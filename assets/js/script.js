@@ -200,7 +200,7 @@ function navBarAnimation() {
 
 //Languages
 function languageAnimation(){
-    if (scrollDistance > 2800 && viewCurrent == 2 && animLanguesDo == false) {
+    if (scrollDistance > 3500 && viewCurrent == 2 && animLanguesDo == false) {
           
         var i=0;
         var j=0;
@@ -236,7 +236,7 @@ function reinitLangues() {
 
 //Skills
 function skillsAnimation() {
-    if (scrollDistance > 3300 && viewCurrent == 2 && animSkillsDo == false) {
+    if (scrollDistance > 2900 && viewCurrent == 2 && animSkillsDo == false) {
         nivCompetence.forEach(function(competenceX) {
             competenceX.animate([
                 {
