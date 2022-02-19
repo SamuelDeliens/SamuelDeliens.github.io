@@ -200,7 +200,7 @@ function navBarAnimation() {
 
 //Languages
 function languageAnimation(){
-    if (scrollDistance > 3500 && viewCurrent == 2 && animLanguesDo == false) {
+    if (scrollDistance > 3300 && viewCurrent == 2 && animLanguesDo == false) {
           
         var i=0;
         var j=0;

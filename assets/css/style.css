@@ -113,3 +113,8 @@ body {
   padding-top: 41px;
 }
 
+.popover {
+  width: 100%;
+  max-width: 500px;
+}
+
