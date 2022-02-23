@@ -6,7 +6,11 @@ body {
 }
 
 .view2 {
-  /*display: none;*/
+  display: none;
+}
+
+.view3 {
+  display: none;
 }
 
 #pp {

@@ -10,6 +10,7 @@
 
     //Switch vue entre 1 et 2
     window.viewCurrent = 1;
+    window.view = [document.querySelectorAll('.view1'), document.querySelectorAll('.view2')];
 
     //NavBar
     window.scrollToTop = document.querySelector('#mainNav');
@@ -45,6 +46,7 @@
     
     menu();
     viewController();
+    formSubmit();
     
 })(); //End  of use script
 
@@ -92,42 +94,48 @@ function menu() {
 }
 
 function viewController() {
-    var buttonView2 = document.querySelectorAll('.buttonView2');
     var buttonView1 = document.querySelectorAll('.buttonView1');
-    var view1 = document.querySelectorAll('.view1');
-    var view2 = document.querySelectorAll('.view2');
+    var buttonView2 = document.querySelectorAll('.buttonView2');
     
-    buttonView1.forEach(function(bouttonX) {
+    var buttonView = [buttonView1, buttonView2];
+    
+    //LISTERNER VIEW
+    buttonView[0].forEach(function(bouttonX) {
         bouttonX.addEventListener('click', function() {
-            if (viewCurrent == 2) {
-                view2.forEach(function(section) {
-                    section.style.display = 'none';
-                });
-                view1.forEach(function(section) {
-                    section.style.display = 'block';
-                });
-                viewCurrent = 1;
-                
-                //reinitialisé l'animation langues et compétences
-                reinitLangues();
-                reinitSkills();
-            }  
+            if (viewCurrent != 1) {
+                switchView(1);
+            }
         })
     });
-    buttonView2.forEach(function(bouttonX) {
-        bouttonX.addEventListener('click', function() {
-            
-            
-            if (viewCurrent == 1) {
-                view1.forEach(function(section) {
-                    section.style.display = 'none';
-                });
-                view2.forEach(function(section) {
-                    section.style.display = 'block';
-                });
-                viewCurrent = 2;
-            }                       
+    buttonView[1].forEach(function(bouttonX) {
+        bouttonX.addEventListener('click', function() {    
+            if (viewCurrent != 2) switchView(2);                    
         })
+    });
+}
+
+//SwitchView
+function switchView(viewId) {
+    closeView();
+    showView(view[viewId-1]);
+    viewCurrent = viewId;
+}
+
+function closeView() {
+    view.forEach(function(viewX) {
+        viewX.forEach(function(section) {
+            section.style.display = 'none';
+        });
+    });
+    
+    //reinitialisé l'animation langues et compétences
+    reinitLangues();
+    reinitSkills();
+}
+
+function showView(viewCurrent) {
+    viewCurrent.forEach(function(section) {
+        section.style.display = 'block';
     });
 }
 
