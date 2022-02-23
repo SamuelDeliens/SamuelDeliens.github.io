@@ -9,6 +9,10 @@ body {
   display: none;
 }
 
+.view3 {
+  display: none;
+}
+
 #pp {
   min-width: 25%;
   max-width: 25%;
@@ -111,5 +115,10 @@ body {
 .timeline-panel-container .timeline-panel-container-left {
   padding-right: 20%;
   padding-top: 41px;
+}
+
+.popover {
+  width: 100%;
+  max-width: 500px;
 }
 
