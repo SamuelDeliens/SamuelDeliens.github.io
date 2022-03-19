@@ -1,4 +1,6 @@
 <!DOCTYPE html>
+
+<?php //require('assets/sendMail.php'); ?>
 <html>
 
 <head>
@@ -869,10 +871,11 @@
                     <h4 class="modal-title">Contactez moi !</h4><button type="button" class="btn-close" data-bs-dismiss="modal" aria-label="Close" onclick="closeContactUs()"></button>
                 </div>
                 <div class="modal-body">
-                    <form id="contactUsForm" class="needs-validation" method="post" novalidate="">
+                    <form id="contactUsForm" class="needs-validation" method="POST" novalidate="" action="">
                         <div class="row">
                             <div class="col" style="padding: 10px;">
-                                <h6 class="text-start" style="margin: 0px;margin-left: 10px;margin-bottom: 5px;" for="validationName">Prénom</h6><input class="form-control" type="text" id="validationName" name="Prénom" placeholder="Prénom" required="" minlength="3" maxlength="10">
+                                <h6 class="text-start" style="margin: 0px;margin-left: 10px;margin-bottom: 5px;" for="firstnameInput">Prénom</h6>
+                                <input class="form-control" type="text" id="firstnameInput" name="firstnameInput" placeholder="Prénom" required="" minlength="3" maxlength="10" value="">
                                 <div class="valid-feedback">
                                     <p class="text-start" style="color: var(--bs-success);font-size: 12px;margin: 0px;margin-top: 5px;margin-left: 10px;">Tout est bon ici !</p>
                                 </div>
@@ -881,7 +884,8 @@
                                 </div>
                             </div>
                             <div class="col" style="padding: 10px;">
-                                <h6 class="text-start" style="margin: 0px;margin-left: 10px;margin-bottom: 5px;" for="validationLastName">Nom</h6><input class="form-control" type="text" id="validationLastName" name="Nom" placeholder="Nom" required="" minlength="3" maxlength="15">
+                                <h6 class="text-start" style="margin: 0px;margin-left: 10px;margin-bottom: 5px;" for="nameInput">Nom</h6>
+                                <input class="form-control" type="text" id="nameInput" name="nameInput" placeholder="Nom" required="" minlength="3" maxlength="15" value="">
                                 <div class="valid-feedback">
                                     <p class="text-start" style="color: var(--bs-success);font-size: 12px;margin: 0px;margin-top: 5px;margin-left: 10px;">Tout est bon ici !</p>
                                 </div>
@@ -892,8 +896,8 @@
                         </div>
                         <div class="row">
                             <div class="col" style="padding: 10px;">
-                                <h6 class="text-start" style="margin: 0px;margin-left: 10px;margin-bottom: 5px;" for="validationMail">Mail</h6>
-                                <div class="input-group"><span class="input-group-text">@</span><input class="form-control" type="email" id="validationMail" inputmode="email" required="">
+                                <h6 class="text-start" style="margin: 0px;margin-left: 10px;margin-bottom: 5px;" for="emailInput">Mail</h6>
+                                <div class="input-group"><span class="input-group-text">@</span><input class="form-control" type="email" id="emailInput" name="emailInput" inputmode="email" required="" value="">
                                     <div class="input-group-text valid-feedback" style="background: transparent;border-style: none;padding: 0px;margin: 0px;">
                                         <p class="text-start" style="color: var(--bs-success);font-size: 12px;margin: 0px;margin-top: 5px;margin-left: 10px;">Tout est bon ici !</p>
                                     </div>
@@ -903,8 +907,8 @@
                                 </div>
                             </div>
                             <div class="col" style="padding: 10px;">
-                                <h6 class="text-start" style="margin: 0px;margin-left: 10px;margin-bottom: 5px;" for="validationPhone">Téléphone</h6>
-                                <div class="input-group"><span class="input-group-text">0</span><input class="form-control" type="tel" id="validationPhone" placeholder="Téléphone" inputmode="tel" minlength="9" maxlength="9">
+                                <h6 class="text-start" style="margin: 0px;margin-left: 10px;margin-bottom: 5px;" for="phoneInput">Téléphone</h6>
+                                <div class="input-group"><span class="input-group-text">0</span><input class="form-control" type="tel" id="phoneInput" name="phoneInput" placeholder="Téléphone" inputmode="tel" minlength="9" maxlength="9">
                                     <div class="input-group-text valid-feedback" style="background: transparent;border-style: none;margin: 0px;padding: 0px;">
                                         <p class="text-start" style="color: var(--bs-success);font-size: 12px;margin: 0px;margin-top: 5px;margin-left: 10px;">Tout est bon ici !</p>
                                     </div>
@@ -916,7 +920,8 @@
                         </div>
                         <div class="row">
                             <div class="col" style="padding: 10px;">
-                                <h6 class="text-start" style="margin: 0px;margin-left: 10px;margin-bottom: 5px;">Message</h6><textarea class="form-control" style="height: 100px;" required="" maxlength="500" minlength="10"></textarea>
+                                <h6 class="text-start" style="margin: 0px;margin-left: 10px;margin-bottom: 5px;" for="messageInput">Message</h6>
+                                <textarea class="form-control" id="messageInput" name="messageInput" style="height: 100px;" required="" maxlength="500" minlength="10"></textarea>
                                 <div class="valid-feedback">
                                     <p class="text-start" style="color: var(--bs-success);font-size: 12px;margin: 0px;margin-top: 5px;margin-left: 10px;">Tout est bon ici !</p>
                                 </div>
