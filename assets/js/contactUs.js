@@ -106,8 +106,8 @@ function checkError() {
         else showSuccess(1);
         if(mailError["emailError"]) showError(2); 
         else showSuccess(2);
-        if(mailError["msgError"]) showError(3); 
-        else showSuccess(3);
+        if(mailError["msgError"]) showError(4); 
+        else showSuccess(4);
     } 
 }
 function showError(int) {
