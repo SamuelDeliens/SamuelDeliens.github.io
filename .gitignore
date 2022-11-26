@@ -1,3 +1,1 @@
-.DS_Store
-.assets/.DS_Store
-.assets/bootstrap/.DS_Store
+*.DS_Store
