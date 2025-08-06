@@ -12,7 +12,7 @@ export default class Floating {
     world: World;
     globes: Globe[];
 
-    tls: gsap.core.Timeline[] = [];
+    animations: Map<Globe, gsap.core.Tween> = new Map();
 
     constructor() {
         this.experience = new Experience();
@@ -26,35 +26,36 @@ export default class Floating {
     start(globe: Globe) {
         const base = globe.ballMesh.position.clone();
 
-        const delta = {
-            x: (Math.random() - 0.5) * 0.5,
-            y: (Math.random() - 0.5) * 0.5,
-            z: (Math.random() - 0.5) * 0.5,
+        const animate = () => {
+            const delta = {
+                x: (Math.random() - 0.5) * 0.3,
+                y: (Math.random() - 0.5) * 0.3,
+                z: (Math.random() - 0.5) * 0.3,
+            };
+
+            const duration = 2 + Math.random();
+
+            const tween = gsap.to([globe.ballMesh.position, globe.glassMesh.position], {
+                x: base.x + delta.x,
+                y: base.y + delta.y,
+                z: base.z + delta.z,
+                duration,
+                ease: "sine.inOut",
+                delay: Math.random() * 0.3,
+                onComplete: animate,
+            });
+
+            this.animations.set(globe, tween);
         };
 
-        const duration = 2 + Math.random();
-
-        const tl = gsap.timeline({
-            repeat: -1,
-            yoyo: true,
-            ease: "sine.inOut",
-        });
-
-        tl.to([globe.ballMesh.position, globe.glassMesh.position], {
-            x: base.x + delta.x,
-            y: base.y + delta.y,
-            z: base.z + delta.z,
-            duration
-        });
-
-        this.tls.push(tl);
+        animate();
     }
 
     stop(globe: Globe) {
-        const index = this.globes.indexOf(globe);
-        if (index !== -1) {
-            this.tls[index].kill();
-            this.tls.splice(index, 1);
+        const tween = this.animations.get(globe);
+        if (tween) {
+            tween.kill();
+            this.animations.delete(globe);
         }
     }
 }
