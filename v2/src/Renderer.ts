@@ -23,6 +23,7 @@ export default class Renderer {
         this.setRenderer();
     }
 
+
     setRenderer() {
         this.renderer = new THREE.WebGLRenderer({
             canvas: this.canvas,
@@ -39,7 +40,7 @@ export default class Renderer {
     }
 
     update() {
-        this.renderer.render(this.scene, this.camera.ortographicCamera);
+        this.renderer.render(this.scene, this.camera.camera);
     }
 
 }

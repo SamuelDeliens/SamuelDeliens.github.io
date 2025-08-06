@@ -4,6 +4,7 @@ import Camera from "./Camera.ts";
 import Renderer from "./Renderer.ts";
 import World from "./World/World.ts";
 import Time from "./Utils/Time.ts";
+import Composer from "./Composer.ts";
 
 export default class Experience {
     static _instance: Experience;
@@ -16,6 +17,7 @@ export default class Experience {
 
     camera!: Camera;
     renderer!: Renderer;
+    composer!: Composer;
     world!: World;
 
 
@@ -38,6 +40,7 @@ export default class Experience {
 
         this.camera = new Camera();
         this.renderer = new Renderer();
+        this.composer = new Composer();
 
         this.world = new World();
 
@@ -49,7 +52,7 @@ export default class Experience {
     update() {
         this.camera.update();
         this.world.update();
-        this.renderer.update();
+        this.composer.update();
     }
 
 }
