@@ -6,6 +6,10 @@ varying vec2 vUv;
 varying vec3 vPosition;
 float PI = 3.141592653589793238;
 
+uniform vec3 baseFirst;
+uniform vec3 baseSecond;
+uniform vec3 baseThird;
+
 //NOISE
 float mod289(float x){return x - floor(x * (1.0 / 289.0)) * 289.0;}
 vec4 mod289(vec4 x){return x - floor(x * (1.0 / 289.0)) * 289.0;}
@@ -50,10 +54,10 @@ mat2 rotate2D(float angle) {
 void main() {
     float n = noise(vPosition + time);
 
-    vec3 baseFirst = vec3(120./255., 158./255.,113./255.);
+    //vec3 baseFirst = vec3(120./255., 158./255.,113./255.);
     vec3 accent = vec3(0.,0.,0.);
-    vec3 baseSecond = vec3(224./255., 148./255.,66./255.);
-    vec3 baseThird = vec3(232./255., 201./255.,73./255.);
+    //vec3 baseSecond = vec3(224./255., 148./255.,66./255.);
+    //vec3 baseThird = vec3(232./255., 201./255.,73./255.);
 
     vec2 baseUV = rotate2D(n) * vPosition.xy * 0.1;
     float basePattern = lines(baseUV, 0.5);

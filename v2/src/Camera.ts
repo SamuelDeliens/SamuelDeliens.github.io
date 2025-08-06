@@ -50,7 +50,7 @@ export default class Camera {
             100
         );
 
-        this.camera.position.set(0, 0, 10);
+        this.camera.position.set(0, 0, 3);
     }
 
     setOrbitControls() {

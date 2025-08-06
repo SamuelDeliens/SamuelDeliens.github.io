@@ -2,12 +2,14 @@ import * as THREE from 'three';
 import Environment from "./Environment.ts";
 import Experience from "../Experience.ts";
 import Globes from "./Globes.ts";
+import Background from "./Background.ts";
 
 export default class World {
     experience: Experience
     scene: THREE.Scene;
 
     private environment: Environment;
+    private background: Background;
     private globes: Globes;
 
     constructor() {
@@ -16,6 +18,7 @@ export default class World {
 
         this.environment = new Environment()
         this.globes = new Globes();
+        this.background = new Background();
     }
 
     update() {
