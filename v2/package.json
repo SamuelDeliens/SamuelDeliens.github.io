@@ -12,20 +12,8 @@
     "@types/events": "^3.0.3",
     "@types/three": "^0.178.1",
     "typescript": "~5.8.3",
-    "vite": "^7.0.4"
-  },
-  "compilerOptions": {
-    "target": "ESNext",
-    "module": "ESNext",
-    "moduleResolution": "node",
-    "lib": [
-      "DOM",
-      "ESNext"
-    ],
-    "strict": true,
-    "esModuleInterop": true,
-    "forceConsistentCasingInFileNames": true,
-    "skipLibCheck": true
+    "vite": "^7.0.4",
+    "vite-plugin-glsl": "^1.5.1"
   },
   "dependencies": {
     "events": "^3.3.0",
