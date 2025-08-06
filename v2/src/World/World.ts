@@ -10,7 +10,7 @@ export default class World {
 
     private environment: Environment;
     private background: Background;
-    private globes: Globes;
+    public globes: Globes;
 
     constructor() {
         this.experience = new Experience();

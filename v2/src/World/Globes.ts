@@ -16,29 +16,217 @@ export interface Globe {
     cubeRenderTarget: THREE.WebGLCubeRenderTarget;
 }
 export interface GlobeFactoryInput {
-    radius: number;
-    position: THREE.Vector3;
+    timeline: {
+        first: {
+            position: THREE.Vector3;
+            scale: number;
+        };
+        second: {
+            position: THREE.Vector3;
+            scale: number;
+        };
+    }
     baseFirst: THREE.Vector3;
     baseSecond: THREE.Vector3;
     baseThird: THREE.Vector3;
 }
 
-const globesData: GlobeFactoryInput[] = [
+export const globesData: GlobeFactoryInput[] = [
     {
-        radius: 1.5,
-        position: new THREE.Vector3(0, 0, 0),
-        baseFirst: new THREE.Vector3(120./255., 158./255.,113./255.),
-        baseSecond: new THREE.Vector3(224./255., 148./255.,66./255.),
-        baseThird: new THREE.Vector3(232./255., 201./255.,73./255.)
+        timeline: {
+            first: {position: new THREE.Vector3(0, 0, 0), scale: 1},
+            second: {position: new THREE.Vector3(0, 0, 0), scale: 0.6}
+        },
+        baseFirst: new THREE.Vector3(120 / 255, 158 / 255, 113 / 255),
+        baseSecond: new THREE.Vector3(224 / 255, 148 / 255, 66 / 255),
+        baseThird: new THREE.Vector3(232 / 255, 201 / 255, 73 / 255)
     },
     {
-        radius: 0.6,
-        position: new THREE.Vector3(0, 0, -3),
-        baseFirst: new THREE.Vector3(150./255., 120./255.,11./255.),
-        baseSecond: new THREE.Vector3(100./255., 34./255.,168./255.),
-        baseThird: new THREE.Vector3(100./255., 2001./255.,54./255.)
-    }
-]
+        timeline: {
+            first: { position: new THREE.Vector3(-0.4, 0.8, 0.8), scale: 0.1 },
+            second: { position: new THREE.Vector3(-4.5, 2.2, 0.5), scale: 0.18 }
+        },
+        baseFirst: new THREE.Vector3(120 / 255, 158 / 255, 113 / 255),
+        baseSecond: new THREE.Vector3(224 / 255, 148 / 255, 66 / 255),
+        baseThird: new THREE.Vector3(232 / 255, 201 / 255, 73 / 255)
+    },
+    {
+        timeline: {
+            first: { position: new THREE.Vector3(0.8, -0.8, -0.4), scale: 0.1 },
+            second: { position: new THREE.Vector3(3.2, -1.8, -0.4), scale: 0.27 }
+        },
+        baseFirst: new THREE.Vector3(120 / 255, 158 / 255, 113 / 255),
+        baseSecond: new THREE.Vector3(224 / 255, 148 / 255, 66 / 255),
+        baseThird: new THREE.Vector3(232 / 255, 201 / 255, 73 / 255)
+    },
+    {
+        timeline: {
+            first: { position: new THREE.Vector3(-0.8, 0.8, 0.1), scale: 0.1 },
+            second: { position: new THREE.Vector3(-1.7, 0.3, 0.1), scale: 0.14 }
+        },
+        baseFirst: new THREE.Vector3(120 / 255, 158 / 255, 113 / 255),
+        baseSecond: new THREE.Vector3(224 / 255, 148 / 255, 66 / 255),
+        baseThird: new THREE.Vector3(232 / 255, 201 / 255, 73 / 255)
+    },
+    {
+        timeline: {
+            first: { position: new THREE.Vector3(-0.8, 0.8, 0.1), scale: 0.1 },
+            second: { position: new THREE.Vector3(0.0, 1.5, -0.8), scale: 0.25 }
+        },
+        baseFirst: new THREE.Vector3(120 / 255, 158 / 255, 113 / 255),
+        baseSecond: new THREE.Vector3(224 / 255, 148 / 255, 66 / 255),
+        baseThird: new THREE.Vector3(232 / 255, 201 / 255, 73 / 255)
+    },
+    {
+        timeline: {
+            first: { position: new THREE.Vector3(-0.7, 0.7, 0.1), scale: 0.1 },
+            second: { position: new THREE.Vector3(2.4, -2.0, 0.9), scale: 0.09 }
+        },
+        baseFirst: new THREE.Vector3(120 / 255, 158 / 255, 113 / 255),
+        baseSecond: new THREE.Vector3(224 / 255, 148 / 255, 66 / 255),
+        baseThird: new THREE.Vector3(232 / 255, 201 / 255, 73 / 255)
+    },
+    {
+        timeline: {
+            first: { position: new THREE.Vector3(-0.5, 0.9, 0.4), scale: 0.1 },
+            second: { position: new THREE.Vector3(-3.6, 0.96, 0.3), scale: 0.23 }
+        },
+        baseFirst: new THREE.Vector3(120 / 255, 158 / 255, 113 / 255),
+        baseSecond: new THREE.Vector3(224 / 255, 148 / 255, 66 / 255),
+        baseThird: new THREE.Vector3(232 / 255, 201 / 255, 73 / 255)
+    },
+
+    {
+        timeline: {
+            first: {position: new THREE.Vector3(-0.8, 0.8, 0.8), scale: 0.1},
+            second: {position: new THREE.Vector3(-3, 1.8, 0.4), scale: 0.31}
+        },
+        baseFirst: new THREE.Vector3(0.8, 0.2, 0.3),
+        baseSecond: new THREE.Vector3(0.2, 0.6, 0.8),
+        baseThird: new THREE.Vector3(0.4, 0.8, 0.4)
+    },
+    {
+        timeline: {
+            first: {position: new THREE.Vector3(-0.8, 0.8, 0.8), scale: 0.1},
+            second: {position: new THREE.Vector3(-3.94, 2.86, 0.73), scale: 0.18}
+        },
+        baseFirst: new THREE.Vector3(0.8, 0.2, 0.3),
+        baseSecond: new THREE.Vector3(0.2, 0.6, 0.8),
+        baseThird: new THREE.Vector3(0.4, 0.8, 0.4)
+    },
+    {
+        timeline: {
+            first: {position: new THREE.Vector3(-0.8, 0.8, 0.8), scale: 0.1},
+            second: {position: new THREE.Vector3(-3.79, 1.94, 0.43), scale: 0.08}
+        },
+        baseFirst: new THREE.Vector3(0.8, 0.2, 0.3),
+        baseSecond: new THREE.Vector3(0.2, 0.6, 0.8),
+        baseThird: new THREE.Vector3(0.4, 0.8, 0.4)
+    },
+    {
+        timeline: {
+            first: {position: new THREE.Vector3(-0.8, 0.8, 0.8), scale: 0.1},
+            second: {position: new THREE.Vector3(-2.74, 0.93, 0.43), scale: 0.13}
+        },
+        baseFirst: new THREE.Vector3(0.8, 0.2, 0.3),
+        baseSecond: new THREE.Vector3(0.2, 0.6, 0.8),
+        baseThird: new THREE.Vector3(0.4, 0.8, 0.4)
+    },
+    {
+        timeline: {
+            first: {position: new THREE.Vector3(-0.8, 0.8, 0.8), scale: 0.1},
+            second: {position: new THREE.Vector3(1.94, 2.86, 0.73), scale: 0.19}
+        },
+        baseFirst: new THREE.Vector3(0.8, 0.2, 0.3),
+        baseSecond: new THREE.Vector3(0.2, 0.6, 0.8),
+        baseThird: new THREE.Vector3(0.4, 0.8, 0.4)
+    },
+    {
+        timeline: {
+            first: {position: new THREE.Vector3(-0.8, 0.8, 0.8), scale: 0.1},
+            second: {position: new THREE.Vector3(0.95, -2.21, -0.51), scale: 0.14}
+        },
+        baseFirst: new THREE.Vector3(0.8, 0.2, 0.3),
+        baseSecond: new THREE.Vector3(0.2, 0.6, 0.8),
+        baseThird: new THREE.Vector3(0.4, 0.8, 0.4)
+    },
+    {
+        timeline: {
+            first: {position: new THREE.Vector3(-0.8, 0.8, 0.8), scale: 0.1},
+            second: {position: new THREE.Vector3(0.64, -2.86, 0.73), scale: 0.08}
+        },
+        baseFirst: new THREE.Vector3(0.8, 0.2, 0.3),
+        baseSecond: new THREE.Vector3(0.2, 0.6, 0.8),
+        baseThird: new THREE.Vector3(0.4, 0.8, 0.4)
+    },
+
+    {
+        timeline: {
+            first: {position: new THREE.Vector3(0.8, -0.8, 0.8), scale: 0.1},
+            second: {position: new THREE.Vector3(3.5, -2.2, 0.3), scale: 0.23}
+        },
+        baseFirst: new THREE.Vector3(0.3, 0.7, 0.9),
+        baseSecond: new THREE.Vector3(1.0, 0.5, 0.2),
+        baseThird: new THREE.Vector3(0.9, 0.8, 0.4)
+    },
+    {
+        timeline: {
+            first: {position: new THREE.Vector3(0.8, -0.8, 0.8), scale: 0.1},
+            second: {position: new THREE.Vector3(5.3, -2.2, 0.1), scale: 0.34}
+        },
+        baseFirst: new THREE.Vector3(0.3, 0.7, 0.9),
+        baseSecond: new THREE.Vector3(1.0, 0.5, 0.2),
+        baseThird: new THREE.Vector3(0.9, 0.8, 0.4)
+    },
+    {
+        timeline: {
+            first: {position: new THREE.Vector3(0.8, -0.8, 0.8), scale: 0.1},
+            second: {position: new THREE.Vector3(4.8, -3.1, 0.5), scale: 0.14}
+        },
+        baseFirst: new THREE.Vector3(0.3, 0.7, 0.9),
+        baseSecond: new THREE.Vector3(1.0, 0.5, 0.2),
+        baseThird: new THREE.Vector3(0.9, 0.8, 0.4)
+    },
+
+    {
+        timeline: {
+            first: {position: new THREE.Vector3(0.8, 0.8, -0.8), scale: 0.1},
+            second: {position: new THREE.Vector3(4.1, 2.5, -0.2), scale: 0.46}
+        },
+        baseFirst: new THREE.Vector3(0.6, 0.3, 0.9),
+        baseSecond: new THREE.Vector3(0.3, 0.9, 0.7),
+        baseThird: new THREE.Vector3(0.9, 0.6, 0.4)
+    },
+    {
+        timeline: {
+            first: {position: new THREE.Vector3(0.8, 0.8, -0.8), scale: 0.1},
+            second: {position: new THREE.Vector3(4.5, 1.1, -0.2), scale: 0.23}
+        },
+        baseFirst: new THREE.Vector3(0.6, 0.3, 0.9),
+        baseSecond: new THREE.Vector3(0.3, 0.9, 0.7),
+        baseThird: new THREE.Vector3(0.9, 0.6, 0.4)
+    },
+
+    {
+        timeline: {
+            first: {position: new THREE.Vector3(-0.8, -0.8, 0.8), scale: 0.1},
+            second: {position: new THREE.Vector3(-2.8, -2.3, 0.3), scale: 0.43}
+        },
+        baseFirst: new THREE.Vector3(0.7, 0.7, 0.2),
+        baseSecond: new THREE.Vector3(0.2, 0.8, 0.9),
+        baseThird: new THREE.Vector3(0.4, 0.5, 0.9)
+    },
+    {
+        timeline: {
+            first: {position: new THREE.Vector3(-0.6, 0.5, 0.4), scale: 0.1},
+            second: {position: new THREE.Vector3(-3.9, -1.8, -0.1), scale: 0.28}
+        },
+        baseFirst: new THREE.Vector3(0.7, 0.7, 0.2),
+        baseSecond: new THREE.Vector3(0.2, 0.8, 0.9),
+        baseThird: new THREE.Vector3(0.4, 0.5, 0.9)
+    },
+];
+
 
 export default class Globes {
     experience: Experience
@@ -70,7 +258,6 @@ export default class Globes {
     }
 
     createGlobe(globeData: GlobeFactoryInput) {
-        console.log(globeData);
         const ballMat = new THREE.ShaderMaterial({
             extensions: {
                 derivatives: `#extension 
@@ -90,10 +277,11 @@ export default class Globes {
             fragmentShader: ballF,
         });
 
-        const ballGeo = new THREE.SphereGeometry(globeData.radius, 64, 64);
+        const ballGeo = new THREE.SphereGeometry(1.5, 32, 32);
         const ballMesh = new THREE.Mesh(ballGeo, ballMat);
 
-        ballMesh.position.copy(globeData.position);
+        ballMesh.position.copy(globeData.timeline.first.position);
+        ballMesh.scale.set(globeData.timeline.first.scale, globeData.timeline.first.scale, globeData.timeline.first.scale)
 
 
         const glassMat = new THREE.ShaderMaterial({
@@ -113,10 +301,11 @@ export default class Globes {
             fragmentShader: glassF,
         });
 
-        const glassGeo = new THREE.SphereGeometry(globeData.radius + 0.5, 64, 64);
+        const glassGeo = new THREE.SphereGeometry(2, 32, 32);
         const glassMesh = new THREE.Mesh(glassGeo, glassMat);
 
-        glassMesh.position.copy(globeData.position);
+        glassMesh.position.copy(globeData.timeline.first.position);
+        glassMesh.scale.set(globeData.timeline.first.scale, globeData.timeline.first.scale, globeData.timeline.first.scale)
 
         return {
             ballMesh: ballMesh,
@@ -132,7 +321,7 @@ export default class Globes {
             minFilter: THREE.LinearMipmapLinearFilter,
         });
         const cubeCamera = new THREE.CubeCamera(0.1, 10, cubeRenderTarget);
-        cubeCamera.position.copy(globeData.position);
+        cubeCamera.position.copy(globeData.timeline.first.position);
 
 
         return {
@@ -144,6 +333,7 @@ export default class Globes {
     update() {
         this.globes.forEach((globe) => {
             globe.glassMesh.visible = false;
+            globe.cubeCamera.position.copy(globe.ballMesh.position);
             globe.cubeCamera.update(this.experience.renderer.renderer, this.scene);
             globe.glassMesh.visible = true;
             globe.ballMat.uniforms.time.value = this.experience.time.elapsed * 0.001;

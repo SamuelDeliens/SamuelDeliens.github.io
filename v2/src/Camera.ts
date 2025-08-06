@@ -20,17 +20,17 @@ export default class Camera {
         this.canvas = this.experience.canvas;
         this.sizes = this.experience.sizes;
 
-        this.createPerspectiveCamera();
-        this.setOrbitControls();
+        this.createOrtographicCamera();
+        //this.setOrbitControls();
     }
 
     createOrtographicCamera() {
         this.camera = new THREE.OrthographicCamera(
-            (this.sizes.frustrumSize * this.sizes.ratio) / -2,
-            (this.sizes.frustrumSize * this.sizes.ratio) / 2,
-            this.sizes.frustrumSize / 2,
-            this.sizes.frustrumSize / -2,
-            -50,
+            (this.sizes.frustrumSize * this.sizes.ratio) / -7,
+            (this.sizes.frustrumSize * this.sizes.ratio) / 7,
+            this.sizes.frustrumSize / 7,
+            this.sizes.frustrumSize / -7,
+            -1,
             50
         );
 
