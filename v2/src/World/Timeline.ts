@@ -16,6 +16,10 @@ export default class Timeline extends EventEmitter {
     globes: Globe[];
 
     firstTimeline!: gsap.core.Timeline;
+    secondTimeline!: gsap.core.Timeline;
+    thirdTimeline!: {
+
+    };
 
     constructor() {
         super();
@@ -29,6 +33,7 @@ export default class Timeline extends EventEmitter {
         this.globes = this.world.globes.globes;
 
         this.initFirstTimeline();
+        this.initSecondTimeline();
     }
 
     initFirstTimeline() {
@@ -40,8 +45,8 @@ export default class Timeline extends EventEmitter {
         });
 
         const timelineData = globesData.map((globeData) => ({
-            position: globeData.timeline.second.position,
-            scale: globeData.timeline.second.scale
+            position: globeData.timeline.first.position,
+            scale: globeData.timeline.first.scale
         }));
 
 /*        this.firstTimeline.to(this.camera.position, {
@@ -50,6 +55,7 @@ export default class Timeline extends EventEmitter {
             ease: "power2.inOut"
         }, "same");*/
 
+        const increment = (1 / this.globes.length) / 5;
         this.globes.forEach((globe: Globe, index: number) => {
             [globe.ballMesh, globe.glassMesh].forEach((mesh: THREE.Mesh) => {
                 this.firstTimeline
@@ -58,16 +64,65 @@ export default class Timeline extends EventEmitter {
                         y: timelineData[index].position.y,
                         z: timelineData[index].position.z,
                         ease: "power2.inOut",
-                        duration: 2
+                        delay: index * increment,
+                        duration: 0.5
                     }, "same")
                     .to(mesh.scale, {
                         x: timelineData[index].scale,
                         y: timelineData[index].scale,
                         z: timelineData[index].scale,
-                        duration: 2,
-                        ease: "power2.inOut"
+                        duration: 0.5,
+                        delay: index * increment,
+                        ease: "power2.inOut",
                     }, "same");
             });
         });
+    }
+
+    initSecondTimeline() {
+        this.secondTimeline = gsap.timeline({
+            paused: true,
+            onComplete: () => {
+                this.emit("secondTimelineComplete");
+            }
+        });
+
+        const timelineData = globesData.map((globeData) => ({
+            position: globeData.timeline.second.position,
+            scale: globeData.timeline.second.scale
+        }));
+
+        /*        this.firstTimeline.to(this.camera.position, {
+                    z: 7,
+                    duration: 1,
+                    ease: "power2.inOut"
+                }, "same");*/
+
+        const increment = (1 / this.globes.length) / 5;
+        this.globes.forEach((globe: Globe, index: number) => {
+            [globe.ballMesh, globe.glassMesh].forEach((mesh: THREE.Mesh) => {
+                this.secondTimeline
+                    .to(mesh.position, {
+                        x: timelineData[index].position.x,
+                        y: timelineData[index].position.y,
+                        z: timelineData[index].position.z,
+                        ease: "power2.inOut",
+                        delay: index * increment,
+                        duration: 0.7
+                    }, "same")
+                    .to(mesh.scale, {
+                        x: timelineData[index].scale,
+                        y: timelineData[index].scale,
+                        z: timelineData[index].scale,
+                        duration: 0.7,
+                        delay: index * increment,
+                        ease: "power2.inOut",
+                    }, "same");
+            });
+        });
+    }
+
+    initThirdTimeline() {
+
     }
 }

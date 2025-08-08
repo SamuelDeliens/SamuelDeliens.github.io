@@ -21,6 +21,7 @@
   },
   "include": [
     "src",
+    "define-component.ts",
     "glsl.d.ts"
   ]
 }

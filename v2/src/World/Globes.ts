@@ -17,14 +17,19 @@ export interface Globe {
 }
 export interface GlobeFactoryInput {
     timeline: {
+        initial: {
+            position: THREE.Vector3;
+            scale?: number;
+            rotation?: THREE.Euler;
+        };
         first: {
             position: THREE.Vector3;
-            scale: number;
+            scale?: number;
             rotation?: THREE.Euler;
         };
         second: {
             position: THREE.Vector3;
-            scale: number;
+            scale?: number;
             rotation?: THREE.Euler;
         };
     }
@@ -36,18 +41,9 @@ export interface GlobeFactoryInput {
 export const globesData: GlobeFactoryInput[] = [
     {
         timeline: {
-            first: {position: new THREE.Vector3(0, 0, 0), scale: 1},
-            second: {position: new THREE.Vector3(0, 0, 0), scale: 0.6}
-        },
-        baseFirst: new THREE.Vector3(120 / 255, 158 / 255, 113 / 255),
-        baseSecond: new THREE.Vector3(224 / 255, 148 / 255, 66 / 255),
-        baseThird: new THREE.Vector3(232 / 255, 201 / 255, 73 / 255)
-    },
-
-    {
-        timeline: {
-            first: { position: new THREE.Vector3(-0.4, 0.8, 0.8), scale: 0.1, rotation: new THREE.Euler(35, 30, 10) },
-            second: { position: new THREE.Vector3(-4.5, 2.2, 0.5), scale: 0.18 }
+            initial: {position: new THREE.Vector3(0, 0, 0), scale: 1},
+            first: {position: new THREE.Vector3(0, 0, 0), scale: 0.6},
+            second: {position: new THREE.Vector3(0, 1.5, 0), scale: 0.4}
         },
         baseFirst: new THREE.Vector3(120 / 255, 158 / 255, 113 / 255),
         baseSecond: new THREE.Vector3(224 / 255, 148 / 255, 66 / 255),
@@ -55,8 +51,9 @@ export const globesData: GlobeFactoryInput[] = [
     },
     {
         timeline: {
-            first: { position: new THREE.Vector3(0.8, -0.8, 0.4), scale: 0.1, rotation: new THREE.Euler(15, 90, 90) },
-            second: { position: new THREE.Vector3(3.2, -1.8, -0.4), scale: 0.27 }
+            initial: { position: new THREE.Vector3(0, 0, -3), scale: 0.1, rotation: new THREE.Euler(35, 30, 10) },
+            first: { position: new THREE.Vector3(-4.5, 2.2, 0.5), scale: 0.18 },
+            second: { position: new THREE.Vector3(0.72, 2.51, 0.9), scale: 0.13 }
         },
         baseFirst: new THREE.Vector3(120 / 255, 158 / 255, 113 / 255),
         baseSecond: new THREE.Vector3(224 / 255, 148 / 255, 66 / 255),
@@ -64,8 +61,9 @@ export const globesData: GlobeFactoryInput[] = [
     },
     {
         timeline: {
-            first: { position: new THREE.Vector3(-0.8, 0.8, 0.1), scale: 0.1, rotation: new THREE.Euler(90, 15, 10) },
-            second: { position: new THREE.Vector3(-1.7, 0.3, 0.1), scale: 0.14 }
+            initial: { position: new THREE.Vector3(0, 0, -3), scale: 0.1, rotation: new THREE.Euler(15, 90, 90) },
+            first: { position: new THREE.Vector3(3.2, -1.8, -0.4), scale: 0.27 },
+            second: { position: new THREE.Vector3(0.70, 1.1, 0.9), scale: 0.19 }
         },
         baseFirst: new THREE.Vector3(120 / 255, 158 / 255, 113 / 255),
         baseSecond: new THREE.Vector3(224 / 255, 148 / 255, 66 / 255),
@@ -73,8 +71,9 @@ export const globesData: GlobeFactoryInput[] = [
     },
     {
         timeline: {
-            first: { position: new THREE.Vector3(-0.8, 0.8, 0.1), scale: 0.1, rotation: new THREE.Euler(20, 25, 10) },
-            second: { position: new THREE.Vector3(0.0, 1.5, -0.8), scale: 0.25 }
+            initial: { position: new THREE.Vector3(0, 0, -3), scale: 0.1, rotation: new THREE.Euler(90, 15, 10) },
+            first: { position: new THREE.Vector3(-1.7, 0.3, 0.1), scale: 0.14 },
+            second: { position: new THREE.Vector3(-1, 1.25, 0.1), scale: 0.09 }
         },
         baseFirst: new THREE.Vector3(120 / 255, 158 / 255, 113 / 255),
         baseSecond: new THREE.Vector3(224 / 255, 148 / 255, 66 / 255),
@@ -82,7 +81,17 @@ export const globesData: GlobeFactoryInput[] = [
     },
     {
         timeline: {
-            first: { position: new THREE.Vector3(-0.7, 0.7, 0.1), scale: 0.1, rotation: new THREE.Euler(90, 90, 90) },
+            initial: { position: new THREE.Vector3(0, 0, -3), scale: 0.1, rotation: new THREE.Euler(20, 25, 10) },
+            first: { position: new THREE.Vector3(0.0, 1.5, -0.8), scale: 0.25 },
+            second: { position: new THREE.Vector3(-0.13, 2.15, -0.8), scale: 0.18 }
+        },
+        baseFirst: new THREE.Vector3(120 / 255, 158 / 255, 113 / 255),
+        baseSecond: new THREE.Vector3(224 / 255, 148 / 255, 66 / 255),
+        baseThird: new THREE.Vector3(232 / 255, 201 / 255, 73 / 255)
+    },
+/*    {
+        timeline: {
+            first: { position: new THREE.Vector3(0, 0, -3), scale: 0.1, rotation: new THREE.Euler(90, 90, 90) },
             second: { position: new THREE.Vector3(2.4, -2.0, 0.9), scale: 0.09 }
         },
         baseFirst: new THREE.Vector3(120 / 255, 158 / 255, 113 / 255),
@@ -91,7 +100,7 @@ export const globesData: GlobeFactoryInput[] = [
     },
     {
         timeline: {
-            first: { position: new THREE.Vector3(-0.5, 0.9, 0.4), scale: 0.1, rotation: new THREE.Euler(0, 15, 0) },
+            first: { position: new THREE.Vector3(0, 0, -3), scale: 0.1, rotation: new THREE.Euler(0, 15, 0) },
             second: { position: new THREE.Vector3(-3.6, 0.96, 0.3), scale: 0.23 }
         },
         baseFirst: new THREE.Vector3(120 / 255, 158 / 255, 113 / 255),
@@ -100,17 +109,18 @@ export const globesData: GlobeFactoryInput[] = [
     },
     {
         timeline: {
-            first: {position: new THREE.Vector3(-0.6, 0.5, 0.4), scale: 0.1, rotation: new THREE.Euler(15, 0, 90)},
+            first: {position: new THREE.Vector3(0, 0, -3), scale: 0.1, rotation: new THREE.Euler(15, 0, 90)},
             second: {position: new THREE.Vector3(-5.1, -2.3, 0.3), scale: 0.09}
         },
         baseFirst: new THREE.Vector3(120 / 255, 158 / 255, 113 / 255),
         baseSecond: new THREE.Vector3(224 / 255, 148 / 255, 66 / 255),
         baseThird: new THREE.Vector3(232 / 255, 201 / 255, 73 / 255)
-    },
+    },*/
     {
         timeline: {
-            first: { position: new THREE.Vector3(-0.4, 0.8, 0.8), scale: 0.1, rotation: new THREE.Euler(35, 30, 10) },
-            second: { position: new THREE.Vector3(-6.5, -1.2, 0.5), scale: 0.4 }
+            initial: { position: new THREE.Vector3(0, 0, -3), scale: 0.1, rotation: new THREE.Euler(35, 30, 10) },
+            first: { position: new THREE.Vector3(-6.5, -1.2, 0.5), scale: 0.4 },
+            second: { position: new THREE.Vector3(-0.7, 0.8, 0.5), scale: 0.25 }
         },
         baseFirst: new THREE.Vector3(120 / 255, 158 / 255, 113 / 255),
         baseSecond: new THREE.Vector3(224 / 255, 148 / 255, 66 / 255),
@@ -119,8 +129,9 @@ export const globesData: GlobeFactoryInput[] = [
 
     {
         timeline: {
-            first: {position: new THREE.Vector3(-0.8, 0.8, 0.8), scale: 0.1},
-            second: {position: new THREE.Vector3(-3, 1.8, 0.4), scale: 0.31}
+            initial: {position: new THREE.Vector3(0, 0, -3), scale: 0.1},
+            first: {position: new THREE.Vector3(-3, 1.8, 0.4), scale: 0.31},
+            second: {position: new THREE.Vector3(-4, 1.5, 0.4), scale: 0.42}
         },
         baseFirst: new THREE.Vector3(0.8, 0.2, 0.3),
         baseSecond: new THREE.Vector3(0.2, 0.6, 0.8),
@@ -128,8 +139,9 @@ export const globesData: GlobeFactoryInput[] = [
     },
     {
         timeline: {
-            first: {position: new THREE.Vector3(-0.8, 0.8, 0.8), scale: 0.1},
-            second: {position: new THREE.Vector3(-3.94, 2.86, 0.73), scale: 0.18}
+            initial: {position: new THREE.Vector3(0, 0, -3), scale: 0.1},
+            first: {position: new THREE.Vector3(-3.94, 2.86, 0.73), scale: 0.18},
+            second: {position: new THREE.Vector3(-4.7, 2.31, 0.6), scale: 0.18}
         },
         baseFirst: new THREE.Vector3(0.8, 0.2, 0.3),
         baseSecond: new THREE.Vector3(0.2, 0.6, 0.8),
@@ -137,8 +149,9 @@ export const globesData: GlobeFactoryInput[] = [
     },
     {
         timeline: {
-            first: {position: new THREE.Vector3(-0.8, 0.8, 0.8), scale: 0.1},
-            second: {position: new THREE.Vector3(-3.79, 1.94, 0.43), scale: 0.08}
+            initial: {position: new THREE.Vector3(0, 0, -3), scale: 0.1},
+            first: {position: new THREE.Vector3(-3.79, 1.94, 0.43), scale: 0.08},
+            second: {position: new THREE.Vector3(-3.85, 2.65, 0.43), scale: 0.08}
         },
         baseFirst: new THREE.Vector3(0.8, 0.2, 0.3),
         baseSecond: new THREE.Vector3(0.2, 0.6, 0.8),
@@ -146,8 +159,9 @@ export const globesData: GlobeFactoryInput[] = [
     },
     {
         timeline: {
-            first: {position: new THREE.Vector3(-0.8, 0.8, 0.8), scale: 0.1},
-            second: {position: new THREE.Vector3(-2.74, 0.93, 0.43), scale: 0.13}
+            initial: {position: new THREE.Vector3(0, 0, -3), scale: 0.1},
+            first: {position: new THREE.Vector3(-2.74, 0.93, 0.43), scale: 0.13},
+            second: {position: new THREE.Vector3(-3.3, 0.86, 0.43), scale: 0.13}
         },
         baseFirst: new THREE.Vector3(0.8, 0.2, 0.3),
         baseSecond: new THREE.Vector3(0.2, 0.6, 0.8),
@@ -155,16 +169,17 @@ export const globesData: GlobeFactoryInput[] = [
     },
     {
         timeline: {
-            first: {position: new THREE.Vector3(-0.8, 0.8, 0.8), scale: 0.1},
-            second: {position: new THREE.Vector3(1.94, 2.86, 0.73), scale: 0.19}
+            initial: {position: new THREE.Vector3(0, 0, -3), scale: 0.1},
+            first: {position: new THREE.Vector3(1.94, 2.86, 0.73), scale: 0.19},
+            second: {position: new THREE.Vector3(-5, 1.2, 0.5), scale: 0.25}
         },
         baseFirst: new THREE.Vector3(0.8, 0.2, 0.3),
         baseSecond: new THREE.Vector3(0.2, 0.6, 0.8),
         baseThird: new THREE.Vector3(0.4, 0.8, 0.4)
     },
-    {
+/*    {
         timeline: {
-            first: {position: new THREE.Vector3(-0.8, 0.8, 0.8), scale: 0.1},
+            first: {position: new THREE.Vector3(0, 0, -3), scale: 0.1},
             second: {position: new THREE.Vector3(0.95, -2.21, -0.51), scale: 0.14}
         },
         baseFirst: new THREE.Vector3(0.8, 0.2, 0.3),
@@ -173,7 +188,7 @@ export const globesData: GlobeFactoryInput[] = [
     },
     {
         timeline: {
-            first: {position: new THREE.Vector3(-0.8, 0.8, 0.8), scale: 0.1},
+            first: {position: new THREE.Vector3(0, 0, -3), scale: 0.1},
             second: {position: new THREE.Vector3(0.64, -2.86, 0.73), scale: 0.08}
         },
         baseFirst: new THREE.Vector3(0.8, 0.2, 0.3),
@@ -182,18 +197,19 @@ export const globesData: GlobeFactoryInput[] = [
     },
     {
         timeline: {
-            first: {position: new THREE.Vector3(-0.8, 0.8, 0.8), scale: 0.1},
+            first: {position: new THREE.Vector3(0, 0, -3), scale: 0.1},
             second: {position: new THREE.Vector3(-4.2, 3.8, 0.4), scale: 0.27}
         },
         baseFirst: new THREE.Vector3(0.8, 0.2, 0.3),
         baseSecond: new THREE.Vector3(0.2, 0.6, 0.8),
         baseThird: new THREE.Vector3(0.4, 0.8, 0.4)
-    },
+    },*/
 
     {
         timeline: {
-            first: {position: new THREE.Vector3(0.8, -0.8, 0.8), scale: 0.1},
-            second: {position: new THREE.Vector3(3.5, -2.2, 0.3), scale: 0.23}
+            initial: {position: new THREE.Vector3(0, 0, -3), scale: 0.1},
+            first: {position: new THREE.Vector3(5.3, -2.2, 0.1), scale: 0.34},
+            second: {position: new THREE.Vector3(0, -1.9, 0.1), scale: 0.39}
         },
         baseFirst: new THREE.Vector3(0.3, 0.7, 0.9),
         baseSecond: new THREE.Vector3(1.0, 0.5, 0.2),
@@ -201,8 +217,9 @@ export const globesData: GlobeFactoryInput[] = [
     },
     {
         timeline: {
-            first: {position: new THREE.Vector3(0.8, -0.8, 0.8), scale: 0.1},
-            second: {position: new THREE.Vector3(5.3, -2.2, 0.1), scale: 0.34}
+            initial: {position: new THREE.Vector3(0, 0, -3), scale: 0.1},
+            first: {position: new THREE.Vector3(3.5, -2.2, 0.3), scale: 0.23},
+            second: {position: new THREE.Vector3(-0.81, -2.4, 0.3), scale: 0.23}
         },
         baseFirst: new THREE.Vector3(0.3, 0.7, 0.9),
         baseSecond: new THREE.Vector3(1.0, 0.5, 0.2),
@@ -210,8 +227,9 @@ export const globesData: GlobeFactoryInput[] = [
     },
     {
         timeline: {
-            first: {position: new THREE.Vector3(0.8, -0.8, 0.8), scale: 0.1},
-            second: {position: new THREE.Vector3(4.8, -3.1, 0.5), scale: 0.14}
+            initial: {position: new THREE.Vector3(0, 0, -3), scale: 0.1},
+            first: {position: new THREE.Vector3(4.8, -3.1, 0.5), scale: 0.14},
+            second: {position: new THREE.Vector3(0.4, -2.13, 0.9), scale: 0.14}
         },
         baseFirst: new THREE.Vector3(0.3, 0.7, 0.9),
         baseSecond: new THREE.Vector3(1.0, 0.5, 0.2),
@@ -220,8 +238,9 @@ export const globesData: GlobeFactoryInput[] = [
 
     {
         timeline: {
-            first: {position: new THREE.Vector3(0.8, 0.8, 0.8), scale: 0.1},
-            second: {position: new THREE.Vector3(4.1, 2.5, -0.2), scale: 0.46}
+            initial: {position: new THREE.Vector3(0, 0, -3), scale: 0.1},
+            first: {position: new THREE.Vector3(4.1, 2.5, -0.2), scale: 0.46},
+            second: {position: new THREE.Vector3(4.06, 1.5, -0.1), scale: 0.46}
         },
         baseFirst: new THREE.Vector3(0.6, 0.3, 0.9),
         baseSecond: new THREE.Vector3(0.3, 0.9, 0.7),
@@ -229,8 +248,9 @@ export const globesData: GlobeFactoryInput[] = [
     },
     {
         timeline: {
-            first: {position: new THREE.Vector3(0.8, 0.8, 0.8), scale: 0.1},
-            second: {position: new THREE.Vector3(4.5, 1.1, -0.2), scale: 0.23}
+            initial: {position: new THREE.Vector3(0, 0, -3), scale: 0.1},
+            first: {position: new THREE.Vector3(4.5, 1.1, -0.2), scale: 0.23},
+            second: {position: new THREE.Vector3(3.44, 0.8, 0.7), scale: 0.23}
         },
         baseFirst: new THREE.Vector3(0.6, 0.3, 0.9),
         baseSecond: new THREE.Vector3(0.3, 0.9, 0.7),
@@ -238,8 +258,9 @@ export const globesData: GlobeFactoryInput[] = [
     },
     {
         timeline: {
-            first: {position: new THREE.Vector3(0.8, 0.8, 0.8), scale: 0.1},
-            second: {position: new THREE.Vector3(6.3, 2.9, -0.2), scale: 0.32}
+            initial: {position: new THREE.Vector3(0, 0, -3), scale: 0.1},
+            first: {position: new THREE.Vector3(6.3, 2.9, -0.2), scale: 0.32},
+            second: {position: new THREE.Vector3(5.28, 1.3, -0.4), scale: 0.32}
         },
         baseFirst: new THREE.Vector3(0.6, 0.3, 0.9),
         baseSecond: new THREE.Vector3(0.3, 0.9, 0.7),
@@ -248,8 +269,9 @@ export const globesData: GlobeFactoryInput[] = [
 
     {
         timeline: {
-            first: {position: new THREE.Vector3(-0.8, -0.8, 0.8), scale: 0.1},
-            second: {position: new THREE.Vector3(-2.8, -2.3, 0.3), scale: 0.43}
+            initial: {position: new THREE.Vector3(0, 0, -3), scale: 0.1},
+            first: {position: new THREE.Vector3(-2.8, -2.3, 0.3), scale: 0.43},
+            second: {position: new THREE.Vector3(-4.09, -2.02, 0.1), scale: 0.43}
         },
         baseFirst: new THREE.Vector3(0.7, 0.7, 0.2),
         baseSecond: new THREE.Vector3(0.2, 0.8, 0.9),
@@ -257,8 +279,9 @@ export const globesData: GlobeFactoryInput[] = [
     },
     {
         timeline: {
-            first: {position: new THREE.Vector3(-0.6, 0.5, 0.4), scale: 0.1},
-            second: {position: new THREE.Vector3(-3.9, -1.8, -0.1), scale: 0.28}
+            initial: {position: new THREE.Vector3(0, 0, -3), scale: 0.1},
+            first: {position: new THREE.Vector3(-3.9, -1.8, -0.1), scale: 0.28},
+            second: {position: new THREE.Vector3(-4.79, -1.24, 0.2), scale: 0.26}
         },
         baseFirst: new THREE.Vector3(0.7, 0.7, 0.2),
         baseSecond: new THREE.Vector3(0.2, 0.8, 0.9),
@@ -266,8 +289,9 @@ export const globesData: GlobeFactoryInput[] = [
     },
     {
         timeline: {
-            first: {position: new THREE.Vector3(-0.6, 0.5, 0.4), scale: 0.1},
-            second: {position: new THREE.Vector3(2.8, 0.3, 0.3), scale: 0.08}
+            initial: {position: new THREE.Vector3(0, 0, -3), scale: 0.1},
+            first: {position: new THREE.Vector3(2.8, 0.3, 0.3), scale: 0.08},
+            second: {position: new THREE.Vector3(-4.62, -1.2, 0.59), scale: 0.08}
         },
         baseFirst: new THREE.Vector3(0.7, 0.7, 0.2),
         baseSecond: new THREE.Vector3(0.2, 0.8, 0.9),
@@ -291,18 +315,21 @@ export default class Globes {
 
     setGlobes() {
         globesData.forEach((globeData) => {
-            const globe = this.createGlobe(globeData);
-            const cubeCamera = this.createCubeRenderCamera(globeData);
-
-            const completeGlobe: Globe = {
-                ...globe,
-                ...cubeCamera
-            }
-
-            this.globes.push(completeGlobe);
-            this.scene.add(completeGlobe.ballMesh);
-            this.scene.add(completeGlobe.glassMesh);
+            this.setGlobe(globeData);
         });
+    }
+    setGlobe(globeData: GlobeFactoryInput) {
+        const globe = this.createGlobe(globeData);
+        const cubeCamera = this.createCubeRenderCamera(globeData);
+
+        const completeGlobe: Globe = {
+            ...globe,
+            ...cubeCamera
+        }
+
+        this.globes.push(completeGlobe);
+        this.scene.add(completeGlobe.ballMesh);
+        this.scene.add(completeGlobe.glassMesh);
     }
 
     createGlobe(globeData: GlobeFactoryInput) {
@@ -325,12 +352,12 @@ export default class Globes {
             fragmentShader: ballF,
         });
 
-        const ballGeo = new THREE.SphereGeometry(1.5, 32, 32);
+        const ballGeo = new THREE.SphereGeometry(1.5, 8, 8);
         const ballMesh = new THREE.Mesh(ballGeo, ballMat);
 
-        ballMesh.position.copy(globeData.timeline.first.position);
-        ballMesh.scale.set(globeData.timeline.first.scale, globeData.timeline.first.scale, globeData.timeline.first.scale)
-        ballMesh.rotation.copy(globeData.timeline.first.rotation || new THREE.Euler(0, 0, 0));
+        ballMesh.position.copy(globeData.timeline.initial.position);
+        ballMesh.scale.set(globeData.timeline.initial.scale, globeData.timeline.initial.scale, globeData.timeline.initial.scale)
+        ballMesh.rotation.copy(globeData.timeline.initial.rotation || new THREE.Euler(0, 0, 0));
 
 
         const glassMat = new THREE.ShaderMaterial({
@@ -353,8 +380,8 @@ export default class Globes {
         const glassGeo = new THREE.SphereGeometry(2, 32, 32);
         const glassMesh = new THREE.Mesh(glassGeo, glassMat);
 
-        glassMesh.position.copy(globeData.timeline.first.position);
-        glassMesh.scale.set(globeData.timeline.first.scale, globeData.timeline.first.scale, globeData.timeline.first.scale)
+        glassMesh.position.copy(globeData.timeline.initial.position);
+        glassMesh.scale.set(globeData.timeline.initial.scale, globeData.timeline.initial.scale, globeData.timeline.initial.scale)
 
         return {
             ballMesh: ballMesh,
@@ -370,7 +397,7 @@ export default class Globes {
             minFilter: THREE.LinearMipmapLinearFilter,
         });
         const cubeCamera = new THREE.CubeCamera(0.1, 10, cubeRenderTarget);
-        cubeCamera.position.copy(globeData.timeline.first.position);
+        cubeCamera.position.copy(globeData.timeline.initial.position);
 
 
         return {
@@ -381,6 +408,8 @@ export default class Globes {
 
     update() {
         this.globes.forEach((globe) => {
+            if (!globe.ballMesh.visible)
+                return;
             globe.glassMesh.visible = false;
             globe.cubeCamera.position.copy(globe.ballMesh.position);
             globe.cubeCamera.update(this.experience.renderer.renderer, this.scene);

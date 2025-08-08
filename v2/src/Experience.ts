@@ -7,6 +7,7 @@ import Time from "./Utils/Time.ts";
 import Composer from "./Composer.ts";
 import Timeline from "./World/Timeline.ts";
 import Floating from "./World/Floating.ts";
+import Controls from "./Controls.ts";
 
 export default class Experience {
     static _instance: Experience;
@@ -24,6 +25,8 @@ export default class Experience {
 
     timeline!: Timeline;
     floating!: Floating;
+
+    controls!: Controls;
 
     constructor(canvas?: HTMLCanvasElement) {
         if (Experience._instance) {
@@ -47,22 +50,15 @@ export default class Experience {
         this.composer = new Composer();
 
         this.world = new World();
-
-        this.timeline = new Timeline();
-        this.floating = new Floating();
+        this.controls = new Controls(this.world.globes.globes);
 
         this.time.on('tick', () => {
             this.update();
         });
 
         setTimeout(() => {
-            this.timeline.firstTimeline.play();
-            this.timeline.on("firstTimelineComplete", () => {
-                this.world.globes.globes.forEach(globe => {
-                    this.floating.start(globe);
-                });
-            });
-        }, 2000);
+            this.controls.startFirstTimeline();
+        }, 1000);
     }
 
     update() {

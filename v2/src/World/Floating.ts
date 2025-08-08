@@ -3,7 +3,6 @@ import * as THREE from "three";
 import type {Globe} from "./Globes.ts";
 import World from "./World.ts";
 import { gsap } from "gsap";
-import Globes from "./Globes.ts";
 
 export default class Floating {
     experience: Experience
