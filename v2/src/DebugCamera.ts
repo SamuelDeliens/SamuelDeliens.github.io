@@ -33,6 +33,8 @@ export default class DebugCamera {
         this.createDebugCamera();
         this.createDebugControls();
         this.setupEventListeners();
+
+        this.toggle();
     }
 
     createDebugCamera() {

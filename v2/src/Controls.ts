@@ -14,6 +14,7 @@ export default class Controls {
     public heroContact = document.querySelector(".hero-contact");
 
     public projectsList = document.querySelector(".projects-list");
+    public openProjectButtons = document.querySelectorAll(".open-project-button");
 
     constructor(globes: Globe[]) {
         this.timeline = new Timeline();
@@ -23,6 +24,13 @@ export default class Controls {
 
         this.heroWork?.addEventListener("click", () => {
             this.startSecondTimeline();
+        });
+
+        this.openProjectButtons.forEach((button) => {
+            const projectId = parseInt(button.getAttribute("data-project-id") || "-1");
+            button.addEventListener("click", () => {
+                this.startThirdTimeline(projectId);
+            });
         });
     }
 
@@ -56,6 +64,13 @@ export default class Controls {
         })
     }
 
+    startThirdTimeline(projectId: number) {
+        this.globes.forEach(globe => {
+            this.floating.stop(globe);
+        });
+        this.projectsList?.classList.add("hidden-section");
 
+        this.timeline.thirdTimeline[projectId].play();
+    }
 
 }

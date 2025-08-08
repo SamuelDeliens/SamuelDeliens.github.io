@@ -28,6 +28,7 @@ export default class Experience {
     floating!: Floating;
 
     controls!: Controls;
+    debugCamera!: DebugCamera;
 
     constructor(canvas?: HTMLCanvasElement) {
         if (Experience._instance) {
@@ -57,6 +58,11 @@ export default class Experience {
 
         this.time.on('tick', () => {
             this.update();
+        });
+
+        this.camera.on('cameraSwitched', (camera: THREE.OrthographicCamera | THREE.PerspectiveCamera) => {
+            console.log('Switching camera');
+            this.composer.setCamera(camera);
         });
 
         setTimeout(() => {

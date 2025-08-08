@@ -10,6 +10,7 @@ export default class Composer {
     scene: THREE.Scene;
 
     composer!: EffectComposer;
+    renderPass!: RenderPass;
 
     constructor() {
         this.experience = new Experience();
@@ -20,7 +21,12 @@ export default class Composer {
 
     setComposer() {
         this.composer = new EffectComposer( this.experience.renderer.renderer );
-        this.composer.addPass( new RenderPass(this.scene, this.experience.camera.camera));
+
+        this.renderPass = new RenderPass(
+            this.scene,
+            this.experience.camera.currentCamera
+        );
+        this.composer.addPass(this.renderPass);
 
         const effect = new ShaderPass( DotScreenShader );
         effect.uniforms[ 'scale' ].value = 4;
@@ -28,11 +34,15 @@ export default class Composer {
         this.composer.addPass( effect );
     }
 
+    setCamera(camera: THREE.Camera) {
+        this.renderPass.camera = camera;
+    }
+
     resize() {
         this.composer.setSize(this.experience.sizes.width, this.experience.sizes.height);
     }
 
     update() {
-        this.composer.render(this.experience.scene, this.experience.canvas);
+        this.composer.render();
     }
 }
