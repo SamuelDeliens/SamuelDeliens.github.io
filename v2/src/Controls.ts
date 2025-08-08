@@ -71,6 +71,12 @@ export default class Controls {
         this.projectsList?.classList.add("hidden-section");
 
         this.timeline.thirdTimeline[projectId].play();
+
+        this.timeline.on("thirdTimelineComplete", (projectId: number) => {
+            this.globes.forEach(globe => {
+                this.floating.start(globe);
+            });
+        });
     }
 
 }

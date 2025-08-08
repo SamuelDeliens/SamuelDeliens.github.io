@@ -412,6 +412,8 @@ export default class Globes {
     globes: Globe[] = [];
     detailedGeo: { [key: number]: THREE.SphereGeometry } = {};
 
+    speed: number = 0.001;
+
     constructor() {
         this.experience = new Experience();
         this.scene = this.experience.scene;
@@ -529,7 +531,7 @@ export default class Globes {
             globe.cubeCamera.position.copy(globe.ballMesh.position);
             globe.cubeCamera.update(this.experience.renderer.renderer, this.scene);
             globe.glassMesh.visible = true;
-            globe.ballMat.uniforms.time.value = this.experience.time.elapsed * 0.001;
+            globe.ballMat.uniforms.time.value = this.experience.time.elapsed * this.speed;
             globe.glassMat.uniforms.tCube.value = globe.cubeRenderTarget.texture;
         });
     }

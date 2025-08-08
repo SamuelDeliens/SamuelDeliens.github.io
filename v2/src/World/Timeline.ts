@@ -103,13 +103,13 @@ export default class Timeline extends EventEmitter {
                         z: timelineData[index].position.z,
                         ease: "power2.inOut",
                         delay: index * increment,
-                        duration: 0.7
+                        duration: 1
                     }, "same")
                     .to(mesh.scale, {
                         x: timelineData[index].scale,
                         y: timelineData[index].scale,
                         z: timelineData[index].scale,
-                        duration: 0.7,
+                        duration: 1,
                         delay: index * increment,
                         ease: "power2.inOut",
                     }, "same");
@@ -168,7 +168,7 @@ export default class Timeline extends EventEmitter {
                             y: behaviourStep.position.y,
                             z: behaviourStep.position.z,
                             ease: "power2.inOut",
-                            duration: 0.5,
+                            duration: 0.8,
                             delay: index * increment
                         }, "moveGlobes")
                         .to(mesh.scale, {
@@ -176,14 +176,14 @@ export default class Timeline extends EventEmitter {
                             y: behaviourStep.scale,
                             z: behaviourStep.scale,
                             ease: "power2.inOut",
-                            duration: 0.5,
+                            duration: 0.8,
                             delay: index * increment
                         }, "moveGlobes");
 
                     if (!keepGlobe) {
                         groupXthirdTimeline.to(mesh.material, {
                             opacity: 0,
-                            duration: 0.5,
+                            duration: 0.8,
                             ease: "power2.inOut",
                             onComplete: () => {
                                 mesh.visible = false;
@@ -203,26 +203,28 @@ export default class Timeline extends EventEmitter {
                     targetGlobe.globe.ballMesh.geometry = newGeo;
                     oldGeo.dispose();
 
+                    this.world.globes.speed = 0.0002;
+
                 }, null, "enterGlobe")
                 .to(this.camera.perspectiveCamera.position, {
                     x: 0,
                     y: 0.36,
                     z: 1,
-                    duration: 0.6,
+                    duration: 1,
                     ease: "power2.inOut",
                 }, "enterGlobe")
                 .to(targetGlobe.globe.ballMesh.scale, {
                     x: 3,
                     y: 3,
                     z: 3,
-                    duration: 0.6,
+                    duration: 1,
                     ease: "power2.inOut",
                 }, "enterGlobe")
                 .to(targetGlobe.globe.glassMesh.scale, {
                     x: 0.2,
                     y: 0.2,
                     z: 0.2,
-                    duration: 0.4,
+                    duration: 0.8,
                     ease: "power2.inOut",
                 }, "enterGlobe")
 
