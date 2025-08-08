@@ -8,6 +8,7 @@ import Composer from "./Composer.ts";
 import Timeline from "./World/Timeline.ts";
 import Floating from "./World/Floating.ts";
 import Controls from "./Controls.ts";
+import DebugCamera from "./DebugCamera.ts";
 
 export default class Experience {
     static _instance: Experience;
@@ -52,6 +53,8 @@ export default class Experience {
         this.world = new World();
         this.controls = new Controls(this.world.globes.globes);
 
+        this.debugCamera = new DebugCamera();
+
         this.time.on('tick', () => {
             this.update();
         });
@@ -64,7 +67,10 @@ export default class Experience {
     update() {
         this.camera.update();
         this.world.update();
+
+        this.debugCamera.update();
         this.composer.update();
+        this.debugCamera.render();
     }
 
 }
