@@ -15,10 +15,10 @@ export default class DebugCamera {
     debugControls!: OrbitControls;
 
     debugViewport = {
-        x: 0.7, // 70% de la largeur
-        y: 0.7, // 70% de la hauteur
-        width: 0.3, // 30% de largeur
-        height: 0.3 // 30% de hauteur
+        x: 0.7,
+        y: 0.7,
+        width: 0.3,
+        height: 0.3
     };
 
     isEnabled = true;
@@ -37,7 +37,7 @@ export default class DebugCamera {
         this.toggle();
     }
 
-    createDebugCamera() {
+    private createDebugCamera() {
         this.debugCamera = new THREE.PerspectiveCamera(
             60,
             (this.sizes.width * this.debugViewport.width) / (this.sizes.height * this.debugViewport.height),
@@ -53,7 +53,7 @@ export default class DebugCamera {
         this.addDebugHelpers();
     }
 
-    createDebugControls() {
+    private createDebugControls() {
         this.debugControls = new OrbitControls(this.debugCamera, this.canvas);
 
         this.debugControls.enableDamping = true;
@@ -78,7 +78,7 @@ export default class DebugCamera {
         this.debugControls.enabled = true;
     }
 
-    addDebugHelpers() {
+    private addDebugHelpers() {
         const gridHelper = new THREE.GridHelper(20, 20);
         gridHelper.name = 'debugGrid';
         this.scene.add(gridHelper);
@@ -90,7 +90,7 @@ export default class DebugCamera {
         this.updateMainCameraHelper();
     }
 
-    updateMainCameraHelper() {
+    private updateMainCameraHelper() {
         const oldHelper = this.scene.getObjectByName('mainCameraHelper');
         if (oldHelper) {
             this.scene.remove(oldHelper);
@@ -102,7 +102,7 @@ export default class DebugCamera {
         this.scene.add(cameraHelper);
     }
 
-    setupEventListeners() {
+    private setupEventListeners() {
         let isMouseOverDebugViewport = false;
         let mouseDownInDebugViewport = false;
 
@@ -145,7 +145,6 @@ export default class DebugCamera {
             }
         });
 
-        // Gérer le relâchement de la souris
         this.canvas.addEventListener('mouseup', () => {
             if (mouseDownInDebugViewport) {
                 this.canvas.style.cursor = isMouseOverDebugViewport ? 'grab' : 'default';
@@ -155,7 +154,6 @@ export default class DebugCamera {
 
         this.canvas.addEventListener('wheel', (event) => {
             if (isInDebugViewport(event) && this.isEnabled) {
-                // Permettre le zoom seulement si on est dans le viewport debug
                 this.debugControls.enabled = true;
                 event.stopPropagation();
 
@@ -167,7 +165,6 @@ export default class DebugCamera {
             }
         }, { passive: true });
 
-        // Raccourcis clavier pour toggle la caméra debug
         window.addEventListener('keydown', (event) => {
             if (event.key === 'D' || event.key === 'd') {
                 this.toggle();
@@ -188,38 +185,30 @@ export default class DebugCamera {
     render() {
         if (!this.isEnabled) return;
 
-        // Sauvegarder l'état actuel du renderer
         const currentViewport = new THREE.Vector4();
         this.renderer.getViewport(currentViewport);
 
-        // Calculer les dimensions du viewport debug en pixels
         const debugX = Math.floor(this.sizes.width * this.debugViewport.x);
         const debugY = Math.floor(this.sizes.height * this.debugViewport.y);
         const debugWidth = Math.floor(this.sizes.width * this.debugViewport.width);
         const debugHeight = Math.floor(this.sizes.height * this.debugViewport.height);
 
-        // Configurer le viewport pour la caméra debug
         this.renderer.setViewport(debugX, debugY, debugWidth, debugHeight);
         this.renderer.setScissor(debugX, debugY, debugWidth, debugHeight);
         this.renderer.setScissorTest(true);
 
-        // Mettre à jour l'aspect ratio de la caméra debug
         this.debugCamera.aspect = debugWidth / debugHeight;
         this.debugCamera.updateProjectionMatrix();
 
-        // Render avec la caméra debug
         this.renderer.render(this.scene, this.debugCamera);
 
-        // Restaurer le viewport original
         this.renderer.setViewport(currentViewport.x, currentViewport.y, currentViewport.z, currentViewport.w);
         this.renderer.setScissorTest(false);
 
-        // Dessiner une bordure autour du viewport debug
         this.drawDebugBorder(debugX, debugY, debugWidth, debugHeight);
     }
 
-    drawDebugBorder(x: number, y: number, width: number, height: number) {
-        // Utiliser le canvas 2D pour dessiner une bordure
+    private drawDebugBorder(x: number, y: number, width: number, height: number) {
         const canvas2D = document.createElement('canvas');
         const ctx = canvas2D.getContext('2d');
 
@@ -233,7 +222,6 @@ export default class DebugCamera {
         canvas2D.style.pointerEvents = 'none';
         canvas2D.style.zIndex = '1000';
 
-        // Supprimer l'ancienne bordure
         const oldBorder = document.querySelector('.debug-border');
         if (oldBorder) oldBorder.remove();
 
@@ -243,19 +231,17 @@ export default class DebugCamera {
         ctx.lineWidth = 2;
         ctx.strokeRect(x, this.sizes.height - y - height, width, height);
 
-        // Ajouter un label
         ctx.fillStyle = '#ff0000';
         ctx.font = '12px Arial';
         ctx.fillText('DEBUG VIEW', x + 5, this.sizes.height - y - height + 15);
 
         document.body.appendChild(canvas2D);
 
-        // Nettoyer après un court délai
         setTimeout(() => {
             if (canvas2D.parentNode) {
                 canvas2D.parentNode.removeChild(canvas2D);
             }
-        }, 16); // ~60fps
+        }, 16)
     }
 
     update() {
@@ -265,11 +251,10 @@ export default class DebugCamera {
         this.updateMainCameraHelper();
     }
 
-    toggle() {
+    private toggle() {
         this.isEnabled = !this.isEnabled;
         console.log(`Debug camera ${this.isEnabled ? 'enabled' : 'disabled'}`);
 
-        // Masquer/afficher les helpers
         const helpers = ['debugGrid', 'debugAxes', 'mainCameraHelper'];
         helpers.forEach(name => {
             const helper = this.scene.getObjectByName(name);
@@ -279,7 +264,7 @@ export default class DebugCamera {
         });
     }
 
-    resetDebugCamera() {
+    private resetDebugCamera() {
         this.debugCamera.position.set(15, 10, 15);
         this.debugControls.target.set(0, 0, 0);
         this.debugControls.reset();
@@ -287,16 +272,13 @@ export default class DebugCamera {
         console.log("🔄 Debug camera reset to default position");
     }
 
-    // Nouvelle méthode pour focus sur la caméra principale
-    focusOnMainCamera() {
+    private focusOnMainCamera() {
         const mainCamera = this.experience.camera.currentCamera;
         const distance = 5;
 
-        // Calculer une position autour de la caméra principale
         const offset = new THREE.Vector3(3, 2, 3);
         this.debugCamera.position.copy(mainCamera.position).add(offset);
 
-        // Focus sur la position de la caméra principale
         this.debugControls.target.copy(mainCamera.position);
         this.debugControls.update();
 
@@ -311,7 +293,6 @@ export default class DebugCamera {
     dispose() {
         this.debugControls.dispose();
 
-        // Nettoyer les helpers
         const helpers = ['debugGrid', 'debugAxes', 'mainCameraHelper'];
         helpers.forEach(name => {
             const helper = this.scene.getObjectByName(name);
@@ -320,7 +301,6 @@ export default class DebugCamera {
             }
         });
 
-        // Nettoyer les event listeners
         const oldBorder = document.querySelector('.debug-border');
         if (oldBorder) oldBorder.remove();
     }

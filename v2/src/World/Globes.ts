@@ -7,7 +7,10 @@ import ballV from "../Shaders/ballV.glsl?raw";
 import glassF from "../Shaders/glassF.glsl?raw";
 import glassV from "../Shaders/glassV.glsl?raw";
 
-export interface Globe {
+export const SHADER_DEFAULT_SPEED = 0.001;
+export const SHADER_SLOW_SPEED = 0.0001;
+
+export interface GlobeInterface {
     ballMesh: THREE.Mesh;
     ballMat: THREE.ShaderMaterial;
     glassMesh: THREE.Mesh;
@@ -55,7 +58,7 @@ export const globesData: GlobeFactoryInput[] = [
         baseSecond: new THREE.Vector3(224 / 255, 148 / 255, 66 / 255),
         baseThird: new THREE.Vector3(232 / 255, 201 / 255, 73 / 255)
     },
-    {
+/*    {
         timeline: {
             initial: { position: new THREE.Vector3(0, 0, -3), scale: 0.1, rotation: new THREE.Euler(35, 30, 10) },
             first: { position: new THREE.Vector3(-4.5, 2.2, 0.5), scale: 0.18 },
@@ -69,8 +72,8 @@ export const globesData: GlobeFactoryInput[] = [
         baseFirst: new THREE.Vector3(120 / 255, 158 / 255, 113 / 255),
         baseSecond: new THREE.Vector3(224 / 255, 148 / 255, 66 / 255),
         baseThird: new THREE.Vector3(232 / 255, 201 / 255, 73 / 255)
-    },
-    {
+    },*/
+/*    {
         timeline: {
             initial: { position: new THREE.Vector3(0, 0, -3), scale: 0.1, rotation: new THREE.Euler(15, 90, 90) },
             first: { position: new THREE.Vector3(3.2, -1.8, -0.4), scale: 0.27 },
@@ -84,8 +87,8 @@ export const globesData: GlobeFactoryInput[] = [
         baseFirst: new THREE.Vector3(120 / 255, 158 / 255, 113 / 255),
         baseSecond: new THREE.Vector3(224 / 255, 148 / 255, 66 / 255),
         baseThird: new THREE.Vector3(232 / 255, 201 / 255, 73 / 255)
-    },
-    {
+    },*/
+/*    {
         timeline: {
             initial: { position: new THREE.Vector3(0, 0, -3), scale: 0.1, rotation: new THREE.Euler(90, 15, 10) },
             first: { position: new THREE.Vector3(-1.7, 0.3, 0.1), scale: 0.14 },
@@ -99,7 +102,7 @@ export const globesData: GlobeFactoryInput[] = [
         baseFirst: new THREE.Vector3(120 / 255, 158 / 255, 113 / 255),
         baseSecond: new THREE.Vector3(224 / 255, 148 / 255, 66 / 255),
         baseThird: new THREE.Vector3(232 / 255, 201 / 255, 73 / 255)
-    },
+    },*/
     {
         timeline: {
             initial: { position: new THREE.Vector3(0, 0, -3), scale: 0.1, rotation: new THREE.Euler(20, 25, 10) },
@@ -189,7 +192,7 @@ export const globesData: GlobeFactoryInput[] = [
         baseSecond: new THREE.Vector3(0.2, 0.6, 0.8),
         baseThird: new THREE.Vector3(0.4, 0.8, 0.4)
     },
-    {
+/*    {
         timeline: {
             initial: {position: new THREE.Vector3(0, 0, -3), scale: 0.1},
             first: {position: new THREE.Vector3(-3.79, 1.94, 0.43), scale: 0.08},
@@ -203,8 +206,8 @@ export const globesData: GlobeFactoryInput[] = [
         baseFirst: new THREE.Vector3(0.8, 0.2, 0.3),
         baseSecond: new THREE.Vector3(0.2, 0.6, 0.8),
         baseThird: new THREE.Vector3(0.4, 0.8, 0.4)
-    },
-    {
+    },*/
+/*    {
         timeline: {
             initial: {position: new THREE.Vector3(0, 0, -3), scale: 0.1},
             first: {position: new THREE.Vector3(-2.74, 0.93, 0.43), scale: 0.13},
@@ -218,7 +221,7 @@ export const globesData: GlobeFactoryInput[] = [
         baseFirst: new THREE.Vector3(0.8, 0.2, 0.3),
         baseSecond: new THREE.Vector3(0.2, 0.6, 0.8),
         baseThird: new THREE.Vector3(0.4, 0.8, 0.4)
-    },
+    },*/
     {
         timeline: {
             initial: {position: new THREE.Vector3(0, 0, -3), scale: 0.1},
@@ -409,10 +412,10 @@ export default class Globes {
     experience: Experience
     scene: THREE.Scene;
 
-    globes: Globe[] = [];
+    globes: GlobeInterface[] = [];
     detailedGeo: { [key: number]: THREE.SphereGeometry } = {};
 
-    speed: number = 0.001;
+    speed: number = SHADER_DEFAULT_SPEED;
 
     constructor() {
         this.experience = new Experience();
@@ -421,12 +424,12 @@ export default class Globes {
         this.setGlobes();
     }
 
-    setGlobes() {
+    private setGlobes() {
         globesData.forEach((globeData) => {
             this.setGlobe(globeData);
         });
     }
-    setGlobe(globeData: GlobeFactoryInput) {
+    private setGlobe(globeData: GlobeFactoryInput) {
         const globe = this.createGlobe(globeData);
 
         this.globes.push(globe);
@@ -438,7 +441,7 @@ export default class Globes {
         }
     }
 
-    createGlobe(globeData: GlobeFactoryInput, rB?:number, sB ?:number, rG ?:number, sG ?:number): Globe {
+    private createGlobe(globeData: GlobeFactoryInput, rB?:number, sB ?:number, rG ?:number, sG ?:number): GlobeInterface {
         const [ballMesh, ballMat] = this.createBall(globeData, rB, sB);
         const [glassMesh, glassMat] = this.createGlass(globeData, rG, sG);
         const cubeCamera = this.createCubeRenderCamera(globeData);
@@ -452,7 +455,7 @@ export default class Globes {
         };
     }
 
-    createBall(globeData: GlobeFactoryInput, radius = 1.5, segments = 8): [THREE.Mesh, THREE.ShaderMaterial] {
+    private createBall(globeData: GlobeFactoryInput, radius = 1.5, segments = 8): [THREE.Mesh, THREE.ShaderMaterial] {
         const ballMat = new THREE.ShaderMaterial({
             extensions: {
                 derivatives: `#extension 
@@ -476,12 +479,12 @@ export default class Globes {
         const ballMesh = new THREE.Mesh(ballGeo, ballMat);
 
         ballMesh.position.copy(globeData.timeline.initial.position);
-        ballMesh.scale.set(globeData.timeline.initial.scale, globeData.timeline.initial.scale, globeData.timeline.initial.scale)
+        ballMesh.scale.set(globeData.timeline.initial.scale ?? 1, globeData.timeline.initial.scale ?? 1, globeData.timeline.initial.scale ?? 1)
         ballMesh.rotation.copy(globeData.timeline.initial.rotation || new THREE.Euler(0, 0, 0));
 
         return [ballMesh, ballMat];
     }
-    createGlass(globeData: GlobeFactoryInput, radius = 2, segments = 32): [THREE.Mesh, THREE.ShaderMaterial] {
+    private createGlass(globeData: GlobeFactoryInput, radius = 2, segments = 64): [THREE.Mesh, THREE.ShaderMaterial] {
         const glassMat = new THREE.ShaderMaterial({
             extensions: {
                 derivatives: `#extension 
@@ -503,11 +506,11 @@ export default class Globes {
         const glassMesh = new THREE.Mesh(glassGeo, glassMat);
 
         glassMesh.position.copy(globeData.timeline.initial.position);
-        glassMesh.scale.set(globeData.timeline.initial.scale, globeData.timeline.initial.scale, globeData.timeline.initial.scale)
+        glassMesh.scale.set(globeData.timeline.initial.scale ?? 1, globeData.timeline.initial.scale ?? 1, globeData.timeline.initial.scale ?? 1)
 
         return [glassMesh, glassMat]
     }
-    createCubeRenderCamera(globeData: GlobeFactoryInput) {
+    private createCubeRenderCamera(globeData: GlobeFactoryInput) {
         const cubeRenderTarget = new THREE.WebGLCubeRenderTarget(256, {
             format: THREE.RGBAFormat,
             generateMipmaps: true,

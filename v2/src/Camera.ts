@@ -5,7 +5,6 @@ import { OrbitControls } from "three/examples/jsm/controls/OrbitControls.js";
 import {EventEmitter} from "events";
 
 export default class Camera extends EventEmitter {
-
     experience: Experience;
     scene: THREE.Scene;
     canvas: HTMLCanvasElement;
@@ -33,7 +32,7 @@ export default class Camera extends EventEmitter {
         //this.setOrbitControls();
     }
 
-    createOrtographicCamera() {
+    private createOrtographicCamera() {
         this.ortographicCamera = new THREE.OrthographicCamera(
             (this.sizes.frustrumSize * this.sizes.ratio) / -7,
             (this.sizes.frustrumSize * this.sizes.ratio) / 7,
@@ -51,7 +50,7 @@ export default class Camera extends EventEmitter {
         //const helper = new THREE.CameraHelper( this.ortographicCamera );
         //this.scene.add( helper );
     }
-    createPerspectiveCamera() {
+    private createPerspectiveCamera() {
         this.perspectiveCamera = new THREE.PerspectiveCamera(
             100,
             this.sizes.ratio,
@@ -69,7 +68,7 @@ export default class Camera extends EventEmitter {
     }
 
 
-    syncCameraPositions() {
+    private syncCameraPositions() {
         if (this.currentCamera instanceof THREE.OrthographicCamera) {
             this.perspectiveCamera.position.copy(this.ortographicCamera.position);
             this.perspectiveCamera.rotation.copy(this.ortographicCamera.rotation);
@@ -80,7 +79,7 @@ export default class Camera extends EventEmitter {
             this.ortographicCamera.updateMatrixWorld();
         }
     }
-    calculateEquivalentFOV(): number {
+    private calculateEquivalentFOV(): number {
         const distance = this.currentCamera.position.distanceTo(new THREE.Vector3(0, 0, 0));
 
         if (this.currentCamera instanceof THREE.OrthographicCamera) {
@@ -121,19 +120,6 @@ export default class Camera extends EventEmitter {
         }
 
         this.emit("cameraSwitched", this.currentCamera);
-    }
-
-    switchCameraWithTransition(duration: number = 0.5) {
-        return new Promise<void>((resolve) => {
-            const targetCamera = this.currentCamera instanceof THREE.OrthographicCamera
-                ? this.perspectiveCamera
-                : this.ortographicCamera;
-
-            this.syncCameraPositions();
-
-            this.switchCamera();
-            resolve();
-        });
     }
 
     switchPerspectiveCamera() {

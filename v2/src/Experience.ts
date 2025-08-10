@@ -5,8 +5,6 @@ import Renderer from "./Renderer.ts";
 import World from "./World/World.ts";
 import Time from "./Utils/Time.ts";
 import Composer from "./Composer.ts";
-import Timeline from "./World/Timeline.ts";
-import Floating from "./World/Floating.ts";
 import Controls from "./Controls.ts";
 import DebugCamera from "./DebugCamera.ts";
 
@@ -23,9 +21,6 @@ export default class Experience {
     renderer!: Renderer;
     composer!: Composer;
     world!: World;
-
-    timeline!: Timeline;
-    floating!: Floating;
 
     controls!: Controls;
     debugCamera!: DebugCamera;
@@ -61,7 +56,6 @@ export default class Experience {
         });
 
         this.camera.on('cameraSwitched', (camera: THREE.OrthographicCamera | THREE.PerspectiveCamera) => {
-            console.log('Switching camera');
             this.composer.setCamera(camera);
         });
 
@@ -73,6 +67,8 @@ export default class Experience {
     update() {
         this.camera.update();
         this.world.update();
+
+        this.controls.update();
 
         this.debugCamera.update();
         this.composer.update();

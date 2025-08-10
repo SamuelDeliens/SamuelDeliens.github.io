@@ -1,8 +1,7 @@
 import Experience from "../Experience.ts";
 import * as THREE from "three";
-import type {Globe, GlobeFactoryInput, GlobeStep} from "./Globes.ts";
-import {globesData} from "./Globes.ts";
-import World from "./World.ts";
+import type {GlobeInterface, GlobeFactoryInput, GlobeStep} from "./Globes.ts";
+import Globes, {globesData, SHADER_SLOW_SPEED} from "./Globes.ts";
 import { gsap } from "gsap";
 import {EventEmitter} from "events";
 import type Camera from "../Camera.ts";
@@ -13,17 +12,15 @@ export default class Timeline extends EventEmitter {
 
     camera: Camera;
     currentCamera!: THREE.OrthographicCamera | THREE.PerspectiveCamera;
-    world: World;
 
-    globes: Globe[];
+    globes: Globes;
+    globesList: GlobeInterface[];
 
     firstTimeline!: gsap.core.Timeline;
     secondTimeline!: gsap.core.Timeline;
     thirdTimeline!: {
         [key: number]: gsap.core.Timeline
     };
-
-    lookAtTarget: THREE.Vector3 = new THREE.Vector3(0, 0, 0);
 
     constructor() {
         super();
@@ -33,10 +30,9 @@ export default class Timeline extends EventEmitter {
 
         this.camera = this.experience.camera;
         this.currentCamera = this.experience.camera.currentCamera;
-        this.world = this.experience.world;
+        this.globes = this.experience.world.globes;
 
-        this.globes = this.world.globes.globes;
-        this.detailedGlobes = this.world.globes.detailedGlobes;
+        this.globesList = this.globes.globes;
 
         this.initFirstTimeline();
         this.initSecondTimeline();
@@ -56,9 +52,9 @@ export default class Timeline extends EventEmitter {
             scale: globeData.timeline.first.scale
         }));
 
-        const increment = (1 / this.globes.length) / 5;
-        this.globes.forEach((globe: Globe, index: number) => {
-            [globe.ballMesh, globe.glassMesh].forEach((mesh: THREE.Mesh, indexMesh: number) => {
+        const increment = (1 / this.globesList.length) / 5;
+        this.globesList.forEach((globe: GlobeInterface, index: number) => {
+            [globe.ballMesh, globe.glassMesh].forEach((mesh: THREE.Mesh) => {
                 this.firstTimeline
                     .to(mesh.position, {
                         x: timelineData[index].position.x,
@@ -93,9 +89,9 @@ export default class Timeline extends EventEmitter {
             scale: globeData.timeline.second.scale
         }));
 
-        const increment = (1 / this.globes.length) / 5;
-        this.globes.forEach((globe: Globe, index: number) => {
-            [globe.ballMesh, globe.glassMesh].forEach((mesh: THREE.Mesh, indexMesh: number) => {
+        const increment = (1 / this.globesList.length) / 5;
+        this.globesList.forEach((globe: GlobeInterface, index: number) => {
+            [globe.ballMesh, globe.glassMesh].forEach((mesh: THREE.Mesh) => {
                 this.secondTimeline
                     .to(mesh.position, {
                         x: timelineData[index].position.x,
@@ -136,11 +132,11 @@ export default class Timeline extends EventEmitter {
             const timelineData = globesData.map((globeData) => globeData.timeline.third);
 
             let targetGlobe = {
-                globe: this.globes[0],
+                globe: this.globesList[0],
                 behaviourStep: globesData[0].timeline.third.show,
             }
 
-            this.globes.forEach((globe: Globe, index: number) => {
+            this.globesList.forEach((globe: GlobeInterface, index: number) => {
                 const showProject = timelineData[index].projectId === projectId;
                 let behaviourStep;
 
@@ -159,9 +155,9 @@ export default class Timeline extends EventEmitter {
                         behaviourStep: behaviourStep
                     };
 
-                const increment = (1 / this.globes.length) / 5;
+                const increment = (1 / this.globesList.length) / 5;
 
-                [globe.ballMesh, globe.glassMesh].forEach((mesh: THREE.Mesh, indexMesh: number) => {
+                [globe.ballMesh, globe.glassMesh].forEach((mesh: THREE.Mesh) => {
                     groupXthirdTimeline
                         .to(mesh.position, {
                             x: behaviourStep.position.x,
@@ -195,17 +191,18 @@ export default class Timeline extends EventEmitter {
 
             groupXthirdTimeline
                 .call(() => {
-                    this.camera.switchCamera();
+                    this.camera.switchPerspectiveCamera();
                     this.currentCamera = this.camera.currentCamera;
 
-                    const newGeo = this.world.globes.detailedGeo[projectId];
-                    const oldGeo = targetGlobe.globe.ballMesh.geometry;
-                    targetGlobe.globe.ballMesh.geometry = newGeo;
-                    oldGeo.dispose();
+                    setTimeout(() => {
+                        const newGeo = this.globes.detailedGeo[projectId];
+                        const oldGeo = targetGlobe.globe.ballMesh.geometry;
+                        targetGlobe.globe.ballMesh.geometry = newGeo;
+                        oldGeo.dispose();
 
-                    this.world.globes.speed = 0.0002;
-
-                }, null, "enterGlobe")
+                        this.globes.speed = SHADER_SLOW_SPEED;
+                    }, 300);
+                }, undefined, "enterGlobe")
                 .to(this.camera.perspectiveCamera.position, {
                     x: 0,
                     y: 0.36,
@@ -221,21 +218,32 @@ export default class Timeline extends EventEmitter {
                     ease: "power2.inOut",
                 }, "enterGlobe")
                 .to(targetGlobe.globe.glassMesh.scale, {
-                    x: 0.2,
-                    y: 0.2,
-                    z: 0.2,
+                    x: 0.3,
+                    y: 0.3,
+                    z: 0.3,
                     duration: 0.8,
                     ease: "power2.inOut",
                 }, "enterGlobe")
+                .call(() => {
+                    this.emit("thirdTimelineHalfComplete", projectId);
+                })
 
             groupXthirdTimeline
                 .to(this.camera.perspectiveCamera.position, {
                     x: 1,
-                    y: 0.36,
+                    y: 0,
                     z: 1,
                     duration: 0.6,
                     delay: 0.5,
                     ease: "power2.inOut",
+                }, "positionGlass")
+                .to(targetGlobe.globe.glassMesh.scale, {
+                    x: 0.4,
+                    y: 0.4,
+                    z: 0.4,
+                    duration: 0.6,
+                    ease: "power2.inOut",
+                    delay: 0.5,
                 }, "positionGlass");
 
             this.thirdTimeline[projectId] = groupXthirdTimeline;

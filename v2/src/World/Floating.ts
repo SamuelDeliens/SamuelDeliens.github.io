@@ -1,6 +1,6 @@
 import Experience from "../Experience.ts";
 import * as THREE from "three";
-import type {Globe} from "./Globes.ts";
+import type {GlobeInterface} from "./Globes.ts";
 import World from "./World.ts";
 import { gsap } from "gsap";
 
@@ -9,9 +9,9 @@ export default class Floating {
     scene: THREE.Scene;
 
     world: World;
-    globes: Globe[];
+    globes: GlobeInterface[];
 
-    animations: Map<Globe, gsap.core.Tween> = new Map();
+    animations: Map<GlobeInterface, gsap.core.Tween> = new Map();
 
     constructor() {
         this.experience = new Experience();
@@ -22,7 +22,7 @@ export default class Floating {
         this.globes = this.world.globes.globes;
     }
 
-    start(globe: Globe) {
+    start(globe: GlobeInterface) {
         const base = globe.ballMesh.position.clone();
 
         const animate = () => {
@@ -50,7 +50,7 @@ export default class Floating {
         animate();
     }
 
-    stop(globe: Globe) {
+    stop(globe: GlobeInterface) {
         const tween = this.animations.get(globe);
         if (tween) {
             tween.kill();

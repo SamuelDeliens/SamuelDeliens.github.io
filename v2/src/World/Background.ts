@@ -12,16 +12,16 @@ export default class Background {
         this.experience = new Experience();
         this.scene = this.experience.scene;
 
-        this.setBackground();
+        //this.setBackground();
     }
 
-    setBackground() {
-        this.geometry = new THREE.PlaneGeometry(100, 100);
+    private setBackground() {
+        const geometry = new THREE.PlaneGeometry(100, 100);
         this.material = new THREE.MeshStandardMaterial({
             color: 0x000000,
             side: THREE.DoubleSide,
         });
-        this.plane = new THREE.Mesh(this.geometry, this.material);
+        this.plane = new THREE.Mesh(geometry, this.material);
         this.plane.position.z = -10;
         this.scene.add(this.plane);
     }

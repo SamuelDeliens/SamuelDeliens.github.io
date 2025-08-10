@@ -16,7 +16,7 @@ html, body, .page, .page-wrapper {
   width: 100%;
   height: 100%;
 }
-html section.hidden-section, body section.hidden-section, .page section.hidden-section, .page-wrapper section.hidden-section {
+html section.hidden, body section.hidden, .page section.hidden, .page-wrapper section.hidden {
   display: none;
 }
 
@@ -34,13 +34,32 @@ html section.hidden-section, body section.hidden-section, .page section.hidden-s
   height: 100%;
 }
 
-.glass-wrapper {
+.glass-wrapper-translate {
   overflow: hidden;
 }
-.glass-wrapper .glass-animation-wrapper {
+.glass-wrapper-translate .glass-animation-wrapper {
   position: relative;
   top: 0;
   left: 0;
+}
+
+.glass-wrapper-fade {
+  position: absolute;
+}
+.glass-wrapper-fade .glass-fade-element {
+  opacity: 0;
+  transition: opacity 0.8s ease;
+}
+.glass-wrapper-fade .glass-final-element {
+  position: absolute;
+  top: 0;
+  left: 0;
+  visibility: hidden;
+  transition: visibility 0.8s ease;
+}
+
+.interactive {
+  cursor: pointer;
 }
 
 .hero {
@@ -94,9 +113,6 @@ html section.hidden-section, body section.hidden-section, .page section.hidden-s
   left: -20px;
   right: -20px;
 }
-.hero .hero-desc .glass-animation-wrapper {
-  transform: translateY(-100px);
-}
 .hero .hero-desc .hero-desc-wrapper {
   display: flex;
   align-items: center;
@@ -107,110 +123,277 @@ html section.hidden-section, body section.hidden-section, .page section.hidden-s
   white-space: nowrap;
   animation: translate-left 50s linear infinite;
 }
-.hero.show-hero .hero-title .hero-title-first.hero-title-1 {
+.hero.show .hero-title .hero-title-first.hero-title-1 {
   animation: fadeInDown 0.8s cubic-bezier(0.9, 0, 1, 1) forwards;
   animation-delay: 0s;
 }
-.hero.show-hero .hero-title .hero-title-first.hero-title-2 {
+.hero.show .hero-title .hero-title-first.hero-title-2 {
   animation: fadeInDown 0.7s cubic-bezier(0.9, 0, 1, 1) forwards;
   animation-delay: 0s;
 }
-.hero.show-hero .hero-title .hero-title-first.hero-title-3 {
+.hero.show .hero-title .hero-title-first.hero-title-3 {
   animation: fadeInDown 0.6s cubic-bezier(0.9, 0, 1, 1) forwards;
   animation-delay: 0s;
 }
-.hero.show-hero .hero-title .hero-title-second.hero-title-1 {
+.hero.show .hero-title .hero-title-second.hero-title-1 {
   animation: fadeInUp 0.8s cubic-bezier(0.9, 0, 1, 1) forwards;
   animation-delay: 0s;
 }
-.hero.show-hero .hero-title .hero-title-second.hero-title-2 {
+.hero.show .hero-title .hero-title-second.hero-title-2 {
   animation: fadeInUp 0.7s cubic-bezier(0.9, 0, 1, 1) forwards;
   animation-delay: 0s;
 }
-.hero.show-hero .hero-title .hero-title-second.hero-title-3 {
+.hero.show .hero-title .hero-title-second.hero-title-3 {
   animation: fadeInUp 0.6s cubic-bezier(0.9, 0, 1, 1) forwards;
   animation-delay: 0s;
 }
-.hero.show-hero .hero-buttons .glass-animation-wrapper {
+.hero.show .hero-buttons .glass-animation-wrapper {
   transform: translateY(0px);
   animation: downGlass 1s ease forwards;
   animation-delay: 0s;
 }
-.hero.show-hero .hero-desc .glass-animation-wrapper {
-  transform: translateY(0px);
-  animation: downGlass 1.1s ease forwards;
-  animation-delay: 0s;
+.hero.show .glass-fade-element {
+  animation: fadeIn 0.5s ease forwards;
+  animation-delay: 1.5s;
 }
-.hero.hide-hero .hero-title .hero-title-first.hero-title-1 {
+.hero.show .glass-final-element {
+  animation: fakeFadeIn 0s ease forwards;
+  animation-delay: 1.5s;
+}
+.hero.hide .hero-title .hero-title-first.hero-title-1 {
   animation: hideFadeInUp 0.6s cubic-bezier(0.9, 0, 1, 1) forwards;
   animation-delay: 0s;
 }
-.hero.hide-hero .hero-title .hero-title-first.hero-title-2 {
+.hero.hide .hero-title .hero-title-first.hero-title-2 {
   animation: hideFadeInUp 0.7s cubic-bezier(0.9, 0, 1, 1) forwards;
   animation-delay: 0s;
 }
-.hero.hide-hero .hero-title .hero-title-first.hero-title-3 {
+.hero.hide .hero-title .hero-title-first.hero-title-3 {
   animation: hideFadeInUp 0.8s cubic-bezier(0.9, 0, 1, 1) forwards;
   animation-delay: 0s;
 }
-.hero.hide-hero .hero-title .hero-title-second.hero-title-1 {
+.hero.hide .hero-title .hero-title-second.hero-title-1 {
   animation: hideFadeInDown 0.6s cubic-bezier(0.9, 0, 1, 1) forwards;
   animation-delay: 0s;
 }
-.hero.hide-hero .hero-title .hero-title-second.hero-title-2 {
+.hero.hide .hero-title .hero-title-second.hero-title-2 {
   animation: hideFadeInDown 0.7s cubic-bezier(0.9, 0, 1, 1) forwards;
   animation-delay: 0s;
 }
-.hero.hide-hero .hero-title .hero-title-second.hero-title-3 {
+.hero.hide .hero-title .hero-title-second.hero-title-3 {
   animation: hideFadeInDown 0.8s cubic-bezier(0.9, 0, 1, 1) forwards;
   animation-delay: 0s;
 }
-.hero.hide-hero .hero-buttons .glass-animation-wrapper {
+.hero.hide .hero-buttons .glass-animation-wrapper {
   animation: upGlass 0.5s ease forwards;
   animation-delay: 0s;
 }
-.hero.hide-hero .hero-desc .glass-animation-wrapper {
-  animation: upGlass 0.5s ease forwards;
+.hero.hide .glass-fade-element {
+  animation: fadeOut 0.3s ease forwards;
   animation-delay: 0s;
+}
+.hero.hide .glass-final-element {
+  animation: fakeFadeOut 0s ease forwards;
+  animation-delay: 0.1s;
 }
 
 .projects-list {
   width: 100%;
   height: 100%;
+  /*    &.show-project-list {
+          .backup {
+              display: inherit;
+              animation: fakeFadeIn 0.7s ease forwards;
+              animation-delay: 0s;
+          }
+
+          .default .glass-animation-wrapper {
+              opacity: 1;
+              animation: fadeIn 0.3s ease forwards;
+              animation-delay: 0s;
+          }
+      }
+
+      .glass-wrapper {
+          position: absolute;
+
+          &.project-bluerov {
+              top: 30%;
+              left: 15%;
+          }
+          &.project-ejeffrey {
+              top: 75%;
+              left: 15%;
+          }
+          &.project-neobot {
+              top: 30%;
+              left: 47.5%;
+          }
+          &.project-easeidf {
+              top: 30%;
+              right: 15%;
+          }
+          &.project-spider {
+              top: 75%;
+              left: 47.5%;
+          }
+      }*/
 }
-.projects-list .glass-wrapper {
-  position: absolute;
-}
-.projects-list .glass-wrapper.project-bluerov {
+.projects-list .open-project-button[data-project=bluerov] {
   top: 30%;
   left: 15%;
 }
-.projects-list .glass-wrapper.project-ejeffrey {
+.projects-list .open-project-button[data-project=ejeffrey] {
   top: 75%;
   left: 15%;
 }
-.projects-list .glass-wrapper.project-neobot {
+.projects-list .open-project-button[data-project=neobot] {
   top: 30%;
   left: 47.5%;
 }
-.projects-list .glass-wrapper.project-easeidf {
+.projects-list .open-project-button[data-project=easeidf] {
   top: 30%;
   right: 15%;
 }
-.projects-list .glass-wrapper.project-spider {
+.projects-list .open-project-button[data-project=spider] {
   top: 75%;
   left: 47.5%;
 }
-.projects-list .glass-wrapper glass-box div {
+.projects-list .open-project-button glass-box div {
   padding: 0.5rem 1rem;
+}
+.projects-list.show .glass-fade-element {
+  animation: fadeIn 0.3s ease forwards;
+  animation-delay: 0s;
+}
+.projects-list.show .glass-final-element {
+  animation: fakeFadeIn 0.3s ease forwards;
+  animation-delay: 0s;
+}
+.projects-list.hide .glass-fade-element {
+  animation: fadeOut 0.3s ease forwards;
+  animation-delay: 0s;
+}
+.projects-list.hide .glass-final-element {
+  animation: fakeFadeOut 0s ease forwards;
+  animation-delay: 0.1s;
+}
+
+.project-details {
+  width: 100%;
+  height: 100%;
+  /*    .project-details-group {
+          display: none;
+
+          .project-details-title {
+              position: absolute;
+              top: 7%;
+              left: 50%;
+              right: 20%;
+
+              glass-box {
+                  div {
+                      padding: 0.7rem 1rem;
+                  }
+                  h1 {
+                      width: 100%;
+                      text-align: center;
+                      margin: 0;
+                      padding: 0;
+                  }
+              }
+          }
+          .project-details-content {
+              position: absolute;
+              top: 20%;
+              bottom: 20%;
+              left: 45%;
+              right: 15%;
+
+              glass-box {
+                  box-shadow: 0 0 10px rgba(0, 0, 0, 0.5);
+
+                  .content-glass {
+                      width: 100%;
+                      height: 100%;
+                      padding: 15rem 10rem;
+                  }
+              }
+          }
+
+          &.show {
+              display: inherit;
+          }
+      }
+
+      .glass-wrapper {
+          position: absolute;
+
+          &.project-bluerov {
+              right: 28%;
+              left: 15%;
+          }
+
+          glass-box {
+              div {
+                  padding: 0.5rem 1rem;
+              }
+          }
+      }*/
+}
+.project-details .project-details-group {
+  display: none;
+  position: absolute;
+  left: 50%;
+  right: -1%;
+  top: -1%;
+  bottom: -1%;
+}
+.project-details .project-details-group glass-box {
+  box-shadow: 0 0 10px rgba(0, 0, 0, 0.5);
+}
+.project-details .project-details-group glass-box .project-details-content {
+  width: 100%;
+  height: 100%;
+  padding: 15rem 10rem;
+}
+.project-details .project-details-group.show {
+  display: inherit;
 }
 
 @keyframes fadeIn {
   0% {
     opacity: 0;
   }
-  100% {
+  99% {
     opacity: 1;
+  }
+  100% {
+    opacity: 0;
+  }
+}
+@keyframes fakeFadeIn {
+  0% {
+    visibility: hidden;
+  }
+  100% {
+    visibility: visible;
+  }
+}
+@keyframes fadeOut {
+  0% {
+    opacity: 1;
+  }
+  100% {
+    opacity: 0;
+  }
+}
+@keyframes fakeFadeOut {
+  0% {
+    visibility: visible;
+  }
+  100% {
+    visibility: hidden;
   }
 }
 @keyframes downGlass {

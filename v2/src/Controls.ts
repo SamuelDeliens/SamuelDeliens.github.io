@@ -1,6 +1,6 @@
 import Timeline from "./World/Timeline.ts";
 import Floating from "./World/Floating.ts";
-import type {Globe} from "./World/Globes.ts";
+import type {GlobeInterface} from "./World/Globes.ts";
 import Cursor from "./Cursor.ts";
 
 export default class Controls {
@@ -8,6 +8,8 @@ export default class Controls {
     floating: Floating;
 
     cursor: Cursor;
+
+    globes: GlobeInterface[];
 
     public hero = document.querySelector(".hero");
     public heroTitle = document.querySelector(".hero-title");
@@ -17,7 +19,10 @@ export default class Controls {
     public projectsList = document.querySelector(".projects-list");
     public openProjectButtons = document.querySelectorAll(".open-project-button");
 
-    constructor(globes: Globe[]) {
+    public projectDetails = document.querySelector(".project-details");
+    public projectDetailsGroup: {[key: string]: HTMLElement} = {};
+
+    constructor(globes: GlobeInterface[]) {
         this.timeline = new Timeline();
         this.floating = new Floating();
 
@@ -25,10 +30,17 @@ export default class Controls {
 
         this.globes = globes;
 
+        this.setListeners();
+
+        document.querySelectorAll(".project-details-group").forEach((group) => {
+            const groupId: number = parseInt(group.getAttribute("data-project-id") || "-1");
+            if (groupId !== -1) {
+                this.projectDetailsGroup[groupId] = group as HTMLElement;
+            }
+        });
         this.heroWork?.addEventListener("click", () => {
             this.startSecondTimeline();
         });
-
         this.openProjectButtons.forEach((button) => {
             const projectId = parseInt(button.getAttribute("data-project-id") || "-1");
             button.addEventListener("click", () => {
@@ -37,49 +49,58 @@ export default class Controls {
         });
     }
 
-    startFirstTimeline() {
-        this.hero?.classList.add("show-hero");
-
-        setTimeout(() => {
-            this.timeline.firstTimeline.play();
-            this.timeline.on("firstTimelineComplete", () => {
-                this.globes.forEach(globe => {
-                    this.floating.start(globe);
-                });
+    // Sets up event listeners for trigger the end of timelines and update UI elements
+    private setListeners() {
+        this.timeline.on("firstTimelineComplete", () => {
+            this.globes.forEach(globe => {
+                this.floating.start(globe);
             });
-        }, 600)
-    }
-
-    startSecondTimeline() {
-        this.hero?.classList.remove("show-hero");
-        this.hero?.classList.add("hide-hero");
-        this.globes.forEach(globe => {
-            this.floating.stop(globe);
         });
-        this.timeline.secondTimeline.play();
+
         this.timeline.on("secondTimelineComplete", () => {
-            this.hero?.classList.add("hidden-section");
-            this.projectsList?.classList.remove("hidden-section");
+            this.hero?.classList.add("hidden");
+            this.projectsList?.classList.remove("hidden");
 
             this.globes.forEach(globe => {
                 this.floating.start(globe);
             });
         })
+        this.timeline.on("thirdTimelineHalfComplete", (projectId: number) => {
+            this.projectsList?.classList.add("hidden");
+            this.projectDetails?.classList.remove("hidden");
+            this.projectDetailsGroup[projectId.toString()]?.classList.add("show");
+        });
     }
 
-    startThirdTimeline(projectId: number) {
+    // Starts the animation timelines
+    startFirstTimeline() {
+        this.hero?.classList.add("show");
+
+        setTimeout(() => {
+            this.timeline.firstTimeline.play();
+        }, 600)
+    }
+    startSecondTimeline() {
+        this.hero?.classList.remove("show");
+        this.hero?.classList.add("hide");
         this.globes.forEach(globe => {
             this.floating.stop(globe);
         });
-        this.projectsList?.classList.add("hidden-section");
+        this.projectsList?.classList.add("show");
+        this.timeline.secondTimeline.play();
+    }
+    startThirdTimeline(projectId: number) {
+        this.projectsList?.classList.remove("show");
+        this.projectsList?.classList.add("hide");
+        this.globes.forEach(globe => {
+            this.floating.stop(globe);
+        });
 
         this.timeline.thirdTimeline[projectId].play();
+    }
 
-        this.timeline.on("thirdTimelineComplete", (projectId: number) => {
-            this.globes.forEach(globe => {
-                this.floating.start(globe);
-            });
-        });
+    update() {
+        this.cursor.update();
     }
 
 }

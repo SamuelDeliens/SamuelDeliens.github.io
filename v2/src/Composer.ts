@@ -1,7 +1,10 @@
 import * as THREE from "three";
+// @ts-ignore
 import {EffectComposer} from "three/examples/jsm/postprocessing/EffectComposer";
 import Experience from "./Experience.ts";
+// @ts-ignore
 import {RenderPass} from "three/examples/jsm/postprocessing/RenderPass";
+// @ts-ignore
 import {ShaderPass} from "three/examples/jsm/postprocessing/ShaderPass";
 import {DotScreenShader} from "./Shaders/DotScreenShader.ts";
 
@@ -19,7 +22,7 @@ export default class Composer {
         this.setComposer();
     }
 
-    setComposer() {
+    private setComposer() {
         this.composer = new EffectComposer( this.experience.renderer.renderer );
 
         this.renderPass = new RenderPass(

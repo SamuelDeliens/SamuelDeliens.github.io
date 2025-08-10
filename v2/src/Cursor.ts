@@ -28,7 +28,7 @@ export default class Cursor {
         this.init();
     }
 
-    init() {
+    private init() {
         this.mouseX = window.innerWidth / 2;
         this.mouseY = window.innerHeight / 2;
         this.dotX = this.mouseX;
@@ -37,7 +37,7 @@ export default class Cursor {
         this.setListeners();
     }
 
-    setListeners() {
+    private setListeners() {
         window.addEventListener('mousemove', (e) => {
             if (!this.hidden)
                 this.show();
@@ -67,37 +67,37 @@ export default class Cursor {
         });
     }
 
-    lerp(a: number, b: number, n: number){
+    private lerp(a: number, b: number, n: number){
         return (1 - n) * a + n * b;
     }
 
-    move() {
+    private move() {
         this.dotX = this.lerp(this.dotX, this.mouseX, this.ease);
         this.dotY = this.lerp(this.dotY, this.mouseY, this.ease);
 
         this.dot.style.transform = `translate3d(${this.dotX}px, ${this.dotY}px, 0) translate(-50%, -50%) scale(${this.scale})`;
     }
-    down() {
+    private down() {
         this.scale = 0.1;
     }
-    up() {
+    private up() {
         this.scale = 1;
     }
 
-    onHover() {
+    private onHover() {
         this.dot.classList.add('hover');
         this.scale = 1.5;
     }
-    offHover() {
+    private offHover() {
         this.dot.classList.remove('hover');
         this.scale = 1;
     }
 
-    show() {
+    private show() {
         this.hidden = false;
         this.dot.classList.remove('hidden');
     }
-    hide() {
+    private hide() {
         this.hidden = true;
         this.dot.classList.add('hidden');
     }

@@ -13,7 +13,7 @@
   <canvas class="experience-canvas"></canvas>
 </div>
 
-<div class="cursor-dot" id="cursorDot" aria-hidden="true"></div>
+<div class="cursor-dot hidden" id="cursorDot" aria-hidden="true"></div>
 
 <div class="page">
   <div class="page-wrapper">
@@ -40,74 +40,160 @@
       </div>
 
       <div class="hero-buttons">
-        <div class="glass-wrapper">
+        <div class="glass-wrapper-translate">
           <div class="glass-animation-wrapper">
-            <glass-box class="hero-work" hover-effect>
+            <glass-box class="hero-work interactive" hover-effect>
               <div>PROJECT</div>
             </glass-box>
           </div>
         </div>
 
-        <div class="glass-wrapper">
+        <div class="glass-wrapper-translate">
           <div class="glass-animation-wrapper">
-            <glass-box class="hero-contact" hover-effect>
+            <glass-box class="hero-contact interactive" hover-effect>
               <div>CONTACT</div>
             </glass-box>
           </div>
         </div>
       </div>
 
-      <div class="hero-desc glass-wrapper">
-        <div class="glass-animation-wrapper">
-          <glass-box corner-radius="0px">
-            <div class="hero-desc-wrapper">
-              <div class="desc-line"><span>Frontend Development &nbsp;  ●  &nbsp; Backend Development &nbsp;  ●  &nbsp; Web Development &nbsp;  ●  &nbsp; Web Design &nbsp;  ●  &nbsp; FullStack Development &nbsp;  ●  &nbsp;</span></div>
-              <div class="desc-line"><span>Frontend Development &nbsp;  ●  &nbsp; Backend Development &nbsp;  ●  &nbsp; Web Development &nbsp;  ●  &nbsp; Web Design &nbsp;  ●  &nbsp; FullStack Development &nbsp;  ●  &nbsp;</span></div>
-              <div class="desc-line"><span>Frontend Development &nbsp;  ●  &nbsp; Backend Development &nbsp;  ●  &nbsp; Web Development &nbsp;  ●  &nbsp; Web Design &nbsp;  ●  &nbsp; FullStack Development &nbsp;  ●  &nbsp;</span></div>
-            </div>
-          </glass-box>
-        </div>
+      <div class="hero-desc glass-wrapper-fade">
+        <glass-box class="glass-fade-element" corner-radius="0px">
+          <div class="hero-desc-wrapper">
+            <div class="desc-line"><span>Frontend Development &nbsp;  ●  &nbsp; Backend Development &nbsp;  ●  &nbsp; Web Development &nbsp;  ●  &nbsp; Web Design &nbsp;  ●  &nbsp; FullStack Development &nbsp;  ●  &nbsp;</span></div>
+            <div class="desc-line"><span>Frontend Development &nbsp;  ●  &nbsp; Backend Development &nbsp;  ●  &nbsp; Web Development &nbsp;  ●  &nbsp; Web Design &nbsp;  ●  &nbsp; FullStack Development &nbsp;  ●  &nbsp;</span></div>
+            <div class="desc-line"><span>Frontend Development &nbsp;  ●  &nbsp; Backend Development &nbsp;  ●  &nbsp; Web Development &nbsp;  ●  &nbsp; Web Design &nbsp;  ●  &nbsp; FullStack Development &nbsp;  ●  &nbsp;</span></div>
+          </div>
+        </glass-box>
+        <glass-box class="glass-final-element" corner-radius="0px">
+          <div class="hero-desc-wrapper">
+            <div class="desc-line"><span>Frontend Development &nbsp;  ●  &nbsp; Backend Development &nbsp;  ●  &nbsp; Web Development &nbsp;  ●  &nbsp; Web Design &nbsp;  ●  &nbsp; FullStack Development &nbsp;  ●  &nbsp;</span></div>
+            <div class="desc-line"><span>Frontend Development &nbsp;  ●  &nbsp; Backend Development &nbsp;  ●  &nbsp; Web Development &nbsp;  ●  &nbsp; Web Design &nbsp;  ●  &nbsp; FullStack Development &nbsp;  ●  &nbsp;</span></div>
+            <div class="desc-line"><span>Frontend Development &nbsp;  ●  &nbsp; Backend Development &nbsp;  ●  &nbsp; Web Development &nbsp;  ●  &nbsp; Web Design &nbsp;  ●  &nbsp; FullStack Development &nbsp;  ●  &nbsp;</span></div>
+          </div>
+        </glass-box>
       </div>
     </section>
 
-    <section class="projects-list hidden-section">
-      <div class="glass-wrapper open-project-button project-bluerov" data-project-id="2">
-        <div class="glass-animation-wrapper">
-          <glass-box hover-effect>
+    <section class="projects-list hidden">
+      <div class="glass-wrapper-fade open-project-button" data-project="bluerov" data-project-id="2">
+        <glass-box class="glass-fade-element">
+          <div>BlueROV2</div>
+        </glass-box>
+        <glass-box class="glass-final-element interactive" hover-effect>
+          <div>BlueROV2</div>
+        </glass-box>
+      </div>
+      <div class="glass-wrapper-fade open-project-button" data-project="neobot" data-project-id="1">
+        <glass-box class="glass-fade-element">
+          <div>NeoBot</div>
+        </glass-box>
+        <glass-box class="glass-final-element interactive" hover-effect>
+          <div>NeoBot</div>
+        </glass-box>
+      </div>
+      <div class="glass-wrapper-fade open-project-button" data-project="ejeffrey" data-project-id="5">
+        <glass-box class="glass-fade-element">
+          <div>E-Jeffrey</div>
+        </glass-box>
+        <glass-box class="glass-final-element interactive" hover-effect>
+          <div>E-Jeffrey</div>
+        </glass-box>
+      </div>
+      <div class="glass-wrapper-fade open-project-button" data-project="easeidf" data-project-id="4">
+        <glass-box class="glass-fade-element">
+          <div>EaseIDF</div>
+        </glass-box>
+        <glass-box class="glass-final-element interactive" hover-effect>
+          <div>EaseIDF</div>
+        </glass-box>
+      </div>
+      <div class="glass-wrapper-fade open-project-button" data-project="spider" data-project-id="3">
+        <glass-box class="glass-fade-element">
+          <div>Spider</div>
+        </glass-box>
+        <glass-box class="glass-final-element interactive" hover-effect>
+          <div>Spider</div>
+        </glass-box>
+      </div>
+    </section>
+
+    <section class="project-details hidden">
+
+      <article class="project-details-group" data-project="bluerov" data-project-id="2">
+        <header class="project-details-title glass-wrapper-fade">
+          <glass-box class="glass-fade-element">
             <div>BlueROV2</div>
           </glass-box>
+          <glass-box class="glass-final-element interactive" hover-effect>
+            <div>BlueROV2</div>
+          </glass-box>
+        </header>
+        <div class="project-details-content">
+          <p>
+            Lorem ipsum dolor sit amet, consectetur adipiscing elit. Sed do eiusmod tempor incididunt ut labore et dolore magna aliqua. Ut enim ad minim veniam, quis nostrud exercitation ullamco laboris nisi ut aliquip ex ea commodo consequat. Duis aute irure dolor in reprehenderit in voluptate velit esse cillum dolore eu fugiat nulla pariatur. Excepteur sint occaecat cupidatat non proident, sunt in culpa qui officia deserunt mollit anim id est laborum.
+          </p>
         </div>
-      </div>
-      <div class="glass-wrapper open-project-button project-neobot" data-project-id="1">
-        <div class="glass-animation-wrapper">
-          <glass-box hover-effect>
-            <div>NeoBot</div>
+      </article>
+      <article class="project-details-group" data-project="neobot" data-project-id="1">
+        <header class="project-details-title">
+          <glass-box
+          softness="16px"
+          extra-blur="32px">
+            <div>
+              <h1>NeoBot</h1>
+            </div>
+          </glass-box>
+        </header>
+        <div class="project-details-content glass-animation-wrapper">
+          <glass-box softness="16px" extra-blur="32px">
+            <div class="content-glass"></div>
           </glass-box>
         </div>
-      </div>
-      <div class="glass-wrapper open-project-button project-ejeffrey" data-project-id="5">
-        <div class="glass-animation-wrapper">
+      </article>
+      <article class="project-details-group" data-project="ejeffrey" data-project-id="5">
+        <header class="project-details-title">
+          <glass-box>
+            <div>
+              <h1>E-Jeffrey</h1>
+            </div>
+          </glass-box>
+        </header>
+        <div class="project-details-content glass-animation-wrapper">
           <glass-box hover-effect>
-            <div>E-Jeffrey</div>
+            <div class="content-glass"></div>
           </glass-box>
         </div>
-      </div>
-      <div class="glass-wrapper open-project-button project-easeidf" data-project-id="4">
-        <div class="glass-animation-wrapper">
+      </article>
+      <article class="project-details-group" data-project="easeidf" data-project-id="4">
+        <header class="project-details-title">
+          <glass-box>
+            <div>
+              <h1>EaseIDF</h1>
+            </div>
+          </glass-box>
+        </header>
+        <div class="project-details-content glass-animation-wrapper">
           <glass-box hover-effect>
-            <div>EaseIDF</div>
+            <div class="content-glass"></div>
           </glass-box>
         </div>
-      </div>
-      <div class="glass-wrapper open-project-button project-spider" data-project-id="3">
-        <div class="glass-animation-wrapper">
-          <glass-box hover-effect>
-            <div>Spider</div>
-          </glass-box>
-        </div>
-      </div>
+      </article>
+      <article class="project-details-group" data-project="spider" data-project-id="3">
+          <header class="project-details-title">
+            <glass-box softness="16px" extra-blur="32px">
+              <div>
+                <h1>Spider</h1>
+              </div>
+            </glass-box>
+          </header>
+          <div class="project-details-content glass-animation-wrapper">
+            <p>
+              Lorem ipsum dolor sit amet, consectetur adipiscing elit. Sed do eiusmod tempor incididunt ut labore et dolore magna aliqua. Ut enim ad minim veniam, quis nostrud exercitation ullamco laboris nisi ut aliquip ex ea commodo consequat. Duis aute irure dolor in reprehenderit in voluptate velit esse cillum dolore eu fugiat nulla pariatur. Excepteur sint occaecat cupidatat non proident, sunt in culpa qui officia deserunt mollit anim id est laborum.
+            </p>
+          </div>
+      </article>
     </section>
-
   </div>
 </div>
 
