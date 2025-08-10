@@ -1,0 +1,28 @@
+.cursor-dot{
+  opacity: 0.5;
+  position:fixed;
+  left:0; top:0;
+  width:22px; height:22px;
+  border-radius:50%;
+  background:rgba(255,255,255,0.85);
+  pointer-events:none;
+  transform: translate3d(-50%, -50%, 0) scale(1);
+  will-change: transform, opacity;
+  transition: transform 120ms ease-out, opacity 160ms ease;
+  z-index:9999;
+  box-shadow:0 6px 20px rgba(255,255,255,0.25);
+
+  &.hover{
+    opacity: 0.3;
+  }
+
+  &.hidden {
+    opacity:0;
+  }
+}
+
+@media (prefers-reduced-motion: reduce){
+  .cursor-dot {
+    transition:none;
+  }
+}

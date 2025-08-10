@@ -1,12 +1,13 @@
 import Timeline from "./World/Timeline.ts";
 import Floating from "./World/Floating.ts";
 import type {Globe} from "./World/Globes.ts";
+import Cursor from "./Cursor.ts";
 
 export default class Controls {
     timeline: Timeline;
     floating: Floating;
 
-    globes: Globe[];
+    cursor: Cursor;
 
     public hero = document.querySelector(".hero");
     public heroTitle = document.querySelector(".hero-title");
@@ -19,6 +20,8 @@ export default class Controls {
     constructor(globes: Globe[]) {
         this.timeline = new Timeline();
         this.floating = new Floating();
+
+        this.cursor = new Cursor();
 
         this.globes = globes;
 
