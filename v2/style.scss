@@ -45,8 +45,6 @@ html, body, .page, .page-wrapper {
     }
 }
 .glass-wrapper-fade {
-    position: absolute;
-
     .glass-fade-element {
         opacity: 0;
         transition: opacity 0.8s ease;
@@ -228,6 +226,8 @@ html, body, .page, .page-wrapper {
     height: 100%;
 
     .open-project-button {
+        position: absolute;
+
         &[data-project="bluerov"] {
             top: 30%;
             left: 15%;
@@ -276,131 +276,167 @@ html, body, .page, .page-wrapper {
             animation-delay: 0.1s;
         }
     }
-/*    &.show-project-list {
-        .backup {
-            display: inherit;
-            animation: fakeFadeIn 0.7s ease forwards;
-            animation-delay: 0s;
-        }
-
-        .default .glass-animation-wrapper {
-            opacity: 1;
-            animation: fadeIn 0.3s ease forwards;
-            animation-delay: 0s;
-        }
-    }
-
-    .glass-wrapper {
-        position: absolute;
-
-        &.project-bluerov {
-            top: 30%;
-            left: 15%;
-        }
-        &.project-ejeffrey {
-            top: 75%;
-            left: 15%;
-        }
-        &.project-neobot {
-            top: 30%;
-            left: 47.5%;
-        }
-        &.project-easeidf {
-            top: 30%;
-            right: 15%;
-        }
-        &.project-spider {
-            top: 75%;
-            left: 47.5%;
-        }
-    }*/
 }
 
 .project-details {
-    width: 100%;
-    height: 100%;
+    width: 50%;
+    height: calc(100% - 6rem);
+    overflow: scroll;
+    scrollbar-width: none;
+    padding: 3rem 25%;
 
     .project-details-group {
         display: none;
-        position: absolute;
-        left: 50%;
-        right: -1%;
-        top: -1%;
-        bottom: -1%;
-
-        glass-box {
-            box-shadow: 0 0 10px rgba(0, 0, 0, 0.5);
-
-            .project-details-content {
-                width: 100%;
-                height: 100%;
-                padding: 15rem 10rem;
-            }
-        }
-
-        &.show {
-            display: inherit;
-        }
-    }
-
-/*    .project-details-group {
-        display: none;
+        flex-direction: column;
+        align-items: center;
+        gap: 3rem;
 
         .project-details-title {
-            position: absolute;
-            top: 7%;
-            left: 50%;
-            right: 20%;
+            width: 80%;
+            display: flex;
+            align-items: center;
+            justify-content: center;
 
-            glass-box {
-                div {
-                    padding: 0.7rem 1rem;
-                }
-                h1 {
+            &.glass-wrapper-fade {
+                position: relative;
+                display: flex;
+                align-items: center;
+                justify-content: center;
+
+                glass-box {
                     width: 100%;
-                    text-align: center;
-                    margin: 0;
-                    padding: 0;
+                    div {
+                        width: calc(100% - 2rem);
+                        display: flex;
+                        justify-content: center;
+                        padding: 0.7rem 1rem;
+                    }
                 }
             }
         }
-        .project-details-content {
-            position: absolute;
-            top: 20%;
-            bottom: 20%;
-            left: 45%;
-            right: 15%;
+        .project-details-img {
+            width: 100%;
+            height: 80%;
+            display: flex;
+            align-items: center;
+            justify-content: center;
+            box-shadow: 0 0 10px rgba(0, 0, 0, 0.5);
+            border-radius: 1rem 1rem 0 0;
+        }
+        .project-details-description {
+            display: grid;
+            grid-template-columns: 1fr 1fr 6fr;
+            grid-template-rows: 1fr 1fr;
+            font-size: 0.9rem;
+            grid-gap: 0.5rem;
+
+            .date {
+                position: relative;
+                grid-column: 1 / 2;
+                grid-row: 1 / 2;
+            }
+            .location {
+                position: relative;
+                grid-column: 2 / 3;
+                grid-row: 1 / 2;
+            }
+            .role {
+                position: relative;
+                grid-column: 1 / 3;
+                grid-row: 2 / 3;
+            }
+
+            .description-text {
+                font-size: 1rem;
+                text-align: justify;
+                grid-column: 3 / 4;
+                grid-row: 1 / 3;
+                padding: 0 0 0 1rem;
+                margin: 0;
+            }
 
             glass-box {
-                box-shadow: 0 0 10px rgba(0, 0, 0, 0.5);
+                width: 100%;
+                div {
+                    width: calc(100% - 2rem);
+                    display: flex;
+                    justify-content: center;
+                    padding: 0.5rem 1rem;
+                }
+            }
+        }
 
-                .content-glass {
+        .project-details-content {
+            opacity: 0;
+            display: flex;
+            flex-direction: column;
+            align-items: center;
+            gap: 3rem;
+            padding-bottom: 3rem;
+
+            section {
+                display: flex;
+                flex-direction: column;
+                align-items: center;
+                gap: 1rem;
+                h2 {
+                    width: 100%;
+                }
+                h2:after {
+                    content: "";
+                    display: block;
+                    width: 100%;
+                    height: 3px;
+                    background-color: var(--primary-color);
+                    margin-top: 0.5rem;
+                }
+                img {
                     width: 100%;
                     height: 100%;
-                    padding: 15rem 10rem;
+                    border-radius: 0.2rem;
+                    box-shadow: 0 0 10px rgba(0, 0, 0, 0.5);
+                }
+
+                &.skills {
+                    display: flex;
+                    flex-direction: row;
+                    flex-wrap: wrap;
+                    gap: 0.5rem;
+
+                    glass-box {
+                        div {
+                            padding: 0.5rem 1rem;
+                        }
+                    }
+                }
+            }
+
+            &.bluerov2 {
+                .images {
+                    display: grid;
+                    grid-template-columns: repeat(2, 1fr);
+                    gap: 2rem;
                 }
             }
         }
 
         &.show {
-            display: inherit;
-        }
-    }
+            display: flex;
 
-    .glass-wrapper {
-        position: absolute;
-
-        &.project-bluerov {
-            right: 28%;
-            left: 15%;
-        }
-
-        glass-box {
-            div {
-                padding: 0.5rem 1rem;
+            .glass-fade-element {
+                animation: fadeIn 0.3s ease forwards;
+                animation-delay: 0s;
+            }
+            .glass-final-element {
+                animation: fakeFadeIn 0.3s ease forwards;
+                animation-delay: 0s;
+            }
+            .project-details-content {
+                opacity: 1;
+                transition: opacity 0.3s ease;
             }
         }
-    }*/
+    }
 }
 
 @keyframes fadeIn {

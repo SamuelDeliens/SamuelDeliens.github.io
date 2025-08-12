@@ -43,9 +43,6 @@ html section.hidden, body section.hidden, .page section.hidden, .page-wrapper se
   left: 0;
 }
 
-.glass-wrapper-fade {
-  position: absolute;
-}
 .glass-wrapper-fade .glass-fade-element {
   opacity: 0;
   transition: opacity 0.8s ease;
@@ -200,44 +197,9 @@ html section.hidden, body section.hidden, .page section.hidden, .page-wrapper se
 .projects-list {
   width: 100%;
   height: 100%;
-  /*    &.show-project-list {
-          .backup {
-              display: inherit;
-              animation: fakeFadeIn 0.7s ease forwards;
-              animation-delay: 0s;
-          }
-
-          .default .glass-animation-wrapper {
-              opacity: 1;
-              animation: fadeIn 0.3s ease forwards;
-              animation-delay: 0s;
-          }
-      }
-
-      .glass-wrapper {
-          position: absolute;
-
-          &.project-bluerov {
-              top: 30%;
-              left: 15%;
-          }
-          &.project-ejeffrey {
-              top: 75%;
-              left: 15%;
-          }
-          &.project-neobot {
-              top: 30%;
-              left: 47.5%;
-          }
-          &.project-easeidf {
-              top: 30%;
-              right: 15%;
-          }
-          &.project-spider {
-              top: 75%;
-              left: 47.5%;
-          }
-      }*/
+}
+.projects-list .open-project-button {
+  position: absolute;
 }
 .projects-list .open-project-button[data-project=bluerov] {
   top: 30%;
@@ -280,85 +242,146 @@ html section.hidden, body section.hidden, .page section.hidden, .page-wrapper se
 }
 
 .project-details {
-  width: 100%;
-  height: 100%;
-  /*    .project-details-group {
-          display: none;
-
-          .project-details-title {
-              position: absolute;
-              top: 7%;
-              left: 50%;
-              right: 20%;
-
-              glass-box {
-                  div {
-                      padding: 0.7rem 1rem;
-                  }
-                  h1 {
-                      width: 100%;
-                      text-align: center;
-                      margin: 0;
-                      padding: 0;
-                  }
-              }
-          }
-          .project-details-content {
-              position: absolute;
-              top: 20%;
-              bottom: 20%;
-              left: 45%;
-              right: 15%;
-
-              glass-box {
-                  box-shadow: 0 0 10px rgba(0, 0, 0, 0.5);
-
-                  .content-glass {
-                      width: 100%;
-                      height: 100%;
-                      padding: 15rem 10rem;
-                  }
-              }
-          }
-
-          &.show {
-              display: inherit;
-          }
-      }
-
-      .glass-wrapper {
-          position: absolute;
-
-          &.project-bluerov {
-              right: 28%;
-              left: 15%;
-          }
-
-          glass-box {
-              div {
-                  padding: 0.5rem 1rem;
-              }
-          }
-      }*/
+  width: 50%;
+  height: calc(100% - 6rem);
+  overflow: scroll;
+  scrollbar-width: none;
+  padding: 3rem 25%;
 }
 .project-details .project-details-group {
   display: none;
-  position: absolute;
-  left: 50%;
-  right: -1%;
-  top: -1%;
-  bottom: -1%;
+  flex-direction: column;
+  align-items: center;
+  gap: 3rem;
 }
-.project-details .project-details-group glass-box {
+.project-details .project-details-group .project-details-title {
+  width: 80%;
+  display: flex;
+  align-items: center;
+  justify-content: center;
+}
+.project-details .project-details-group .project-details-title.glass-wrapper-fade {
+  position: relative;
+  display: flex;
+  align-items: center;
+  justify-content: center;
+}
+.project-details .project-details-group .project-details-title.glass-wrapper-fade glass-box {
+  width: 100%;
+}
+.project-details .project-details-group .project-details-title.glass-wrapper-fade glass-box div {
+  width: calc(100% - 2rem);
+  display: flex;
+  justify-content: center;
+  padding: 0.7rem 1rem;
+}
+.project-details .project-details-group .project-details-img {
+  width: 100%;
+  height: 80%;
+  display: flex;
+  align-items: center;
+  justify-content: center;
   box-shadow: 0 0 10px rgba(0, 0, 0, 0.5);
+  border-radius: 1rem 1rem 0 0;
 }
-.project-details .project-details-group glass-box .project-details-content {
+.project-details .project-details-group .project-details-description {
+  display: grid;
+  grid-template-columns: 1fr 1fr 6fr;
+  grid-template-rows: 1fr 1fr;
+  font-size: 0.9rem;
+  grid-gap: 0.5rem;
+}
+.project-details .project-details-group .project-details-description .date {
+  position: relative;
+  grid-column: 1/2;
+  grid-row: 1/2;
+}
+.project-details .project-details-group .project-details-description .location {
+  position: relative;
+  grid-column: 2/3;
+  grid-row: 1/2;
+}
+.project-details .project-details-group .project-details-description .role {
+  position: relative;
+  grid-column: 1/3;
+  grid-row: 2/3;
+}
+.project-details .project-details-group .project-details-description .description-text {
+  font-size: 1rem;
+  text-align: justify;
+  grid-column: 3/4;
+  grid-row: 1/3;
+  padding: 0 0 0 1rem;
+  margin: 0;
+}
+.project-details .project-details-group .project-details-description glass-box {
+  width: 100%;
+}
+.project-details .project-details-group .project-details-description glass-box div {
+  width: calc(100% - 2rem);
+  display: flex;
+  justify-content: center;
+  padding: 0.5rem 1rem;
+}
+.project-details .project-details-group .project-details-content {
+  opacity: 0;
+  display: flex;
+  flex-direction: column;
+  align-items: center;
+  gap: 3rem;
+  padding-bottom: 3rem;
+}
+.project-details .project-details-group .project-details-content section {
+  display: flex;
+  flex-direction: column;
+  align-items: center;
+  gap: 1rem;
+}
+.project-details .project-details-group .project-details-content section h2 {
+  width: 100%;
+}
+.project-details .project-details-group .project-details-content section h2:after {
+  content: "";
+  display: block;
+  width: 100%;
+  height: 3px;
+  background-color: var(--primary-color);
+  margin-top: 0.5rem;
+}
+.project-details .project-details-group .project-details-content section img {
   width: 100%;
   height: 100%;
-  padding: 15rem 10rem;
+  border-radius: 0.2rem;
+  box-shadow: 0 0 10px rgba(0, 0, 0, 0.5);
+}
+.project-details .project-details-group .project-details-content section.skills {
+  display: flex;
+  flex-direction: row;
+  flex-wrap: wrap;
+  gap: 0.5rem;
+}
+.project-details .project-details-group .project-details-content section.skills glass-box div {
+  padding: 0.5rem 1rem;
+}
+.project-details .project-details-group .project-details-content.bluerov2 .images {
+  display: grid;
+  grid-template-columns: repeat(2, 1fr);
+  gap: 2rem;
 }
 .project-details .project-details-group.show {
-  display: inherit;
+  display: flex;
+}
+.project-details .project-details-group.show .glass-fade-element {
+  animation: fadeIn 0.3s ease forwards;
+  animation-delay: 0s;
+}
+.project-details .project-details-group.show .glass-final-element {
+  animation: fakeFadeIn 0.3s ease forwards;
+  animation-delay: 0s;
+}
+.project-details .project-details-group.show .project-details-content {
+  opacity: 1;
+  transition: opacity 0.3s ease;
 }
 
 @keyframes fadeIn {
