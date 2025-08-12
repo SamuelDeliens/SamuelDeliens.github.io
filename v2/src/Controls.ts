@@ -2,12 +2,18 @@ import Timeline from "./World/Timeline.ts";
 import Floating from "./World/Floating.ts";
 import type {GlobeInterface} from "./World/Globes.ts";
 import Cursor from "./Cursor.ts";
+import Experience from "./Experience.ts";
+import World from "./World/World.ts";
 
 export default class Controls {
+    experience: Experience
+    world: World;
+
     timeline: Timeline;
     floating: Floating;
 
     cursor: Cursor;
+    lerp;
 
     globes: GlobeInterface[];
 
@@ -23,14 +29,20 @@ export default class Controls {
     public projectDetailsGroup: {[key: string]: HTMLElement} = {};
 
     constructor(globes: GlobeInterface[]) {
+        this.experience = new Experience();
+        this.world = this.experience.world;
+
         this.timeline = new Timeline();
         this.floating = new Floating();
 
         this.cursor = new Cursor();
 
+        this.lerp = this.experience.world.lerp;
+
         this.globes = globes;
 
         this.setListeners();
+        this.setTimelineListeners();
 
         document.querySelectorAll(".project-details-group").forEach((group) => {
             const groupId: number = parseInt(group.getAttribute("data-project-id") || "-1");
@@ -38,6 +50,18 @@ export default class Controls {
                 this.projectDetailsGroup[groupId] = group as HTMLElement;
             }
         });
+    }
+
+    onMouseMove(e: MouseEvent) {
+        if (!this.world.lerpRotation) return;
+        const newRotationX = ((e.clientX - window.innerWidth / 2)*2)/window.innerWidth;
+        const newRotationY = ((e.clientY - window.innerHeight / 2)*2)/window.innerHeight;
+        this.lerp.targetX = newRotationX;
+        this.lerp.targetY = newRotationY;
+    }
+
+    // Sets up dom event listeners
+    private setListeners() {
         this.heroWork?.addEventListener("click", () => {
             this.startSecondTimeline();
         });
@@ -47,10 +71,13 @@ export default class Controls {
                 this.startThirdTimeline(projectId);
             });
         });
-    }
 
-    // Sets up event listeners for trigger the end of timelines and update UI elements
-    private setListeners() {
+        window.addEventListener('mousemove', (e) => {
+            this.onMouseMove(e);
+            this.cursor.onMouseMove(e);
+        }, {passive:true});
+    }
+    private setTimelineListeners() {
         this.timeline.on("firstTimelineComplete", () => {
             this.globes.forEach(globe => {
                 this.floating.start(globe);
@@ -66,9 +93,13 @@ export default class Controls {
             });
         })
         this.timeline.on("thirdTimelineHalfComplete", (projectId: number) => {
+            console.log("thirdTimelineHalfComplete", projectId);
             this.projectsList?.classList.add("hidden");
             this.projectDetails?.classList.remove("hidden");
             this.projectDetailsGroup[projectId.toString()]?.classList.add("show");
+        });
+        this.timeline.on("thirdTimelineComplete", () => {
+            this.experience.world.lerpRotation = true;
         });
     }
 

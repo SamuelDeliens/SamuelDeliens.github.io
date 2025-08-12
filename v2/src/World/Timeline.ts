@@ -200,6 +200,9 @@ export default class Timeline extends EventEmitter {
                         targetGlobe.globe.ballMesh.geometry = newGeo;
                         oldGeo.dispose();
 
+                        this.globes.detailedGlass[projectId].glassMesh.visible = true;
+                        this.globes.detailedGlass[projectId].glassMesh.scale.set(0.3, 0.3, 0.3);
+
                         this.globes.speed = SHADER_SLOW_SPEED;
                     }, 300);
                 }, undefined, "enterGlobe")
@@ -229,22 +232,37 @@ export default class Timeline extends EventEmitter {
                 })
 
             groupXthirdTimeline
-                .to(this.camera.perspectiveCamera.position, {
-                    x: 1,
-                    y: 0,
-                    z: 1,
+                .to(targetGlobe.globe.glassMesh.position, {
+                    x: -1.7,
+                    y: 0.5,
+                    z: 0,
                     duration: 0.6,
                     delay: 0.5,
                     ease: "power2.inOut",
                 }, "positionGlass")
                 .to(targetGlobe.globe.glassMesh.scale, {
                     x: 0.4,
-                    y: 0.4,
+                    y: 0.5,
                     z: 0.4,
                     duration: 0.6,
                     ease: "power2.inOut",
                     delay: 0.5,
-                }, "positionGlass");
+                }, "positionGlass")
+                .to(this.globes.detailedGlass[projectId].glassMesh.position, {
+                    x: 1.8,
+                    y: -0.3,
+                    z: 0,
+                    duration: 0.6,
+                    ease: "power2.inOut",
+                    delay: 0.5,
+                }, "positionGlass")
+                .call(() => {
+                    this.globes.moveObjectPreserveWorldTransform(this.globes.detailedGlass[projectId].glassMesh, this.globes.currentGroup);
+                    this.globes.moveObjectPreserveWorldTransform(targetGlobe.globe.ballMesh, this.globes.currentGroup);
+                    this.globes.moveObjectPreserveWorldTransform(targetGlobe.globe.glassMesh, this.globes.currentGroup);
+
+                    this.emit("thirdTimelineComplete", projectId);
+                })
 
             this.thirdTimeline[projectId] = groupXthirdTimeline;
         });

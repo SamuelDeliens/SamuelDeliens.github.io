@@ -38,14 +38,6 @@ export default class Cursor {
     }
 
     private setListeners() {
-        window.addEventListener('mousemove', (e) => {
-            if (!this.hidden)
-                this.show();
-
-            this.mouseX = e.clientX;
-            this.mouseY = e.clientY;
-        }, {passive:true});
-
         window.addEventListener('mousedown', () => this.down());
         window.addEventListener('mouseup', () => this.up());
 
@@ -65,6 +57,14 @@ export default class Cursor {
             el.addEventListener('mouseenter', () => this.onHover());
             el.addEventListener('mouseleave', () => this.offHover());
         });
+    }
+
+    onMouseMove(e: MouseEvent) {
+        if (!this.hidden)
+            this.show();
+
+        this.mouseX = e.clientX;
+        this.mouseY = e.clientY;
     }
 
     private lerp(a: number, b: number, n: number){

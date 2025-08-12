@@ -414,12 +414,22 @@ export default class Globes {
 
     globes: GlobeInterface[] = [];
     detailedGeo: { [key: number]: THREE.SphereGeometry } = {};
+    detailedGlass: { [key: number]: {
+        glassMesh: THREE.Mesh;
+        glassMat: THREE.ShaderMaterial;
+        cubeCamera: THREE.CubeCamera;
+        cubeRenderTarget: THREE.WebGLCubeRenderTarget;
+    }} = {};
+
+    currentGroup: THREE.Group = new THREE.Group();
 
     speed: number = SHADER_DEFAULT_SPEED;
 
     constructor() {
         this.experience = new Experience();
         this.scene = this.experience.scene;
+
+        this.scene.add(this.currentGroup);
 
         this.setGlobes();
     }
@@ -438,6 +448,14 @@ export default class Globes {
 
         if (globeData.timeline.third.stay) {
             this.detailedGeo[globeData.timeline.third.projectId] = new THREE.SphereGeometry(3, 32, 32);
+            this.detailedGlass[globeData.timeline.third.projectId] = {
+                glassMesh: globe.glassMesh.clone(),
+                glassMat: globe.glassMat.clone(),
+                cubeCamera: globe.cubeCamera,
+                cubeRenderTarget: globe.cubeRenderTarget
+            }
+            this.detailedGlass[globeData.timeline.third.projectId].glassMesh.visible = false;
+            this.scene.add(this.detailedGlass[globeData.timeline.third.projectId].glassMesh);
         }
     }
 
@@ -526,13 +544,44 @@ export default class Globes {
         }
     }
 
+    moveObjectPreserveWorldTransform(object: THREE.Mesh, newParent: THREE.Group | THREE.Scene) {
+        const worldPosition = new THREE.Vector3();
+        const worldQuaternion = new THREE.Quaternion();
+        const worldScale = new THREE.Vector3();
+
+        object.getWorldPosition(worldPosition);
+        object.getWorldQuaternion(worldQuaternion);
+        object.getWorldScale(worldScale);
+
+        newParent.add(object);
+
+        object.position.copy(worldPosition);
+        object.quaternion.copy(worldQuaternion);
+        object.scale.copy(worldScale);
+    }
+
     update() {
+        this.globes.forEach(globe => globe.glassMesh.visible = false);
+
+        const detailedGlassVisibilityState = new Map<number, boolean>();
+        Object.entries(this.detailedGlass).forEach(([projectId, dg]) => {
+            detailedGlassVisibilityState.set(parseInt(projectId), dg.glassMesh.visible);
+            dg.glassMesh.visible = false;
+        });
+
         this.globes.forEach((globe) => {
-            if (!globe.ballMesh.visible)
-                return;
-            globe.glassMesh.visible = false;
+            if (!globe.ballMesh.visible) return;
             globe.cubeCamera.position.copy(globe.ballMesh.position);
             globe.cubeCamera.update(this.experience.renderer.renderer, this.scene);
+        });
+
+        Object.entries(this.detailedGlass).forEach(([projectId, dg]) => {
+            const wasVisible = detailedGlassVisibilityState.get(parseInt(projectId));
+            dg.glassMesh.visible = wasVisible || false;
+        });
+
+        this.globes.forEach((globe) => {
+            if (!globe.ballMesh.visible) return;
             globe.glassMesh.visible = true;
             globe.ballMat.uniforms.time.value = this.experience.time.elapsed * this.speed;
             globe.glassMat.uniforms.tCube.value = globe.cubeRenderTarget.texture;

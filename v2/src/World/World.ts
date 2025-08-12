@@ -3,6 +3,7 @@ import Environment from "./Environment.ts";
 import Experience from "../Experience.ts";
 import Globes from "./Globes.ts";
 import Background from "./Background.ts";
+import { gsap } from "gsap";
 
 export default class World {
     experience: Experience
@@ -11,6 +12,15 @@ export default class World {
     private environment: Environment;
     private background: Background;
     public globes: Globes;
+
+    lerp = {
+        currentX: 0,
+        targetX: 0,
+        currentY: 0,
+        targetY: 0,
+        ease: 0.1
+    }
+    lerpRotation: boolean = false;
 
     constructor() {
         this.experience = new Experience();
@@ -24,6 +34,24 @@ export default class World {
     update() {
         this.environment.update();
         this.globes.update();
+
+        this.globes.currentGroup.visible = false;
+        if (this.lerpRotation) {
+            this.lerp.currentX = gsap.utils.interpolate(
+                this.lerp.currentX,
+                this.lerp.targetX,
+                this.lerp.ease
+            );
+            this.lerp.currentY = gsap.utils.interpolate(
+                this.lerp.currentY,
+                this.lerp.targetY,
+                this.lerp.ease
+            );
+
+            this.globes.currentGroup.rotation.y = this.lerp.currentX*0.1;
+            this.globes.currentGroup.rotation.x = this.lerp.currentY*0.1;
+        }
+        this.globes.currentGroup.visible = true;
     }
 
 }
