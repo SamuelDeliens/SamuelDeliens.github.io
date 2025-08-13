@@ -13,7 +13,17 @@
   <canvas class="experience-canvas"></canvas>
 </div>
 
-<div class="cursor-dot hidden" id="cursorDot" aria-hidden="true"></div>
+<div class="cursor hidden" id="cursor" aria-hidden="true">
+  <div class="cursor-dot" id="cursor-dot"></div>
+  <div class="cursor-tooltip hidden" id="cursor-tooltip">
+    <span class="tooltip-text" id="cursor-tooltip-text">Hover</span>
+  </div>
+</div>
+<!--<div class="back-button cursor-hide">
+  <svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 24 24">
+    <path d="M19 11H7.83l5.59-5.59L12 4l-8 8 8 8 1.41-1.41L7.83 13H19v-2z"/>
+  </svg>
+</div>-->
 
 <div class="page">
   <div class="page-wrapper">
@@ -119,6 +129,23 @@
     </section>
 
     <section class="project-details hidden">
+      <div class="nav-button back cursor-tooltip" data-tooltip="Back">
+        <glass-box class="interactive" corner-radius="100px">
+          <div class="nav-arrow">
+            <svg viewBox="0 0 852 852" xmlns="http://www.w3.org/2000/svg">
+              <path id="Triangle" fill-rule="evenodd" stroke="none" d="M 1.006269 429.214478 C 0.687578 467.562744 37.722969 493.436859 47.076675 499.882019 C 145.654129 557.480347 418.630646 719.178406 548.934082 794.805664 C 581.707825 810.121948 617.275757 814.818298 641.132568 793.911621 C 670.734558 768.514526 666.82019 747.983215 670.16217 717.14386 C 669.11908 524.984009 669.484497 332.821655 669.845398 140.240601 C 669.84314 129.244751 670.179199 88.369751 641.562195 63.504333 C 621.066284 45.695374 580.352844 43.214478 538.567444 67.778015 C 475.020874 104.852051 174.504974 282.139771 42.017036 361.562927 C 20.241558 375.636261 1.343719 388.61554 1.006269 429.214478 Z"/>            </svg>
+          </div>
+        </glass-box>
+      </div>
+      <div class="nav-button next cursor-tooltip" data-tooltip="Next">
+        <glass-box class="interactive" corner-radius="100px">
+          <div class="nav-arrow">
+            <svg viewBox="0 0 852 852" xmlns="http://www.w3.org/2000/svg">
+              <path id="Triangle" fill-rule="evenodd" stroke="none" d="M 1.006269 429.214478 C 0.687578 467.562744 37.722969 493.436859 47.076675 499.882019 C 145.654129 557.480347 418.630646 719.178406 548.934082 794.805664 C 581.707825 810.121948 617.275757 814.818298 641.132568 793.911621 C 670.734558 768.514526 666.82019 747.983215 670.16217 717.14386 C 669.11908 524.984009 669.484497 332.821655 669.845398 140.240601 C 669.84314 129.244751 670.179199 88.369751 641.562195 63.504333 C 621.066284 45.695374 580.352844 43.214478 538.567444 67.778015 C 475.020874 104.852051 174.504974 282.139771 42.017036 361.562927 C 20.241558 375.636261 1.343719 388.61554 1.006269 429.214478 Z"/>            </svg>
+          </div>
+        </glass-box>
+      </div>
+
       <article class="project-details-group" data-project="bluerov" data-project-id="2">
         <header class="project-details-title glass-wrapper-fade">
           <glass-box class="glass-fade-element">

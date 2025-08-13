@@ -58,6 +58,95 @@ html, body, .page, .page-wrapper {
     }
 }
 
+/*.back-button {
+    position: absolute;
+    top: -3rem;
+    left: -3rem;
+    z-index: 10;
+    width: 13rem;
+    height: 13rem;
+    transform: scale(1);
+    font-size: 3rem;
+    display: flex;
+    align-items: center;
+    justify-content: center;
+    border-radius: 50%;
+    transition: all 0.4s ease;
+    border: 1px solid rgba(255, 255, 255, 0.8);
+    overflow: hidden;
+
+    &:before {
+        content: "";
+        background-color: #fff;
+        position: absolute;
+        top: 0;
+        left: -100%;
+        width: 100%;
+        height: 100%;
+        transition: all 0.4s ease;
+        z-index: -1;
+    }
+
+    svg {
+        width: 1.5rem;
+        height: 1.5rem;
+        fill: var(--primary-color);
+    }
+
+    &:hover {
+        &:before {
+            left: 0;
+        }
+
+        transform: scale(1.1);
+        svg {
+            fill: var(--background-color);
+        }
+    }
+}*/
+.nav-button {
+    position: absolute;
+    top: 0;
+    left: 0;
+    z-index: 10;
+    transition: all 0.4s ease;
+    overflow: hidden;
+
+    .nav-arrow {
+        width: 7rem;
+        height: 7rem;
+        display: flex;
+        align-items: center;
+        justify-content: center;
+    }
+    svg {
+        transform: rotate(30deg);
+        transition: transform 0.4s cubic-bezier(0.175, 0.885, 0.32, 1.275);
+        fill: var(--primary-color);
+        width: 4rem;
+    }
+
+    &.next {
+        svg {
+            transform: rotate(90deg);
+        }
+
+        &:hover {
+            svg {
+                transform: rotate(60deg);
+            }
+        }
+    }
+
+    &:hover {
+        transform: scale(1.05);
+        svg {
+            transform: rotate(0deg);
+        }
+    }
+}
+
+
 .interactive {
     cursor: pointer;
 }
@@ -473,6 +562,19 @@ html, body, .page, .page-wrapper {
                 opacity: 1;
                 transition: opacity 0.3s ease;
             }
+        }
+    }
+
+    .nav-button {
+
+        &.back {
+            top: 40%;
+            left: 10%;
+        }
+        &.next {
+            left: auto;
+            top: 40%;
+            right: 10%;
         }
     }
 }

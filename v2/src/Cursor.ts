@@ -1,26 +1,30 @@
-export default class Cursor {
-    public dot: HTMLElement = document.getElementById('cursorDot')!;
-    private hidden: boolean = !document.getElementById('cursorDot')?.classList.contains('hidden') || true;
+import { gsap } from "gsap";
 
-    private dotSize: number = 12;
-    private ease: number = 0.2;
+export default class Cursor {
+    public cursor: HTMLElement = document.getElementById('cursor')!;
+    public dot: HTMLElement = document.getElementById('cursor-dot')!;
+    public tooltip: HTMLElement = document.getElementById('cursor-tooltip')!;
+    public tooltipText: HTMLElement = document.getElementById('cursor-tooltip-text')!;
+    private hidden: boolean = !document.getElementById('cursor')?.classList.contains('hidden') || true;
+
     private hideOnMobile: boolean = true;
 
-    private mouseX: number = 0;
-    private mouseY: number = 0;
-    private dotX: number = 0;
-    private dotY: number = 0;
+    private xTo!: gsap.QuickToFunc;
+    private yTo!: gsap.QuickToFunc;
+    private xScaleDotTo!: gsap.QuickToFunc;
+    private yScaleDotTo!: gsap.QuickToFunc;
+
     private scale: number = 1;
 
     private isTouch: boolean = ('ontouchstart' in window) || navigator.maxTouchPoints > 0;
 
     constructor() {
         if (this.isTouch && this.hideOnMobile) {
-            document.getElementById('cursorDot')!.style.display = 'none';
+            document.getElementById('cursor')!.style.display = 'none';
             return;
         }
 
-        if (!this.dot) {
+        if (!this.cursor) {
             console.error("Cursor elements not found in the DOM.");
             return;
         }
@@ -29,10 +33,11 @@ export default class Cursor {
     }
 
     private init() {
-        this.mouseX = window.innerWidth / 2;
-        this.mouseY = window.innerHeight / 2;
-        this.dotX = this.mouseX;
-        this.dotY = this.mouseY;
+        gsap.set(".cursor", {xPercent: -50, yPercent: -50});
+        this.xTo = gsap.quickTo(".cursor", "x", {duration: 1, ease: "power3"});
+        this.yTo = gsap.quickTo(".cursor", "y", {duration: 1, ease: "power3"});
+        this.xScaleDotTo = gsap.quickTo(".cursor-dot", "scaleX", {duration: 0.3, ease: "power3"});
+        this.yScaleDotTo = gsap.quickTo(".cursor-dot", "scaleY", {duration: 0.3, ease: "power3"});
 
         this.setListeners();
     }
@@ -49,60 +54,77 @@ export default class Cursor {
             this.show();
         });
 
-        const mq = window.matchMedia('(prefers-reduced-motion: reduce)');
-        if (mq && mq.matches){ this.ease = 1; }
-
         const interactiveSelector = 'a, button, .interactive';
         document.querySelectorAll(interactiveSelector).forEach(el => {
             el.addEventListener('mouseenter', () => this.onHover());
             el.addEventListener('mouseleave', () => this.offHover());
         });
+
+        const interactiveHideSelector = '.cursor-hide';
+        document.querySelectorAll(interactiveHideSelector).forEach(el => {
+            el.addEventListener('mouseenter', () => this.hide());
+            el.addEventListener('mouseleave', () => this.show());
+        });
+
+        const interactiveTooltipSelector = '.cursor-tooltip';
+        document.querySelectorAll(interactiveTooltipSelector).forEach(el => {
+            const text = el.getAttribute('data-tooltip');
+            if (text) {
+                el.addEventListener('mouseenter', () => this.onTooltip(text));
+                el.addEventListener('mouseleave', () => this.offTooltip());
+            }
+        });
+
     }
 
     onMouseMove(e: MouseEvent) {
         if (!this.hidden)
             this.show();
 
-        this.mouseX = e.clientX;
-        this.mouseY = e.clientY;
+        this.xTo(e.clientX);
+        this.yTo(e.clientY);
     }
 
-    private lerp(a: number, b: number, n: number){
-        return (1 - n) * a + n * b;
-    }
-
-    private move() {
-        this.dotX = this.lerp(this.dotX, this.mouseX, this.ease);
-        this.dotY = this.lerp(this.dotY, this.mouseY, this.ease);
-
-        this.dot.style.transform = `translate3d(${this.dotX}px, ${this.dotY}px, 0) translate(-50%, -50%) scale(${this.scale})`;
-    }
     private down() {
-        this.scale = 0.1;
+        this.xScaleDotTo(0.1);
+        this.yScaleDotTo(0.1);
     }
     private up() {
-        this.scale = 1;
+        this.xScaleDotTo(1);
+        this.yScaleDotTo(1);
     }
 
     private onHover() {
-        this.dot.classList.add('hover');
-        this.scale = 1.5;
+        this.cursor.classList.add('hover');
+        this.xScaleDotTo(1.5);
+        this.yScaleDotTo(1.5);
     }
     private offHover() {
-        this.dot.classList.remove('hover');
-        this.scale = 1;
+        this.cursor.classList.remove('hover');
+        this.xScaleDotTo(1);
+        this.yScaleDotTo(1);
+    }
+
+    private onTooltip(text: string) {
+        this.tooltipText.innerText = text;
+        this.dot.classList.add('hidden');
+        this.tooltip.classList.remove('hidden');
+    }
+    private offTooltip() {
+        this.dot.classList.remove('hidden');
+        this.tooltip.classList.add('hidden');
     }
 
     private show() {
         this.hidden = false;
-        this.dot.classList.remove('hidden');
+        this.cursor.classList.remove('hidden');
     }
     private hide() {
         this.hidden = true;
-        this.dot.classList.add('hidden');
+        this.cursor.classList.add('hidden');
     }
 
     update() {
-        this.move();
+        //this.move();
     }
 }

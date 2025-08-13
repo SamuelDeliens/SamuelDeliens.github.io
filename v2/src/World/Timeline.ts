@@ -233,8 +233,8 @@ export default class Timeline extends EventEmitter {
 
             groupXthirdTimeline
                 .to(targetGlobe.globe.glassMesh.position, {
-                    x: -1.7,
-                    y: 0.5,
+                    x: -1.9,
+                    y: -0.3,
                     z: 0,
                     duration: 0.6,
                     delay: 0.5,
@@ -249,8 +249,8 @@ export default class Timeline extends EventEmitter {
                     delay: 0.5,
                 }, "positionGlass")
                 .to(this.globes.detailedGlass[projectId].glassMesh.position, {
-                    x: 1.8,
-                    y: -0.3,
+                    x: 1.5,
+                    y: 0.3,
                     z: 0,
                     duration: 0.6,
                     ease: "power2.inOut",
