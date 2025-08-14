@@ -4,6 +4,7 @@ import Experience from "../Experience.ts";
 import Globes from "./Globes.ts";
 import Background from "./Background.ts";
 import { gsap } from "gsap";
+import type {WorldRotationLerp} from "../Controls/WorldRotation.ts";
 
 export default class World {
     experience: Experience
@@ -13,14 +14,14 @@ export default class World {
     private background: Background;
     public globes: Globes;
 
-    lerp = {
+    lerp: WorldRotationLerp = {
+        active: false,
         currentX: 0,
         targetX: 0,
         currentY: 0,
         targetY: 0,
         ease: 0.1
     }
-    lerpRotation: boolean = false;
 
     constructor() {
         this.experience = new Experience();
@@ -36,7 +37,7 @@ export default class World {
         this.globes.update();
 
         this.globes.currentGroup.visible = false;
-        if (this.lerpRotation) {
+        if (this.lerp.active) {
             this.lerp.currentX = gsap.utils.interpolate(
                 this.lerp.currentX,
                 this.lerp.targetX,

@@ -569,7 +569,7 @@ export default class ProjectDetailSection extends BaseSection {
             this.show();
         })
         this.on("enterComplete", () => {
-            this.world.lerpRotation = true;
+            this.world.lerp.active = true;
         })
     }
 
@@ -594,13 +594,13 @@ export default class ProjectDetailSection extends BaseSection {
         //part of enter is trigger in listeners ==> after halfComplete & complete
     }
     exit(): void {
-        this.world.lerpRotation = false;
+        this.world.lerp.active = false;
         this.hide();
         this.exitTimeline[this.currentProjectId].pause(0).play();
         this.currentProjectId = -1;
     }
     switchProject() {
-        this.world.lerpRotation = false;
+        this.world.lerp.active = false;
         this.hide();
         this.switchProjectTimeline[this.currentProjectId].restart();
         this.currentProjectId = this.projectDetailsGroup[this.currentProjectId + 1] ? this.currentProjectId + 1 : 1;

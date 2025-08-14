@@ -49,7 +49,7 @@ export default class Experience {
         this.composer = new Composer();
 
         this.world = new World();
-        this.controls = new Controls(this.world.globes.globes);
+        this.controls = new Controls();
         this.sectionManager = new SectionManager();
 
         this.debugCamera = new DebugCamera();
@@ -70,8 +70,6 @@ export default class Experience {
     update() {
         this.camera.update();
         this.world.update();
-
-        this.controls.update();
 
         this.debugCamera.update();
         this.composer.update();

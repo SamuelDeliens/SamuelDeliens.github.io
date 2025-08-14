@@ -1,10 +1,10 @@
 import { gsap } from "gsap";
 
 export default class Cursor {
-    public cursor: HTMLElement = document.getElementById('cursor')!;
-    public dot: HTMLElement = document.getElementById('cursor-dot')!;
-    public tooltip: HTMLElement = document.getElementById('cursor-tooltip')!;
-    public tooltipText: HTMLElement = document.getElementById('cursor-tooltip-text')!;
+    private cursor: HTMLElement = document.getElementById('cursor')!;
+    private dot: HTMLElement = document.getElementById('cursor-dot')!;
+    private tooltip: HTMLElement = document.getElementById('cursor-tooltip')!;
+    private tooltipText: HTMLElement = document.getElementById('cursor-tooltip-text')!;
     private hidden: boolean = !document.getElementById('cursor')?.classList.contains('hidden') || true;
 
     private hideOnMobile: boolean = true;
@@ -13,8 +13,6 @@ export default class Cursor {
     private yTo!: gsap.QuickToFunc;
     private xScaleDotTo!: gsap.QuickToFunc;
     private yScaleDotTo!: gsap.QuickToFunc;
-
-    private scale: number = 1;
 
     private isTouch: boolean = ('ontouchstart' in window) || navigator.maxTouchPoints > 0;
 
@@ -122,9 +120,5 @@ export default class Cursor {
     private hide() {
         this.hidden = true;
         this.cursor.classList.add('hidden');
-    }
-
-    update() {
-        //this.move();
     }
 }
