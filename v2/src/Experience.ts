@@ -7,6 +7,7 @@ import Time from "./Utils/Time.ts";
 import Composer from "./Composer.ts";
 import Controls from "./Controls.ts";
 import DebugCamera from "./DebugCamera.ts";
+import SectionManager, {SectionType} from "./SectionManager.ts";
 
 export default class Experience {
     static _instance: Experience;
@@ -23,6 +24,7 @@ export default class Experience {
     world!: World;
 
     controls!: Controls;
+    sectionManager!: SectionManager;
     debugCamera!: DebugCamera;
 
     constructor(canvas?: HTMLCanvasElement) {
@@ -48,6 +50,7 @@ export default class Experience {
 
         this.world = new World();
         this.controls = new Controls(this.world.globes.globes);
+        this.sectionManager = new SectionManager();
 
         this.debugCamera = new DebugCamera();
 
@@ -60,7 +63,7 @@ export default class Experience {
         });
 
         setTimeout(() => {
-            this.controls.startFirstTimeline();
+            this.sectionManager.goToSection(SectionType.HERO);
         }, 1100);
     }
 

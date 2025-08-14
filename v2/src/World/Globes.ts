@@ -18,6 +18,14 @@ export interface GlobeInterface {
     cubeCamera: THREE.CubeCamera;
     cubeRenderTarget: THREE.WebGLCubeRenderTarget;
 }
+export interface DetailedGlobeInterface {
+    globe: GlobeInterface;
+    geometry: THREE.SphereGeometry;
+    glassMesh: THREE.Mesh;
+    glassMat: THREE.ShaderMaterial;
+    cubeCamera: THREE.CubeCamera;
+    cubeRenderTarget: THREE.WebGLCubeRenderTarget;
+}
 
 export interface GlobeStep {
     position: THREE.Vector3;
@@ -413,14 +421,7 @@ export default class Globes {
     scene: THREE.Scene;
 
     globes: GlobeInterface[] = [];
-    detailedGlobes: { [key: number]: {
-        globe: GlobeInterface;
-        geometry: THREE.SphereGeometry;
-        glassMesh: THREE.Mesh;
-        glassMat: THREE.ShaderMaterial;
-        cubeCamera: THREE.CubeCamera;
-        cubeRenderTarget: THREE.WebGLCubeRenderTarget;
-    }} = {};
+    detailedGlobes: { [key: number]: DetailedGlobeInterface} = {};
 
     currentGroup: THREE.Group = new THREE.Group();
 
