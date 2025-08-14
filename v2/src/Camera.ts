@@ -1,7 +1,7 @@
 import Experience from "./Experience.ts";
 import * as THREE from 'three';
 import type Sizes from "./Utils/Sizes.ts";
-import { OrbitControls } from "three/examples/jsm/controls/OrbitControls.js";
+import {OrbitControls} from "three/examples/jsm/controls/OrbitControls.js";
 import {EventEmitter} from "events";
 
 export default class Camera extends EventEmitter {
@@ -17,6 +17,13 @@ export default class Camera extends EventEmitter {
     currentCamera!: THREE.OrthographicCamera | THREE.PerspectiveCamera;
     controls!: OrbitControls;
 
+    private originalOrthoParams: {
+        left: number;
+        right: number;
+        top: number;
+        bottom: number;
+    };
+
     constructor() {
         super();
 
@@ -27,6 +34,13 @@ export default class Camera extends EventEmitter {
 
         this.createPerspectiveCamera();
         this.createOrtographicCamera();
+
+        this.originalOrthoParams = {
+            left: this.ortographicCamera.left,
+            right: this.ortographicCamera.right,
+            top: this.ortographicCamera.top,
+            bottom: this.ortographicCamera.bottom,
+        };
 
         this.currentCamera = this.ortographicCamera;
         //this.setOrbitControls();
@@ -50,6 +64,7 @@ export default class Camera extends EventEmitter {
         //const helper = new THREE.CameraHelper( this.ortographicCamera );
         //this.scene.add( helper );
     }
+
     private createPerspectiveCamera() {
         this.perspectiveCamera = new THREE.PerspectiveCamera(
             100,
@@ -67,7 +82,6 @@ export default class Camera extends EventEmitter {
         this.controls.enableZoom = true;
     }
 
-
     private syncCameraPositions() {
         if (this.currentCamera instanceof THREE.OrthographicCamera) {
             this.perspectiveCamera.position.copy(this.ortographicCamera.position);
@@ -79,18 +93,20 @@ export default class Camera extends EventEmitter {
             this.ortographicCamera.updateMatrixWorld();
         }
     }
+
     private calculateEquivalentFOV(): number {
         const distance = this.currentCamera.position.distanceTo(new THREE.Vector3(0, 0, 0));
 
         if (this.currentCamera instanceof THREE.OrthographicCamera) {
             const orthoHeight = (this.ortographicCamera.top - this.ortographicCamera.bottom);
             const fov = 2 * Math.atan(orthoHeight / (2 * distance)) * (180 / Math.PI);
-            return Math.max(10, Math.min(175, fov)); // Limiter entre 10 et 175 degrés
+            return Math.max(10, Math.min(175, fov));
         } else {
             const fov = this.perspectiveCamera.fov * (Math.PI / 180);
             const orthoSize = 2 * distance * Math.tan(fov / 2);
 
             const aspect = this.sizes.ratio;
+
             this.ortographicCamera.left = -orthoSize * aspect / 2;
             this.ortographicCamera.right = orthoSize * aspect / 2;
             this.ortographicCamera.top = orthoSize / 2;
@@ -101,16 +117,24 @@ export default class Camera extends EventEmitter {
         }
     }
 
+    private restoreOrthoParams() {
+        this.ortographicCamera.left = this.originalOrthoParams.left;
+        this.ortographicCamera.right = this.originalOrthoParams.right;
+        this.ortographicCamera.top = this.originalOrthoParams.top;
+        this.ortographicCamera.bottom = this.originalOrthoParams.bottom;
+        this.ortographicCamera.updateProjectionMatrix();
+    }
+
     switchCamera() {
         this.syncCameraPositions();
 
         if (this.currentCamera instanceof THREE.OrthographicCamera) {
-            const equivalentFOV = this.calculateEquivalentFOV();
-            this.perspectiveCamera.fov = equivalentFOV;
+            this.perspectiveCamera.fov = this.calculateEquivalentFOV();
             this.perspectiveCamera.updateProjectionMatrix();
             this.currentCamera = this.perspectiveCamera;
         } else {
             this.calculateEquivalentFOV();
+            this.restoreOrthoParams();
             this.currentCamera = this.ortographicCamera;
         }
 
@@ -127,13 +151,26 @@ export default class Camera extends EventEmitter {
             this.switchCamera();
         }
     }
+
     switchOrthgraphicCamera() {
         if (this.currentCamera instanceof THREE.PerspectiveCamera) {
             this.switchCamera();
         }
     }
 
-    update() {
+    resize() {
+        this.originalOrthoParams = {
+            left: (this.sizes.frustrumSize * this.sizes.ratio) / -7,
+            right: (this.sizes.frustrumSize * this.sizes.ratio) / 7,
+            top: this.sizes.frustrumSize / 7,
+            bottom: this.sizes.frustrumSize / -7,
+        };
+
+        if (this.currentCamera instanceof THREE.OrthographicCamera) {
+            this.restoreOrthoParams();
+        }
     }
 
+    update() {
+    }
 }

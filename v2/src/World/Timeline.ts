@@ -1,6 +1,6 @@
 import Experience from "../Experience.ts";
 import * as THREE from "three";
-import type {GlobeInterface, GlobeFactoryInput, GlobeStep} from "./Globes.ts";
+import type {GlobeInterface, GlobeFactoryInput} from "./Globes.ts";
 import Globes, {globesData, SHADER_SLOW_SPEED} from "./Globes.ts";
 import { gsap } from "gsap";
 import {EventEmitter} from "events";
@@ -100,7 +100,6 @@ export default class Timeline extends EventEmitter {
         this.secondTimeline = gsap.timeline({
             paused: true,
             onComplete: () => {
-                console.log(this.camera.ortographicCamera);
                 this.emit("secondTimelineComplete");
             }
         });
@@ -532,7 +531,6 @@ export default class Timeline extends EventEmitter {
             const groupXbackFromProjectTimeline = gsap.timeline({
                 paused: true,
                 onComplete: () => {
-                    console.log(this.camera.ortographicCamera);
                     this.emit("backFromProjectTimelineComplete", projectId);
                 }
             });
