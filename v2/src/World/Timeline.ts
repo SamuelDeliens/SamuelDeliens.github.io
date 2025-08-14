@@ -1,7 +1,7 @@
 import Experience from "../Experience.ts";
 import * as THREE from "three";
 import type {GlobeInterface, GlobeFactoryInput} from "./Globes.ts";
-import Globes, {globesData, SHADER_SLOW_SPEED} from "./Globes.ts";
+import Globes, {globesData, SHADER_DEFAULT_SPEED, SHADER_SLOW_SPEED} from "./Globes.ts";
 import { gsap } from "gsap";
 import {EventEmitter} from "events";
 import type Camera from "../Camera.ts";
@@ -15,8 +15,6 @@ export default class Timeline extends EventEmitter {
 
     globes: Globes;
     globesList: GlobeInterface[];
-
-    currentGlobe!: GlobeInterface;
 
     firstTimeline!: gsap.core.Timeline;
     secondTimeline!: gsap.core.Timeline;
@@ -80,7 +78,7 @@ export default class Timeline extends EventEmitter {
                         x: timelineData[index].position.x,
                         y: timelineData[index].position.y,
                         z: timelineData[index].position.z,
-                        ease: "power2.inOut",
+                        ease: "power3.out",
                         delay: index * increment,
                         duration: 0.5
                     }, "same")
@@ -90,7 +88,7 @@ export default class Timeline extends EventEmitter {
                         z: timelineData[index].scale,
                         duration: 0.5,
                         delay: index * increment,
-                        ease: "power2.inOut",
+                        ease: "power3.out",
                     }, "same");
             });
         });
@@ -547,6 +545,8 @@ export default class Timeline extends EventEmitter {
                         const oldGeo = currentDetailedGlobe.globe.ballMesh.geometry as THREE.SphereGeometry;
                         currentDetailedGlobe.globe.ballMesh.geometry = newGeo;
                         currentDetailedGlobe.geometry = oldGeo;
+
+                        this.globes.speed = SHADER_DEFAULT_SPEED;
 
                         this.camera.switchOrthgraphicCamera();
                     }, 940);

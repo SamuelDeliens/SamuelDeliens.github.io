@@ -61,7 +61,7 @@ export default class Experience {
 
         setTimeout(() => {
             this.controls.startFirstTimeline();
-        }, 1000);
+        }, 1100);
     }
 
     update() {
