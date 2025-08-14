@@ -413,8 +413,9 @@ export default class Globes {
     scene: THREE.Scene;
 
     globes: GlobeInterface[] = [];
-    detailedGeo: { [key: number]: THREE.SphereGeometry } = {};
-    detailedGlass: { [key: number]: {
+    detailedGlobes: { [key: number]: {
+        globe: GlobeInterface;
+        geometry: THREE.SphereGeometry;
         glassMesh: THREE.Mesh;
         glassMat: THREE.ShaderMaterial;
         cubeCamera: THREE.CubeCamera;
@@ -447,15 +448,16 @@ export default class Globes {
         this.scene.add(globe.glassMesh);
 
         if (globeData.timeline.third.stay) {
-            this.detailedGeo[globeData.timeline.third.projectId] = new THREE.SphereGeometry(3, 32, 32);
-            this.detailedGlass[globeData.timeline.third.projectId] = {
+            this.detailedGlobes[globeData.timeline.third.projectId] = {
+                globe: globe,
+                geometry: new THREE.SphereGeometry(3, 32, 32),
                 glassMesh: globe.glassMesh.clone(),
                 glassMat: globe.glassMat.clone(),
                 cubeCamera: globe.cubeCamera,
                 cubeRenderTarget: globe.cubeRenderTarget
             }
-            this.detailedGlass[globeData.timeline.third.projectId].glassMesh.visible = false;
-            this.scene.add(this.detailedGlass[globeData.timeline.third.projectId].glassMesh);
+            this.detailedGlobes[globeData.timeline.third.projectId].glassMesh.visible = false;
+            this.scene.add(this.detailedGlobes[globeData.timeline.third.projectId].glassMesh);
         }
     }
 
@@ -564,7 +566,7 @@ export default class Globes {
         this.globes.forEach(globe => globe.glassMesh.visible = false);
 
         const detailedGlassVisibilityState = new Map<number, boolean>();
-        Object.entries(this.detailedGlass).forEach(([projectId, dg]) => {
+        Object.entries(this.detailedGlobes).forEach(([projectId, dg]) => {
             detailedGlassVisibilityState.set(parseInt(projectId), dg.glassMesh.visible);
             dg.glassMesh.visible = false;
         });
@@ -575,7 +577,7 @@ export default class Globes {
             globe.cubeCamera.update(this.experience.renderer.renderer, this.scene);
         });
 
-        Object.entries(this.detailedGlass).forEach(([projectId, dg]) => {
+        Object.entries(this.detailedGlobes).forEach(([projectId, dg]) => {
             const wasVisible = detailedGlassVisibilityState.get(parseInt(projectId));
             dg.glassMesh.visible = wasVisible || false;
         });

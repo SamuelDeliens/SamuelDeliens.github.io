@@ -25,8 +25,11 @@ export default class Controls {
     public projectsList = document.querySelector(".projects-list");
     public openProjectButtons = document.querySelectorAll(".open-project-button");
 
+    currentProjectId: number = -1;
     public projectDetails = document.querySelector(".project-details");
     public projectDetailsGroup: {[key: string]: HTMLElement} = {};
+    public nextProjectButton = document.querySelector(".nav-button.next");
+    public backProjectButton = document.querySelector(".nav-button.back");
 
     constructor(globes: GlobeInterface[]) {
         this.experience = new Experience();
@@ -71,6 +74,12 @@ export default class Controls {
                 this.startThirdTimeline(projectId);
             });
         });
+        this.nextProjectButton?.addEventListener("click", () => {
+            this.nextProject();
+        });
+        this.backProjectButton?.addEventListener("click", () => {
+            this.backFromProject();
+        })
 
         window.addEventListener('mousemove', (e) => {
             this.onMouseMove(e);
@@ -92,8 +101,8 @@ export default class Controls {
                 this.floating.start(globe);
             });
         })
+
         this.timeline.on("thirdTimelineHalfComplete", (projectId: number) => {
-            console.log("thirdTimelineHalfComplete", projectId);
             this.projectsList?.classList.add("hidden");
             this.projectDetails?.classList.remove("hidden");
             this.projectDetailsGroup[projectId.toString()]?.classList.add("show");
@@ -101,6 +110,16 @@ export default class Controls {
         this.timeline.on("thirdTimelineComplete", () => {
             this.experience.world.lerpRotation = true;
         });
+
+        this.timeline.on("backFromProjectTimelineComplete", () => {
+            this.projectsList?.classList.remove("hide");
+            this.projectsList?.classList.remove("hidden");
+            this.projectsList?.classList.add("show");
+
+            this.globes.forEach(globe => {
+                this.floating.start(globe);
+            });
+        })
     }
 
     // Starts the animation timelines
@@ -108,7 +127,7 @@ export default class Controls {
         this.hero?.classList.add("show");
 
         setTimeout(() => {
-            this.timeline.firstTimeline.play();
+            this.timeline.firstTimeline.pause(0).play();
         }, 600)
     }
     startSecondTimeline() {
@@ -118,16 +137,34 @@ export default class Controls {
             this.floating.stop(globe);
         });
         this.projectsList?.classList.add("show");
-        this.timeline.secondTimeline.play();
+        this.timeline.secondTimeline.pause(0).play();
     }
     startThirdTimeline(projectId: number) {
+        if (this.currentProjectId === projectId) return;
+        this.currentProjectId = projectId;
         this.projectsList?.classList.remove("show");
         this.projectsList?.classList.add("hide");
         this.globes.forEach(globe => {
             this.floating.stop(globe);
         });
 
-        this.timeline.thirdTimeline[projectId].play();
+        this.timeline.thirdTimeline[projectId].pause(0).play();
+    }
+
+    nextProject() {
+        this.experience.world.lerpRotation = false;
+        this.projectDetails?.classList.add("hidden");
+        this.projectDetailsGroup[this.currentProjectId]?.classList.remove("show");
+        this.timeline.switchProjectTimeline[this.currentProjectId].pause(0).play();
+        this.currentProjectId = this.projectDetailsGroup[this.currentProjectId + 1] ? this.currentProjectId + 1 : 1;
+    }
+
+    backFromProject() {
+        this.experience.world.lerpRotation = false;
+        this.projectDetails?.classList.add("hidden");
+        this.projectDetailsGroup[this.currentProjectId]?.classList.remove("show");
+        this.timeline.backFromProjectTimeline[this.currentProjectId].pause(0).play();
+        this.currentProjectId = -1;
     }
 
     update() {
