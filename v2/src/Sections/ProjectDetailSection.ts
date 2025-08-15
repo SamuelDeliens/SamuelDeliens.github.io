@@ -168,6 +168,30 @@ export default class ProjectDetailSection extends BaseSection {
                     duration: 0.8,
                     ease: "power2.inOut",
                 }, "enterGlobe")
+                .to(targetGlobe.globe.glassMesh.position, {
+                    x: this.enterTimelineComplete.glassMeshPosition.x,
+                    y: this.enterTimelineComplete.glassMeshPosition.y,
+                    z: this.enterTimelineComplete.glassMeshPosition.z,
+                    duration: 0.4,
+                    delay: 0.2,
+                    ease: "power2.inOut",
+                }, "enterGlobe")
+                .to(targetGlobe.globe.glassMesh.scale, {
+                    x: this.enterTimelineComplete.glassMeshScale.x,
+                    y: this.enterTimelineComplete.glassMeshScale.y,
+                    z: this.enterTimelineComplete.glassMeshScale.z,
+                    duration: 0.4,
+                    ease: "power2.inOut",
+                    delay: 0.2,
+                }, "enterGlobe")
+                .to(this.globes.detailedGlobes[projectId].glassMesh.position, {
+                    x: this.enterTimelineComplete.detailedGlassMeshPosition.x,
+                    y: this.enterTimelineComplete.detailedGlassMeshPosition.y,
+                    z: this.enterTimelineComplete.detailedGlassMeshPosition.z,
+                    duration: 0.4,
+                    ease: "power2.inOut",
+                    delay: 0.2,
+                }, "enterGlobe")
 
             enterTimeline
                 .call(() => {
@@ -177,30 +201,6 @@ export default class ProjectDetailSection extends BaseSection {
                     this.globes.moveObjectPreserveWorldTransform(targetGlobe.globe.ballMesh, this.globes.currentGroup);
                     this.globes.moveObjectPreserveWorldTransform(targetGlobe.globe.glassMesh, this.globes.currentGroup);
                 }, undefined, "positionGlass")
-                .to(targetGlobe.globe.glassMesh.position, {
-                    x: this.enterTimelineComplete.glassMeshPosition.x,
-                    y: this.enterTimelineComplete.glassMeshPosition.y,
-                    z: this.enterTimelineComplete.glassMeshPosition.z,
-                    duration: 0.6,
-                    delay: 0.5,
-                    ease: "power2.inOut",
-                }, "positionGlass")
-                .to(targetGlobe.globe.glassMesh.scale, {
-                    x: this.enterTimelineComplete.glassMeshScale.x,
-                    y: this.enterTimelineComplete.glassMeshScale.y,
-                    z: this.enterTimelineComplete.glassMeshScale.z,
-                    duration: 0.6,
-                    ease: "power2.inOut",
-                    delay: 0.5,
-                }, "positionGlass")
-                .to(this.globes.detailedGlobes[projectId].glassMesh.position, {
-                    x: this.enterTimelineComplete.detailedGlassMeshPosition.x,
-                    y: this.enterTimelineComplete.detailedGlassMeshPosition.y,
-                    z: this.enterTimelineComplete.detailedGlassMeshPosition.z,
-                    duration: 0.6,
-                    ease: "power2.inOut",
-                    delay: 0.5,
-                }, "positionGlass")
 
             this.enterTimeline[projectId] = enterTimeline;
         });
@@ -472,31 +472,31 @@ export default class ProjectDetailSection extends BaseSection {
                     ease: "power3.out",
                 }, "enterGlobe")
                 .to(nextDetailedGlobe.globe.glassMesh.position, {
-                    x: currentBallMeshPosition.x,
-                    y: currentBallMeshPosition.y,
-                    z: currentBallMeshPosition.z,
+                    x: currentGlassMeshPosition.x,
+                    y: currentGlassMeshPosition.y,
+                    z: currentGlassMeshPosition.z,
                     duration: 1,
                     ease: "power3.out",
                 }, "enterGlobe")
                 .to(nextDetailedGlobe.glassMesh.position, {
-                    x: currentBallMeshPosition.x,
-                    y: currentBallMeshPosition.y,
-                    z: currentBallMeshPosition.z,
+                    x: currentDetGlassMeshPosition.x,
+                    y: currentDetGlassMeshPosition.y,
+                    z: currentDetGlassMeshPosition.z,
                     duration: 1,
                     ease: "power3.out",
                 }, "enterGlobe")
 
                 .to(nextDetailedGlobe.glassMesh.scale, {
-                    x: 0.2,
-                    y: 0.2,
-                    z: 0.2,
+                    x: currentDetGlassMeshScale.x,
+                    y: currentDetGlassMeshScale.y,
+                    z: currentDetGlassMeshScale.z,
                     duration: 1,
                     ease: "power3.out",
                 }, "enterGlobe")
                 .to(nextDetailedGlobe.globe.glassMesh.scale, {
-                    x: 0.1,
-                    y: 0.1,
-                    z: 0.1,
+                    x: currentGlassMeshScale.x,
+                    y: currentGlassMeshScale.y,
+                    z: currentGlassMeshScale.z,
                     duration: 1,
                     ease: "power3.out",
                 }, "enterGlobe")
@@ -520,35 +520,7 @@ export default class ProjectDetailSection extends BaseSection {
             switchTimeline
                 .call(() => {
                     this.emit("enterHalfComplete", finalProjectId);
-                }, undefined, "positionGlass")
-                .to(nextDetailedGlobe.globe.glassMesh.position, {
-                    x: currentGlassMeshPosition.x,
-                    y: currentGlassMeshPosition.y,
-                    z: currentGlassMeshPosition.z,
-                    duration: 0.6,
-                    ease: "power3.out",
-                }, "positionGlass")
-                .to(nextDetailedGlobe.globe.glassMesh.scale, {
-                    x: currentGlassMeshScale.x,
-                    y: currentGlassMeshScale.y,
-                    z: currentGlassMeshScale.z,
-                    duration: 0.6,
-                    ease: "power3.out",
-                }, "positionGlass")
-                .to(nextDetailedGlobe.glassMesh.position, {
-                    x: currentDetGlassMeshPosition.x,
-                    y: currentDetGlassMeshPosition.y,
-                    z: currentDetGlassMeshPosition.z,
-                    duration: 0.6,
-                    ease: "power3.out",
-                }, "positionGlass")
-                .to(nextDetailedGlobe.glassMesh.scale, {
-                    x: currentDetGlassMeshScale.x,
-                    y: currentDetGlassMeshScale.y,
-                    z: currentDetGlassMeshScale.z,
-                    duration: 0.6,
-                    ease: "power3.out",
-                }, "positionGlass");
+                }, undefined, "positionGlass");
 
             this.switchProjectTimeline[projectId] = switchTimeline;
         });
@@ -579,8 +551,8 @@ export default class ProjectDetailSection extends BaseSection {
 
 
     show() {
-        this.projectDetailsGroup[this.currentProjectId.toString()]?.classList.add("show");
         super.show();
+        this.projectDetailsGroup[this.currentProjectId.toString()]?.classList.add("show");
     }
     hide(duration: number = 0) {
         super.hide(duration);

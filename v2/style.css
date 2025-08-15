@@ -198,79 +198,79 @@ html section.hidden, body section.hidden, .page section.hidden, .page-wrapper se
 }
 .hero .hero-desc .hero-desc-wrapper div {
   white-space: nowrap;
-  animation: translate-left 50s linear infinite;
+  animation: hero-desc-translate-left 50s linear infinite;
 }
 .hero.show .hero-title .hero-title-first.hero-title-1 {
-  animation: fadeInDown 0.8s cubic-bezier(0.9, 0, 1, 1) forwards;
+  animation: hero-title-fade-in-down 0.8s cubic-bezier(0.9, 0, 1, 1) forwards;
   animation-delay: 0s;
 }
 .hero.show .hero-title .hero-title-first.hero-title-2 {
-  animation: fadeInDown 0.7s cubic-bezier(0.9, 0, 1, 1) forwards;
+  animation: hero-title-fade-in-down 0.7s cubic-bezier(0.9, 0, 1, 1) forwards;
   animation-delay: 0s;
 }
 .hero.show .hero-title .hero-title-first.hero-title-3 {
-  animation: fadeInDown 0.6s cubic-bezier(0.9, 0, 1, 1) forwards;
+  animation: hero-title-fade-in-down 0.6s cubic-bezier(0.9, 0, 1, 1) forwards;
   animation-delay: 0s;
 }
 .hero.show .hero-title .hero-title-second.hero-title-1 {
-  animation: fadeInUp 0.8s cubic-bezier(0.9, 0, 1, 1) forwards;
+  animation: hero-title-fade-in-up 0.8s cubic-bezier(0.9, 0, 1, 1) forwards;
   animation-delay: 0s;
 }
 .hero.show .hero-title .hero-title-second.hero-title-2 {
-  animation: fadeInUp 0.7s cubic-bezier(0.9, 0, 1, 1) forwards;
+  animation: hero-title-fade-in-up 0.7s cubic-bezier(0.9, 0, 1, 1) forwards;
   animation-delay: 0s;
 }
 .hero.show .hero-title .hero-title-second.hero-title-3 {
-  animation: fadeInUp 0.6s cubic-bezier(0.9, 0, 1, 1) forwards;
+  animation: hero-title-fade-in-up 0.6s cubic-bezier(0.9, 0, 1, 1) forwards;
   animation-delay: 0s;
 }
 .hero.show .hero-buttons .glass-animation-wrapper {
   transform: translateY(0px);
-  animation: downGlass 1s ease forwards;
+  animation: hero-button-translate-down 1s ease forwards;
   animation-delay: 0s;
 }
 .hero.show .glass-fade-element {
-  animation: fadeIn 0.5s ease forwards;
+  animation: glass-fade-in 0.5s ease forwards;
   animation-delay: 1.2s;
 }
 .hero.show .glass-final-element {
-  animation: fakeFadeIn 0s ease forwards;
+  animation: glass-fake-fade-in 0.5s ease forwards;
   animation-delay: 1.2s;
 }
 .hero.hide .hero-title .hero-title-first.hero-title-1 {
-  animation: hideFadeInUp 0.6s cubic-bezier(0.9, 0, 1, 1) forwards;
+  animation: hero-title-fade-out-up 0.6s cubic-bezier(0.9, 0, 1, 1) forwards;
   animation-delay: 0s;
 }
 .hero.hide .hero-title .hero-title-first.hero-title-2 {
-  animation: hideFadeInUp 0.7s cubic-bezier(0.9, 0, 1, 1) forwards;
+  animation: hero-title-fade-out-up 0.7s cubic-bezier(0.9, 0, 1, 1) forwards;
   animation-delay: 0s;
 }
 .hero.hide .hero-title .hero-title-first.hero-title-3 {
-  animation: hideFadeInUp 0.8s cubic-bezier(0.9, 0, 1, 1) forwards;
+  animation: hero-title-fade-out-up 0.8s cubic-bezier(0.9, 0, 1, 1) forwards;
   animation-delay: 0s;
 }
 .hero.hide .hero-title .hero-title-second.hero-title-1 {
-  animation: hideFadeInDown 0.6s cubic-bezier(0.9, 0, 1, 1) forwards;
+  animation: hero-title-fade-out-down 0.6s cubic-bezier(0.9, 0, 1, 1) forwards;
   animation-delay: 0s;
 }
 .hero.hide .hero-title .hero-title-second.hero-title-2 {
-  animation: hideFadeInDown 0.7s cubic-bezier(0.9, 0, 1, 1) forwards;
+  animation: hero-title-fade-out-down 0.7s cubic-bezier(0.9, 0, 1, 1) forwards;
   animation-delay: 0s;
 }
 .hero.hide .hero-title .hero-title-second.hero-title-3 {
-  animation: hideFadeInDown 0.8s cubic-bezier(0.9, 0, 1, 1) forwards;
+  animation: hero-title-fade-out-down 0.8s cubic-bezier(0.9, 0, 1, 1) forwards;
   animation-delay: 0s;
 }
 .hero.hide .hero-buttons .glass-animation-wrapper {
-  animation: upGlass 0.5s ease forwards;
+  animation: hero-button-translate-up 0.5s ease forwards;
   animation-delay: 0s;
 }
 .hero.hide .glass-fade-element {
-  animation: fadeOut 0.3s ease forwards;
+  animation: glass-fade-out 0.3s ease forwards;
   animation-delay: 0s;
 }
 .hero.hide .glass-final-element {
-  animation: fakeFadeOut 0s ease forwards;
+  animation: glass-fake-fade-out 0s ease forwards;
   animation-delay: 0.1s;
 }
 
@@ -305,20 +305,20 @@ html section.hidden, body section.hidden, .page section.hidden, .page-wrapper se
   padding: 0.5rem 1rem;
 }
 .projects-list.show .glass-fade-element {
-  animation: fadeIn 0.3s ease forwards;
+  animation: glass-fade-in 0.3s ease forwards;
   animation-delay: 0s;
 }
 .projects-list.show .glass-final-element {
-  animation: fakeFadeIn 0.3s ease forwards;
+  animation: glass-fake-fade-in 0.3s ease forwards;
   animation-delay: 0s;
 }
 .projects-list.hide .glass-fade-element {
-  animation: fadeOut 0.3s ease forwards;
+  animation: glass-fade-out 0.3s ease forwards;
   animation-delay: 0s;
 }
 .projects-list.hide .glass-final-element {
-  animation: fakeFadeOut 0s ease forwards;
-  animation-delay: 0.1s;
+  animation: glass-fake-fade-out 0.3s ease forwards;
+  animation-delay: 0s;
 }
 
 .project-details {
@@ -334,11 +334,21 @@ html section.hidden, body section.hidden, .page section.hidden, .page-wrapper se
   align-items: center;
   gap: 3rem;
 }
+.project-details .project-details-group .project-details-content-wrapper {
+  display: flex;
+  flex-direction: column;
+  margin: 0;
+  padding: 0;
+  gap: 3rem;
+  align-items: center;
+  transform: translateY(5%);
+}
 .project-details .project-details-group .project-details-title {
   width: 80%;
   display: flex;
   align-items: center;
   justify-content: center;
+  transform: translateY(-20%);
 }
 .project-details .project-details-group .project-details-title.glass-wrapper-fade {
   position: relative;
@@ -363,6 +373,7 @@ html section.hidden, body section.hidden, .page section.hidden, .page-wrapper se
   justify-content: center;
   box-shadow: 0 0 10px rgba(0, 0, 0, 0.5);
   border-radius: 1rem 1rem 0 0;
+  opacity: 0;
 }
 .project-details .project-details-group .project-details-description {
   display: grid;
@@ -478,32 +489,192 @@ html section.hidden, body section.hidden, .page section.hidden, .page-wrapper se
   border-radius: 0 0 1rem 1rem;
   width: 100%;
 }
-.project-details .project-details-group.show {
-  display: flex;
-}
-.project-details .project-details-group.show .glass-fade-element {
-  animation: fadeIn 0.3s ease forwards;
-  animation-delay: 0s;
-}
-.project-details .project-details-group.show .glass-final-element {
-  animation: fakeFadeIn 0.3s ease forwards;
-  animation-delay: 0s;
-}
-.project-details .project-details-group.show .project-details-content {
-  opacity: 1;
-  transition: opacity 0.3s ease;
-}
 .project-details .nav-button.back {
   top: 40%;
   left: 10%;
+  transform: translateX(-50%);
 }
 .project-details .nav-button.next {
   left: auto;
   top: 40%;
   right: 10%;
+  transform: translateX(50%);
+}
+.project-details.show .nav-button {
+  transform: translateX(0%);
+}
+.project-details.show .nav-button.back {
+  animation: details-button-translate-right 0.5s ease;
+  animation-delay: 1s;
+}
+.project-details.show .nav-button.next {
+  animation: details-button-translate-left 0.5s ease;
+  animation-delay: 1s;
+}
+.project-details.show .nav-button .glass-fade-element {
+  animation: glass-fade-in 0.5s ease forwards;
+  animation-delay: 1s;
+}
+.project-details.show .nav-button .glass-final-element {
+  animation: glass-fake-fade-in 0.5s ease forwards;
+  animation-delay: 1s;
+}
+.project-details.show .project-details-group.show {
+  display: flex;
+}
+.project-details.show .project-details-group.show .glass-fade-element {
+  animation: glass-fade-in 0.5s ease forwards;
+  animation-delay: 0.2s;
+}
+.project-details.show .project-details-group.show .glass-final-element {
+  animation: glass-fake-fade-in 0.5s ease forwards;
+  animation-delay: 0.2s;
+}
+.project-details.show .project-details-group.show .project-details-title {
+  transform: translateY(0%);
+  animation: details-title-translate-down 0.5s ease;
+  animation-delay: 0s;
+}
+.project-details.show .project-details-group.show .project-details-content-wrapper {
+  transform: translateY(0%);
+  animation: details-content-translate-up 1.5s ease;
+  animation-delay: 0s;
+}
+.project-details.show .project-details-group.show .project-details-img {
+  opacity: 1;
+  animation: details-content-fade-in 1.5s ease;
+  animation-delay: 0s;
+}
+.project-details.show .project-details-group.show .project-details-content {
+  opacity: 1;
+  transition: opacity 0.3s ease;
 }
 
-@keyframes fadeIn {
+@keyframes hero-title-fade-in-up {
+  0% {
+    opacity: 0;
+    transform: translateY(70px);
+  }
+  100% {
+    opacity: 1;
+    transform: translateY(0);
+  }
+}
+@keyframes hero-title-fade-in-down {
+  0% {
+    opacity: 0;
+    transform: translateY(-70px);
+  }
+  100% {
+    opacity: 1;
+    transform: translateY(0);
+  }
+}
+@keyframes hero-title-fade-out-up {
+  0% {
+    opacity: 1;
+    transform: translateY(0);
+  }
+  100% {
+    opacity: 0;
+    transform: translateY(70px);
+  }
+}
+@keyframes hero-title-fade-out-down {
+  0% {
+    opacity: 1;
+    transform: translateY(0);
+  }
+  100% {
+    opacity: 0;
+    transform: translateY(-70px);
+  }
+}
+@keyframes hero-desc-translate-left {
+  0% {
+    transform: translate(0, 0);
+  }
+  100% {
+    transform: translate(-100%, 0);
+  }
+}
+@keyframes hero-button-translate-down {
+  0% {
+    transform: translateY(-100px);
+  }
+  75% {
+    transform: translateY(-100px);
+  }
+  100% {
+    transform: translateY(0px);
+  }
+}
+@keyframes hero-button-translate-up {
+  0% {
+    transform: translateY(0px);
+  }
+  75% {
+    transform: translateY(0px);
+  }
+  100% {
+    transform: translateY(-100px);
+  }
+}
+@keyframes details-button-translate-right {
+  0% {
+    transform: translateX(-50%);
+  }
+  100% {
+    transform: translateX(0%);
+  }
+}
+@keyframes details-button-translate-left {
+  0% {
+    transform: translateX(50%);
+  }
+  100% {
+    transform: translateX(0%);
+  }
+}
+@keyframes details-title-translate-down {
+  0% {
+    transform: translateY(-50%);
+  }
+  100% {
+    transform: translateY(0%);
+  }
+}
+@keyframes details-content-translate-up {
+  0% {
+    transform: translateY(5%);
+  }
+  34% {
+    transform: translateY(5%);
+  }
+  100% {
+    transform: translateY(0%);
+  }
+}
+@keyframes details-content-fade-in {
+  0% {
+    opacity: 0;
+  }
+  34% {
+    opacity: 0;
+  }
+  100% {
+    opacity: 1;
+  }
+}
+@keyframes fade-in {
+  0% {
+    opacity: 0;
+  }
+  100% {
+    opacity: 1;
+  }
+}
+@keyframes glass-fade-in {
   0% {
     opacity: 0;
   }
@@ -514,15 +685,18 @@ html section.hidden, body section.hidden, .page section.hidden, .page-wrapper se
     opacity: 0;
   }
 }
-@keyframes fakeFadeIn {
+@keyframes glass-fake-fade-in {
   0% {
+    visibility: hidden;
+  }
+  95% {
     visibility: hidden;
   }
   100% {
     visibility: visible;
   }
 }
-@keyframes fadeOut {
+@keyframes glass-fade-out {
   0% {
     opacity: 1;
   }
@@ -530,82 +704,12 @@ html section.hidden, body section.hidden, .page section.hidden, .page-wrapper se
     opacity: 0;
   }
 }
-@keyframes fakeFadeOut {
+@keyframes glass-fake-fade-out {
   0% {
     visibility: visible;
   }
   100% {
     visibility: hidden;
-  }
-}
-@keyframes downGlass {
-  0% {
-    transform: translateY(-100px);
-  }
-  75% {
-    transform: translateY(-100px);
-  }
-  100% {
-    transform: translateY(0px);
-  }
-}
-@keyframes upGlass {
-  0% {
-    transform: translateY(0px);
-  }
-  75% {
-    transform: translateY(0px);
-  }
-  100% {
-    transform: translateY(-100px);
-  }
-}
-@keyframes fadeInUp {
-  0% {
-    opacity: 0;
-    transform: translateY(70px);
-  }
-  100% {
-    opacity: 1;
-    transform: translateY(0);
-  }
-}
-@keyframes fadeInDown {
-  0% {
-    opacity: 0;
-    transform: translateY(-70px);
-  }
-  100% {
-    opacity: 1;
-    transform: translateY(0);
-  }
-}
-@keyframes hideFadeInUp {
-  0% {
-    opacity: 1;
-    transform: translateY(0);
-  }
-  100% {
-    opacity: 0;
-    transform: translateY(70px);
-  }
-}
-@keyframes hideFadeInDown {
-  0% {
-    opacity: 1;
-    transform: translateY(0);
-  }
-  100% {
-    opacity: 0;
-    transform: translateY(-70px);
-  }
-}
-@keyframes translate-left {
-  0% {
-    transform: translate(0, 0);
-  }
-  100% {
-    transform: translate(-100%, 0);
   }
 }
 
