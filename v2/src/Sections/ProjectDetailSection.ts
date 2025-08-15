@@ -573,6 +573,7 @@ export default class ProjectDetailSection extends BaseSection {
     }
     switchProject() {
         this.world.lerp.active = false;
+        this.sectionElement?.scrollTo(0, 0);
         this.hide();
         this.switchProjectTimeline[this.currentProjectId].restart();
         this.currentProjectId = this.projectDetailsGroup[this.currentProjectId + 1] ? this.currentProjectId + 1 : 1;
