@@ -311,10 +311,102 @@ html, body, .page, .page-wrapper {
 }
 
 .projects-list {
-    width: 100%;
-    height: 100%;
+    color: #fff;
+    width: 40%;
+    height: 86%;
+    padding: 7% 5%;
+    display: flex;
+    flex-direction: column;
+    align-items: center;
 
-    .open-project-button {
+    .title {
+        position: relative;
+        width: 100%;
+
+        &.glass-wrapper-fade {
+            position: relative;
+            display: flex;
+            align-items: center;
+            justify-content: center;
+
+            .glass-final-element {
+                visibility: visible;
+            }
+
+            glass-box {
+                width: 100%;
+                div {
+                    font-size: 1.3rem;
+                    width: calc(100% - 2rem);
+                    display: flex;
+                    justify-content: center;
+                    padding: 0.7rem 1rem;
+                }
+            }
+        }
+
+        padding-bottom: 2rem;
+        border-bottom: 3px solid #fff;
+    }
+
+    .project {
+        width: 100%;
+        display: flex;
+        flex-direction: row;
+        align-items: center;
+        overflow: hidden;
+        justify-content: space-between;
+        padding: 1rem 0;
+        border-bottom: 1px solid #fff;
+
+        .left-wrapper {
+            display: flex;
+            align-items: center;
+            gap: 1rem;
+            transform: translateX(-20%);
+            transition: transform 0.2s ease;
+
+            .nav-arrow {
+                width: 4rem;
+                height: 4rem;
+                display: flex;
+                align-items: center;
+                justify-content: center;
+            }
+            svg {
+                transform: rotate(60deg);
+                fill: var(--primary-color);
+                width: 2rem;
+            }
+        }
+
+        h1 {
+            margin: 0;
+            transition: font-size 0.2s ease;
+            font-size: 1.3rem;
+        }
+        h2 {
+            font-size: 1.2rem;
+            font-weight: 700;
+            margin-right: 0;
+            transition: margin-right 0.2s ease;
+        }
+
+        &:hover {
+            .left-wrapper {
+                transform: translateX(0%);
+            }
+            h1 {
+                font-size: 1.6rem;
+            }
+            h2 {
+                margin-right: 1rem;
+            }
+        }
+    }
+
+
+/*    .open-project-button {
         position: absolute;
 
         &[data-project="bluerov"] {
@@ -364,7 +456,7 @@ html, body, .page, .page-wrapper {
             animation: glass-fake-fade-out 0.3s ease forwards;
             animation-delay: 0s;
         }
-    }
+    }*/
 }
 
 .project-details {

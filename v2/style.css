@@ -275,50 +275,138 @@ html section.hidden, body section.hidden, .page section.hidden, .page-wrapper se
 }
 
 .projects-list {
+  color: #fff;
+  width: 40%;
+  height: 86%;
+  padding: 7% 5%;
+  display: flex;
+  flex-direction: column;
+  align-items: center;
+  /*    .open-project-button {
+          position: absolute;
+
+          &[data-project="bluerov"] {
+              top: 30%;
+              left: 15%;
+          }
+          &[data-project="ejeffrey"] {
+              top: 75%;
+              left: 15%;
+          }
+          &[data-project="neobot"] {
+              top: 30%;
+              left: 47.5%;
+          }
+          &[data-project="easeidf"] {
+              top: 30%;
+              right: 15%;
+          }
+          &[data-project="spider"] {
+              top: 75%;
+              left: 47.5%;
+          }
+
+          glass-box {
+              div {
+                  padding: 0.5rem 1rem;
+              }
+          }
+      }
+
+      &.show {
+          .glass-fade-element {
+              animation: glass-fade-in 0.3s ease forwards;
+              animation-delay: 0s;
+          }
+          .glass-final-element {
+              animation: glass-fake-fade-in 0.3s ease forwards;
+              animation-delay: 0s;
+          }
+      }
+      &.hide {
+          .glass-fade-element {
+              animation: glass-fade-out 0.3s ease forwards;
+              animation-delay: 0s;
+          }
+          .glass-final-element {
+              animation: glass-fake-fade-out 0.3s ease forwards;
+              animation-delay: 0s;
+          }
+      }*/
+}
+.projects-list .title {
+  position: relative;
   width: 100%;
-  height: 100%;
+  padding-bottom: 2rem;
+  border-bottom: 3px solid #fff;
 }
-.projects-list .open-project-button {
-  position: absolute;
+.projects-list .title.glass-wrapper-fade {
+  position: relative;
+  display: flex;
+  align-items: center;
+  justify-content: center;
 }
-.projects-list .open-project-button[data-project=bluerov] {
-  top: 30%;
-  left: 15%;
+.projects-list .title.glass-wrapper-fade .glass-final-element {
+  visibility: visible;
 }
-.projects-list .open-project-button[data-project=ejeffrey] {
-  top: 75%;
-  left: 15%;
+.projects-list .title.glass-wrapper-fade glass-box {
+  width: 100%;
 }
-.projects-list .open-project-button[data-project=neobot] {
-  top: 30%;
-  left: 47.5%;
+.projects-list .title.glass-wrapper-fade glass-box div {
+  font-size: 1.3rem;
+  width: calc(100% - 2rem);
+  display: flex;
+  justify-content: center;
+  padding: 0.7rem 1rem;
 }
-.projects-list .open-project-button[data-project=easeidf] {
-  top: 30%;
-  right: 15%;
+.projects-list .project {
+  width: 100%;
+  display: flex;
+  flex-direction: row;
+  align-items: center;
+  overflow: hidden;
+  justify-content: space-between;
+  padding: 1rem 0;
+  border-bottom: 1px solid #fff;
 }
-.projects-list .open-project-button[data-project=spider] {
-  top: 75%;
-  left: 47.5%;
+.projects-list .project .left-wrapper {
+  display: flex;
+  align-items: center;
+  gap: 1rem;
+  transform: translateX(-20%);
+  transition: transform 0.2s ease;
 }
-.projects-list .open-project-button glass-box div {
-  padding: 0.5rem 1rem;
+.projects-list .project .left-wrapper .nav-arrow {
+  width: 4rem;
+  height: 4rem;
+  display: flex;
+  align-items: center;
+  justify-content: center;
 }
-.projects-list.show .glass-fade-element {
-  animation: glass-fade-in 0.3s ease forwards;
-  animation-delay: 0s;
+.projects-list .project .left-wrapper svg {
+  transform: rotate(60deg);
+  fill: var(--primary-color);
+  width: 2rem;
 }
-.projects-list.show .glass-final-element {
-  animation: glass-fake-fade-in 0.3s ease forwards;
-  animation-delay: 0s;
+.projects-list .project h1 {
+  margin: 0;
+  transition: font-size 0.2s ease;
+  font-size: 1.3rem;
 }
-.projects-list.hide .glass-fade-element {
-  animation: glass-fade-out 0.3s ease forwards;
-  animation-delay: 0s;
+.projects-list .project h2 {
+  font-size: 1.2rem;
+  font-weight: 700;
+  margin-right: 0;
+  transition: margin-right 0.2s ease;
 }
-.projects-list.hide .glass-final-element {
-  animation: glass-fake-fade-out 0.3s ease forwards;
-  animation-delay: 0s;
+.projects-list .project:hover .left-wrapper {
+  transform: translateX(0%);
+}
+.projects-list .project:hover h1 {
+  font-size: 1.6rem;
+}
+.projects-list .project:hover h2 {
+  margin-right: 1rem;
 }
 
 .project-details {

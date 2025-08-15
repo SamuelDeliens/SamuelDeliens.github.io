@@ -39,7 +39,7 @@ export default class ProjectDetailSection extends BaseSection {
         this.detailedGlobes = this.world.globes.detailedGlobes;
 
         globesData.forEach((globe: GlobeFactoryInput) => {
-            this.groups.add(globe.timeline.third.projectId)
+            this.groups.add(globe.projectId)
         }); //set groups set
 
         this.enterTimeline = {};
@@ -71,7 +71,13 @@ export default class ProjectDetailSection extends BaseSection {
                 }
             });
 
-            const timelineData = globesData.map((globeData) => globeData.timeline.third);
+            const timelineData = globesData.map((globeData) => {
+                return {
+                    projectId: globeData.projectId,
+                    main: globeData.main,
+                    ...globeData.timeline.third
+                }
+            });
 
             let targetGlobe = {
                 globe: this.globesList[0],
@@ -90,7 +96,7 @@ export default class ProjectDetailSection extends BaseSection {
                 else //else hide
                     behaviourStep = timelineData[index].hide;
 
-                const keepGlobe = showProject ? timelineData[index].stay : false;
+                const keepGlobe = showProject ? timelineData[index].main : false;
                 if (keepGlobe)
                     targetGlobe = {
                         globe: globe,
