@@ -28,11 +28,7 @@ export default class ProjectListSection extends BaseSection {
         const enterTimeline = gsap.timeline({
             paused: true,
             onComplete: () => {
-                this.globesList.forEach(globe => {
-                    Floating.start(globe);
-                });
-
-                this.emit("enterComplete");
+                this.enterComplete();
             }
         });
 
@@ -84,7 +80,7 @@ export default class ProjectListSection extends BaseSection {
         if (enterAnimation)
             this.enterTimeline.restart();
         else
-            this.emit("enterComplete")
+            this.enterComplete();
 
         setTimeout(() => {
             this.show();
@@ -97,6 +93,14 @@ export default class ProjectListSection extends BaseSection {
             Floating.stop(globe);
         });
         this.emit("exitComplete");
+    }
+
+    enterComplete() {
+        this.globesList.forEach(globe => {
+            Floating.start(globe);
+        });
+
+        this.emit("enterComplete");
     }
 
 }
