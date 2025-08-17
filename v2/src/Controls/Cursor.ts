@@ -66,9 +66,9 @@ export default class Cursor {
 
         const interactiveTooltipSelector = '.cursor-tooltip';
         document.querySelectorAll(interactiveTooltipSelector).forEach(el => {
-            const text = el.getAttribute('data-tooltip');
-            if (text) {
-                el.addEventListener('mouseenter', () => this.onTooltip(text));
+            const content = el.querySelector(".data-tooltip")?.innerHTML;
+            if (content) {
+                el.addEventListener('mouseenter', () => this.onTooltip(content));
                 el.addEventListener('mouseleave', () => this.offTooltip());
             }
         });
@@ -103,8 +103,8 @@ export default class Cursor {
         this.yScaleDotTo(1);
     }
 
-    private onTooltip(text: string) {
-        this.tooltipText.innerText = text;
+    private onTooltip(content: string) {
+        this.tooltipText.innerHTML = content;
         this.dot.classList.add('hidden');
         this.tooltip.classList.remove('hidden');
     }

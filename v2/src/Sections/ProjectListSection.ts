@@ -11,11 +11,18 @@ export default class ProjectListSection extends BaseSection {
     private openProjectButtons = document.querySelectorAll(".open-project-button");
 
     protected enterTimeline: gsap.core.Timeline;
+    protected exitTimeline: gsap.core.Timeline;
+
+    private currentGlobe?: GlobeInterface;
+    private targetGlobes: Set<GlobeInterface> = new Set();
+
+    private isEnter: boolean = false;
 
     constructor() {
         super('.projects-list');
 
         this.enterTimeline = gsap.timeline();
+        this.exitTimeline = gsap.timeline();
 
         this.init();
         this.setListeners();
@@ -23,6 +30,7 @@ export default class ProjectListSection extends BaseSection {
 
     init() {
         this.enterTimeline = this.initEnterTimeline();
+        this.exitTimeline = this.initExitTimeline();
     }
     initEnterTimeline() : gsap.core.Timeline {
         const enterTimeline = gsap.timeline({
@@ -33,8 +41,11 @@ export default class ProjectListSection extends BaseSection {
         });
 
         const timelineData = globesData.map((globeData) => ({
+            projectId: globeData.projectId,
+            small: globeData.small,
             position: globeData.timeline.second.position,
-            scale: globeData.timeline.second.scale
+            scale: globeData.timeline.second.scale,
+            opacity: globeData.timeline.second.opacity
         }));
 
         const increment = (1 / this.globesList.length) / 5;
@@ -58,21 +69,173 @@ export default class ProjectListSection extends BaseSection {
                         ease: "power2.inOut",
                     }, "same");
             });
+
+            if (timelineData[index].small) {
+                [globe.ballMesh, globe.glassMesh].forEach((mesh: THREE.Mesh) => {
+                    enterTimeline
+                        .call(() => {
+                            mesh.visible = false;
+                        })
+                });
+            }
         });
 
         return enterTimeline;
     }
+    initExitTimeline() : gsap.core.Timeline {
+        const exitTimeline = gsap.timeline({
+            paused: true,
+            onComplete: () => {
+                this.currentGlobe = undefined;
+                this.emit("exitComplete")
+            }
+        });
+
+        const timelineData = globesData.map((globeData) => ({
+            projectId: globeData.projectId,
+            small: globeData.small,
+            position: globeData.timeline.third.hide.position,
+            scale: globeData.timeline.second.scale,
+        }));
+
+        this.globesList.forEach((globe: GlobeInterface, index: number) => {
+            const behaviourStep = timelineData[index];
+
+            if (behaviourStep.small) {
+                [globe.ballMesh, globe.glassMesh].forEach(mesh => {
+                    let scale = behaviourStep.scale ?? 0.1;
+                    exitTimeline
+                        .call(() => {
+                            if (this.currentGlobe === globe)
+                                scale = 0.1
+
+                            mesh.position.copy(behaviourStep.position);
+                            mesh.scale.set(scale, scale, scale);
+                            mesh.visible = true
+                        })
+                });
+                [globe.ballMat, globe.glassMat].forEach(mat => {
+                    exitTimeline
+                        .call(() => {
+                            mat.opacity = 1;
+                        })
+                })
+            }
+        });
+
+        return exitTimeline;
+    }
+    initHoverTimeline(targetGlobe: GlobeInterface) : gsap.core.Timeline {
+        const timeline = gsap.timeline({
+            paused: true,
+            onComplete: () => {
+                if (this.currentGlobe !== targetGlobe)
+                    return;
+
+                //check if other are still visible
+                this.targetGlobes.forEach(globe => {
+                    if (globe === targetGlobe)
+                        return;
+
+                    [globe.ballMesh, globe.glassMesh].forEach((globe) => {
+                        globe.visible = false;
+                        globe.scale.x = 0;
+                    });
+                    [globe.ballMat, globe.glassMat].forEach((globe) => {
+                        globe.opacity = 0;
+                    })
+                })
+            }
+        });
+
+        [targetGlobe.ballMesh, targetGlobe.glassMesh].forEach(mesh => {
+                timeline.call(() => {
+                    mesh.visible = true;
+                }, undefined, "onhover")
+                timeline.to(mesh.scale, {
+                    x: 1.2,
+                    y: 0.1,
+                    z: 0.1,
+                    ease: "power2.inOut",
+                    overwrite: "auto",
+                    duration: 0.3
+                }, "onhover")
+            });
+        [targetGlobe.glassMat, targetGlobe.ballMat].forEach(mat => {
+                timeline.to(mat, {
+                    opacity: 1,
+                    ease: "power2.inOut",
+                    overwrite: "auto",
+                    duration: 0.3
+                }, "onhover")
+            });
+
+        return timeline;
+    }
+
     setListeners() {
         this.openProjectButtons.forEach((button) => {
             const projectId = parseInt(button.getAttribute("data-project-id") || "-1");
-            button.addEventListener("click", () => {
-                this.emit("navigate", {
-                    to: SectionType.PROJECT_DETAIL,
-                    data: {
-                        projectId: projectId
+            const targetGlobeId = globesData.findIndex(globe => {
+                if (globe.small) {
+                    if (globe.projectId == projectId) {
+                        return true
                     }
-                })
+                }
+            })
+            const targetGlobe = this.globesList[targetGlobeId];
+            this.targetGlobes.add(targetGlobe);
+
+            button.addEventListener("click", () => {
+                if (this.isEnter) {
+                    this.emit("navigate", {
+                        to: SectionType.PROJECT_DETAIL,
+                        data: {
+                            projectId: projectId
+                        }
+                    })
+                }
             });
+            button.addEventListener("mouseenter", () => {
+                this.currentGlobe = targetGlobe;
+                if (this.isEnter) {
+                    this.initHoverTimeline(targetGlobe).play();
+                }
+            })
+            button.addEventListener("mouseleave", () => {
+                console.log("mouseleave");
+                if (this.isEnter) {
+                    const currentGlobe = this.currentGlobe
+
+                    const timeline = gsap.timeline({
+                        paused: true,
+                    });
+                    if (currentGlobe) {
+                        [currentGlobe.ballMesh, currentGlobe.glassMesh].forEach(mesh => {
+                            timeline.to(mesh.scale, {
+                                x: 0,
+                                y: 0,
+                                z: 0,
+                                ease: "power2.inOut",
+                                overwrite: "auto",
+                                duration: 0.3
+                            }, "exitHover")
+                            timeline.call(() => {
+                                mesh.visible = false;
+                            }, undefined, "endHover");
+                        });
+                        [currentGlobe.ballMat, currentGlobe.glassMat].forEach(mat => {
+                            timeline.to(mat, {
+                                opacity: 0,
+                                ease: "power2.inOut",
+                                overwrite: "auto",
+                                duration: 0.3
+                            }, "exitHover")
+                        })
+                    }
+                    timeline.play();
+                }
+            })
         });
     }
 
@@ -89,15 +252,23 @@ export default class ProjectListSection extends BaseSection {
 
     exit(): void {
         this.hide(300);
-        this.globesList.forEach(globe => {
+
+        this.globesList.forEach((globe) => {
             Floating.stop(globe);
         });
-        this.emit("exitComplete");
+        this.exitTimeline.restart();
+        this.isEnter = false;
     }
 
     enterComplete() {
-        this.globesList.forEach(globe => {
-            Floating.start(globe);
+        this.isEnter = true;
+        if (this.currentGlobe)
+            this.initHoverTimeline(this.currentGlobe).play();
+
+        this.globesList.forEach((globe, index) => {
+            if (!globesData[index].small) {
+                Floating.start(globe);
+            }
         });
 
         this.emit("enterComplete");

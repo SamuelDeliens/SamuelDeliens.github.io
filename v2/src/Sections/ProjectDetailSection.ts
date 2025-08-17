@@ -151,6 +151,10 @@ export default class ProjectDetailSection extends BaseSection {
                         this.detailedGlobes[projectId].glassMesh.scale.copy(this.enterTimelineComplete.detailedGlassMeshScale);
 
                         this.globes.speed = SHADER_SLOW_SPEED;
+
+                        this.globes.moveObjectPreserveWorldTransform(this.detailedGlobes[projectId].glassMesh, this.globes.currentGroup);
+                        this.globes.moveObjectPreserveWorldTransform(targetGlobe.globe.ballMesh, this.globes.currentGroup);
+                        this.globes.moveObjectPreserveWorldTransform(targetGlobe.globe.glassMesh, this.globes.currentGroup);
                     }, 300);
                 }, undefined, "enterGlobe")
                 .to(this.camera.perspectiveCamera.position, {
@@ -202,10 +206,6 @@ export default class ProjectDetailSection extends BaseSection {
             enterTimeline
                 .call(() => {
                     this.emit("enterHalfComplete", projectId);
-
-                    this.globes.moveObjectPreserveWorldTransform(this.detailedGlobes[projectId].glassMesh, this.globes.currentGroup);
-                    this.globes.moveObjectPreserveWorldTransform(targetGlobe.globe.ballMesh, this.globes.currentGroup);
-                    this.globes.moveObjectPreserveWorldTransform(targetGlobe.globe.glassMesh, this.globes.currentGroup);
                 }, undefined, "positionGlass")
 
             this.enterTimeline[projectId] = enterTimeline;
@@ -573,6 +573,7 @@ export default class ProjectDetailSection extends BaseSection {
     }
     exit(): void {
         this.world.lerp.active = false;
+        this.sectionElement?.scrollTo(0, 0);
         this.hide();
         this.exitTimeline[this.currentProjectId].pause(0).play();
         this.currentProjectId = -1;

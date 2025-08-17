@@ -44,7 +44,10 @@ export default abstract class BaseSection extends EventEmitter {
     protected show(): void {
         this.sectionElement?.classList.remove('hide');
         this.sectionElement?.classList.remove('hidden');
-        this.sectionElement?.classList.add('show');
+
+        setTimeout(() => {
+            this.sectionElement?.classList.add('show');
+        }, 100)
     }
     protected hide(duration: number = 0): void {
         this.sectionElement?.classList.remove('show');
