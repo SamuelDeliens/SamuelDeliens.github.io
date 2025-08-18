@@ -1,464 +1,487 @@
 <!DOCTYPE html>
 <html lang="en">
 <head>
-  <meta charset="UTF-8">
-  <title>Samuel Deliens</title>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Samuel Deliens - Portfolio</title>
+    <meta name="description" content="Portfolio of Samuel Deliens - Full Stack Developer specializing in Frontend, Backend, and Web Development">
 
-  <link href="./style.css" rel="stylesheet">
-  <link href="./cursor.css" rel="stylesheet">
-  <script src="define-component.ts" type="module"></script>
+    <link href="./style.css" rel="stylesheet">
+    <link href="./cursor.css" rel="stylesheet">
+    <script src="define-component.ts" type="module"></script>
 </head>
+
 <body>
-<div class="experience">
-  <canvas class="experience-canvas"></canvas>
+<!-- 3D Experience Canvas -->
+<div class="experience" aria-hidden="true">
+    <canvas class="experience-canvas"></canvas>
 </div>
 
+<!-- Custom Cursor -->
 <div class="cursor hidden" id="cursor" aria-hidden="true">
-  <div class="cursor-dot" id="cursor-dot"></div>
-  <div class="cursor-tooltip hidden" id="cursor-tooltip">
-    <span class="tooltip-text" id="cursor-tooltip-text">Hover</span>
-  </div>
+    <div class="cursor-dot" id="cursor-dot"></div>
+    <div class="cursor-tooltip hidden" id="cursor-tooltip">
+        <span class="tooltip-text" id="cursor-tooltip-text">Hover</span>
+    </div>
 </div>
-<!--<div class="back-button cursor-hide">
-  <svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 24 24">
-    <path d="M19 11H7.83l5.59-5.59L12 4l-8 8 8 8 1.41-1.41L7.83 13H19v-2z"/>
-  </svg>
-</div>-->
 
-<div class="page">
-  <div class="page-wrapper">
+<!-- Main Content -->
+<main class="page">
+    <header class="page-header">
+        <button class="nav-button home" aria-label="Go back to home page">
+<!--
+            <div class="animated-bg-wrapper"><div class="animated-bg"></div></div>
+-->
+            <glass-box hover-effect class="glass-final-element interactive cursor-tooltip" corner-radius="100px">
+                <div class="data-tooltip">Home</div>
+                <div class="nav-button-content nav-home">
+                    <svg viewBox="0 0 556 556" xmlns="http://www.w3.org/2000/svg">
+                        <path id="Path" d="M 269.900024 1.299988 C 267.900024 2.099976 264.700012 3.599976 262.900024 4.799988 C 261 6 204.799988 61.700012 137.899994 128.700012 C 3.899994 262.799988 12.5 253.400024 12.5 266.299988 C 12.5 276.299988 11.399994 276 49.600006 276 L 82 276 L 82.200012 405.200012 C 82.5 525.5 82.600006 534.799988 84.200012 538.299988 C 87 544.5 91.5 549.400024 97.200012 552.599976 L 102.5 555.5 L 151.5 555.799988 C 205.200012 556.099976 206.299988 556 212.799988 550.400024 C 220.700012 543.700012 220.400024 545.900024 221 487.5 L 221.5 435.5 L 223.799988 431 C 227.099976 424.700012 231.400024 420.5 237.400024 417.799988 C 242.400024 415.5 243 415.5 278 415.5 C 312.900024 415.5 313.599976 415.5 318.5 417.799988 C 324.799988 420.700012 328.5 424.200012 331.799988 430.5 L 334.5 435.5 L 335 487.5 C 335.599976 545.900024 335.299988 543.700012 343.200012 550.400024 C 349.700012 556 350.799988 556.099976 404.5 555.799988 C 453.200012 555.5 453.5 555.5 457.700012 553.200012 C 463.400024 550.200012 468.200012 545.200012 471.099976 539.400024 L 473.5 534.5 L 473.799988 405.200012 L 474 276 L 506.400024 276 C 544.700012 276 543.5 276.299988 543.5 266.299988 C 543.400024 253.299988 552.099976 262.900024 417.700012 128.299988 C 329.299988 39.799988 294.299988 5.400024 290.700012 3.400024 C 284.799988 0.200012 275.400024 -0.700012 269.900024 1.299988 Z"/>
+                    </svg>
+                </div>
+            </glass-box>
+        </button>
+    </header>
 
-    <section class="hero">
-      <div class="hero-title">
-        <div class="hero-title-wrapper">
-          <span class="hero-title-first hero-title-1">S</span>
-          <span class="hero-title-first hero-title-2">A</span>
-          <span class="hero-title-first hero-title-3">M</span>
-          <span class="hero-title-first hero-title-3">U</span>
-          <span class="hero-title-first hero-title-2">E</span>
-          <span class="hero-title-first hero-title-1">L</span>
-        </div>
-        <div class="hero-title-wrapper">
-          <span class="hero-title-second hero-title-1">D</span>
-          <span class="hero-title-second hero-title-2">E</span>
-          <span class="hero-title-second hero-title-3">L</span>
-          <span class="hero-title-second hero-title-3">I</span>
-          <span class="hero-title-second hero-title-3">E</span>
-          <span class="hero-title-second hero-title-2">N</span>
-          <span class="hero-title-second hero-title-1">S</span>
-        </div>
-      </div>
+    <div class="page-wrapper">
+        <!-- Hero Section -->
+        <section class="hero" id="hero">
+            <header class="hero-title">
+                <div class="hero-title-wrapper">
+                    <span class="hero-title-first hero-title-1">S</span>
+                    <span class="hero-title-first hero-title-2">A</span>
+                    <span class="hero-title-first hero-title-3">M</span>
+                    <span class="hero-title-first hero-title-3">U</span>
+                    <span class="hero-title-first hero-title-2">E</span>
+                    <span class="hero-title-first hero-title-1">L</span>
+                </div>
+                <div class="hero-title-wrapper">
+                    <span class="hero-title-second hero-title-1">D</span>
+                    <span class="hero-title-second hero-title-2">E</span>
+                    <span class="hero-title-second hero-title-3">L</span>
+                    <span class="hero-title-second hero-title-3">I</span>
+                    <span class="hero-title-second hero-title-3">E</span>
+                    <span class="hero-title-second hero-title-2">N</span>
+                    <span class="hero-title-second hero-title-1">S</span>
+                </div>
+            </header>
 
-      <div class="hero-buttons">
-        <div class="glass-wrapper-translate">
-          <div class="glass-animation-wrapper">
-            <glass-box class="hero-work interactive" hover-effect>
-              <div>PROJECT</div>
-            </glass-box>
-          </div>
-        </div>
+            <nav class="hero-buttons">
+                <div class="glass-wrapper-translate">
+                    <div class="glass-animation-wrapper">
+                        <glass-box class="hero-work interactive" hover-effect>
+                            <div>PROJECTS</div>
+                        </glass-box>
+                    </div>
+                </div>
 
-        <div class="glass-wrapper-translate">
-          <div class="glass-animation-wrapper">
-            <glass-box class="hero-contact interactive" hover-effect>
-              <div>CONTACT</div>
-            </glass-box>
-          </div>
-        </div>
-      </div>
+                <div class="glass-wrapper-translate">
+                    <div class="glass-animation-wrapper">
+                        <glass-box class="hero-contact interactive" hover-effect>
+                            <div>CONTACT</div>
+                        </glass-box>
+                    </div>
+                </div>
+            </nav>
 
-      <div class="hero-desc glass-wrapper-fade">
-        <glass-box class="glass-fade-element" corner-radius="0px">
-          <div class="hero-desc-wrapper">
-            <div class="desc-line"><span>Frontend Development &nbsp;  ●  &nbsp; Backend Development &nbsp;  ●  &nbsp; Web Development &nbsp;  ●  &nbsp; Web Design &nbsp;  ●  &nbsp; FullStack Development &nbsp;  ●  &nbsp;</span></div>
-            <div class="desc-line"><span>Frontend Development &nbsp;  ●  &nbsp; Backend Development &nbsp;  ●  &nbsp; Web Development &nbsp;  ●  &nbsp; Web Design &nbsp;  ●  &nbsp; FullStack Development &nbsp;  ●  &nbsp;</span></div>
-            <div class="desc-line"><span>Frontend Development &nbsp;  ●  &nbsp; Backend Development &nbsp;  ●  &nbsp; Web Development &nbsp;  ●  &nbsp; Web Design &nbsp;  ●  &nbsp; FullStack Development &nbsp;  ●  &nbsp;</span></div>
-          </div>
-        </glass-box>
-        <glass-box class="glass-final-element" corner-radius="0px">
-          <div class="hero-desc-wrapper">
-            <div class="desc-line"><span>Frontend Development &nbsp;  ●  &nbsp; Backend Development &nbsp;  ●  &nbsp; Web Development &nbsp;  ●  &nbsp; Web Design &nbsp;  ●  &nbsp; FullStack Development &nbsp;  ●  &nbsp;</span></div>
-            <div class="desc-line"><span>Frontend Development &nbsp;  ●  &nbsp; Backend Development &nbsp;  ●  &nbsp; Web Development &nbsp;  ●  &nbsp; Web Design &nbsp;  ●  &nbsp; FullStack Development &nbsp;  ●  &nbsp;</span></div>
-            <div class="desc-line"><span>Frontend Development &nbsp;  ●  &nbsp; Backend Development &nbsp;  ●  &nbsp; Web Development &nbsp;  ●  &nbsp; Web Design &nbsp;  ●  &nbsp; FullStack Development &nbsp;  ●  &nbsp;</span></div>
-          </div>
-        </glass-box>
-      </div>
-    </section>
-
-    <section class="projects-list hidden">
-      <header class="title glass-wrapper-fade">
-        <glass-box class="glass-fade-element">
-          <div>Projects List</div>
-        </glass-box>
-        <glass-box class="glass-final-element">
-          <div>Projects List</div>
-        </glass-box>
-      </header>
-
-      <div class="project open-project-button bluerov interactive cursor-tooltip" data-project="bluerov" data-project-id="2">
-        <div class="data-tooltip">
-          <div class="data-tooltip-wrapper">
-            <img src="./assets/img/bluerov2/preview.jpg" alt="project neobot image"/>
-            <p>Embedded Module to collect water quality data</p>
-          </div>
-        </div>
-        <div class="project-wrapper">
-          <div class="left-wrapper">
-            <glass-box class="interactive" corner-radius="100px">
-              <div class="nav-arrow">
-                <svg viewBox="0 0 852 852" xmlns="http://www.w3.org/2000/svg">
-                  <path id="Triangle" fill-rule="evenodd" stroke="none" d="M 1.006269 429.214478 C 0.687578 467.562744 37.722969 493.436859 47.076675 499.882019 C 145.654129 557.480347 418.630646 719.178406 548.934082 794.805664 C 581.707825 810.121948 617.275757 814.818298 641.132568 793.911621 C 670.734558 768.514526 666.82019 747.983215 670.16217 717.14386 C 669.11908 524.984009 669.484497 332.821655 669.845398 140.240601 C 669.84314 129.244751 670.179199 88.369751 641.562195 63.504333 C 621.066284 45.695374 580.352844 43.214478 538.567444 67.778015 C 475.020874 104.852051 174.504974 282.139771 42.017036 361.562927 C 20.241558 375.636261 1.343719 388.61554 1.006269 429.214478 Z"/>            </svg>
-              </div>
-            </glass-box>
-            <h1>BlueRov2</h1>
-          </div>
-          <h2>Embedded System</h2>
-        </div>
-     </div>
-      <div class="project open-project-button neobot interactive cursor-tooltip" data-project="neobot" data-project-id="1">
-        <div class="data-tooltip">
-          <div class="data-tooltip-wrapper">
-            <img src="./assets/img/neobot/preview.jpg" alt="project neobot image"/>
-            <p>Web Automation Tool build with NodeJS</p>
-          </div>
-        </div>
-        <div class="project-wrapper">
-          <div class="left-wrapper">
-            <glass-box class="interactive" corner-radius="100px">
-              <div class="nav-arrow">
-                <svg viewBox="0 0 852 852" xmlns="http://www.w3.org/2000/svg">
-                  <path id="Triangle" fill-rule="evenodd" stroke="none" d="M 1.006269 429.214478 C 0.687578 467.562744 37.722969 493.436859 47.076675 499.882019 C 145.654129 557.480347 418.630646 719.178406 548.934082 794.805664 C 581.707825 810.121948 617.275757 814.818298 641.132568 793.911621 C 670.734558 768.514526 666.82019 747.983215 670.16217 717.14386 C 669.11908 524.984009 669.484497 332.821655 669.845398 140.240601 C 669.84314 129.244751 670.179199 88.369751 641.562195 63.504333 C 621.066284 45.695374 580.352844 43.214478 538.567444 67.778015 C 475.020874 104.852051 174.504974 282.139771 42.017036 361.562927 C 20.241558 375.636261 1.343719 388.61554 1.006269 429.214478 Z"/>            </svg>
-              </div>
-            </glass-box>
-            <h1>NeoBot</h1>
-          </div>
-          <h2>Backend Development</h2>
-        </div>
-      </div>
-      <div class="project open-project-button easeidf interactive cursor-tooltip" data-project="easeidf" data-project-id="4">
-        <div class="data-tooltip">
-          <div class="data-tooltip-wrapper">
-            <img src="./assets/img/easeidf/preview.jpg" alt="project neobot image"/>
-            <p>Mobile App to ease tracking of Paris transport</p>
-          </div>
-        </div>
-        <div class="project-wrapper">
-          <div class="left-wrapper">
-            <glass-box class="interactive" corner-radius="100px">
-              <div class="nav-arrow">
-                <svg viewBox="0 0 852 852" xmlns="http://www.w3.org/2000/svg">
-                  <path id="Triangle" fill-rule="evenodd" stroke="none" d="M 1.006269 429.214478 C 0.687578 467.562744 37.722969 493.436859 47.076675 499.882019 C 145.654129 557.480347 418.630646 719.178406 548.934082 794.805664 C 581.707825 810.121948 617.275757 814.818298 641.132568 793.911621 C 670.734558 768.514526 666.82019 747.983215 670.16217 717.14386 C 669.11908 524.984009 669.484497 332.821655 669.845398 140.240601 C 669.84314 129.244751 670.179199 88.369751 641.562195 63.504333 C 621.066284 45.695374 580.352844 43.214478 538.567444 67.778015 C 475.020874 104.852051 174.504974 282.139771 42.017036 361.562927 C 20.241558 375.636261 1.343719 388.61554 1.006269 429.214478 Z"/>            </svg>
-              </div>
-            </glass-box>
-            <h1>EaseIDF</h1>
-          </div>
-          <h2>Mobile Development</h2>
-        </div>
-      </div>
-      <div class="project open-project-button ejeffrey" data-project="ejeffrey" data-project-id="5">
-        <div class="project-wrapper">
-          <div class="left-wrapper">
-            <glass-box class="interactive" corner-radius="100px">
-              <div class="nav-arrow">
-                <svg viewBox="0 0 852 852" xmlns="http://www.w3.org/2000/svg">
-                  <path id="Triangle" fill-rule="evenodd" stroke="none" d="M 1.006269 429.214478 C 0.687578 467.562744 37.722969 493.436859 47.076675 499.882019 C 145.654129 557.480347 418.630646 719.178406 548.934082 794.805664 C 581.707825 810.121948 617.275757 814.818298 641.132568 793.911621 C 670.734558 768.514526 666.82019 747.983215 670.16217 717.14386 C 669.11908 524.984009 669.484497 332.821655 669.845398 140.240601 C 669.84314 129.244751 670.179199 88.369751 641.562195 63.504333 C 621.066284 45.695374 580.352844 43.214478 538.567444 67.778015 C 475.020874 104.852051 174.504974 282.139771 42.017036 361.562927 C 20.241558 375.636261 1.343719 388.61554 1.006269 429.214478 Z"/>            </svg>
-              </div>
-            </glass-box>
-            <h1>E-Jeffrey</h1>
-          </div>
-          <h2>Embedded System</h2>
-        </div>
-      </div>
-      <div class="project open-project-button spider" data-project="spider" data-project-id="3">
-        <div class="project-wrapper">
-          <div class="left-wrapper">
-            <glass-box class="interactive" corner-radius="100px">
-              <div class="nav-arrow">
-                <svg viewBox="0 0 852 852" xmlns="http://www.w3.org/2000/svg">
-                  <path id="Triangle" fill-rule="evenodd" stroke="none" d="M 1.006269 429.214478 C 0.687578 467.562744 37.722969 493.436859 47.076675 499.882019 C 145.654129 557.480347 418.630646 719.178406 548.934082 794.805664 C 581.707825 810.121948 617.275757 814.818298 641.132568 793.911621 C 670.734558 768.514526 666.82019 747.983215 670.16217 717.14386 C 669.11908 524.984009 669.484497 332.821655 669.845398 140.240601 C 669.84314 129.244751 670.179199 88.369751 641.562195 63.504333 C 621.066284 45.695374 580.352844 43.214478 538.567444 67.778015 C 475.020874 104.852051 174.504974 282.139771 42.017036 361.562927 C 20.241558 375.636261 1.343719 388.61554 1.006269 429.214478 Z"/>            </svg>
-              </div>
-            </glass-box>
-            <h1>Spider</h1>
-          </div>
-          <h2>Embedded System</h2>
-        </div>
-      </div>
-
-<!--      <div class="glass-wrapper-fade open-project-button" data-project="bluerov" data-project-id="2">
-        <glass-box class="glass-fade-element">
-          <div>BlueROV2</div>
-        </glass-box>
-        <glass-box class="glass-final-element interactive" hover-effect>
-          <div>BlueROV2</div>
-        </glass-box>
-      </div>
-      <div class="glass-wrapper-fade open-project-button" data-project="neobot" data-project-id="1">
-        <glass-box class="glass-fade-element">
-          <div>NeoBot</div>
-        </glass-box>
-        <glass-box class="glass-final-element interactive" hover-effect>
-          <div>NeoBot</div>
-        </glass-box>
-      </div>
-      <div class="glass-wrapper-fade open-project-button" data-project="ejeffrey" data-project-id="5">
-        <glass-box class="glass-fade-element">
-          <div>E-Jeffrey</div>
-        </glass-box>
-        <glass-box class="glass-final-element interactive" hover-effect>
-          <div>E-Jeffrey</div>
-        </glass-box>
-      </div>
-      <div class="glass-wrapper-fade open-project-button" data-project="easeidf" data-project-id="4">
-        <glass-box class="glass-fade-element">
-          <div>EaseIDF</div>
-        </glass-box>
-        <glass-box class="glass-final-element interactive" hover-effect>
-          <div>EaseIDF</div>
-        </glass-box>
-      </div>
-      <div class="glass-wrapper-fade open-project-button" data-project="spider" data-project-id="3">
-        <glass-box class="glass-fade-element">
-          <div>Spider</div>
-        </glass-box>
-        <glass-box class="glass-final-element interactive" hover-effect>
-          <div>Spider</div>
-        </glass-box>
-      </div>-->
-    </section>
-
-    <section class="project-details hidden">
-      <div class="nav-button back glass-wrapper-fade" >
-        <glass-box class="glass-fade-element" corner-radius="100px">
-          <div class="nav-arrow">
-            <svg viewBox="0 0 852 852" xmlns="http://www.w3.org/2000/svg">
-              <path id="Triangle" fill-rule="evenodd" stroke="none" d="M 1.006269 429.214478 C 0.687578 467.562744 37.722969 493.436859 47.076675 499.882019 C 145.654129 557.480347 418.630646 719.178406 548.934082 794.805664 C 581.707825 810.121948 617.275757 814.818298 641.132568 793.911621 C 670.734558 768.514526 666.82019 747.983215 670.16217 717.14386 C 669.11908 524.984009 669.484497 332.821655 669.845398 140.240601 C 669.84314 129.244751 670.179199 88.369751 641.562195 63.504333 C 621.066284 45.695374 580.352844 43.214478 538.567444 67.778015 C 475.020874 104.852051 174.504974 282.139771 42.017036 361.562927 C 20.241558 375.636261 1.343719 388.61554 1.006269 429.214478 Z"/>            </svg>
-          </div>
-        </glass-box>
-        <glass-box class="glass-final-element interactive cursor-tooltip" corner-radius="100px">
-          <div class="data-tooltip">Back</div>
-          <div class="nav-arrow">
-            <svg viewBox="0 0 852 852" xmlns="http://www.w3.org/2000/svg">
-              <path id="Triangle" fill-rule="evenodd" stroke="none" d="M 1.006269 429.214478 C 0.687578 467.562744 37.722969 493.436859 47.076675 499.882019 C 145.654129 557.480347 418.630646 719.178406 548.934082 794.805664 C 581.707825 810.121948 617.275757 814.818298 641.132568 793.911621 C 670.734558 768.514526 666.82019 747.983215 670.16217 717.14386 C 669.11908 524.984009 669.484497 332.821655 669.845398 140.240601 C 669.84314 129.244751 670.179199 88.369751 641.562195 63.504333 C 621.066284 45.695374 580.352844 43.214478 538.567444 67.778015 C 475.020874 104.852051 174.504974 282.139771 42.017036 361.562927 C 20.241558 375.636261 1.343719 388.61554 1.006269 429.214478 Z"/>            </svg>
-          </div>
-        </glass-box>
-      </div>
-      <div class="nav-button next glass-wrapper-fade">
-        <glass-box class="glass-fade-element" corner-radius="100px">
-          <div class="nav-arrow">
-            <svg viewBox="0 0 852 852" xmlns="http://www.w3.org/2000/svg">
-              <path id="Triangle" fill-rule="evenodd" stroke="none" d="M 1.006269 429.214478 C 0.687578 467.562744 37.722969 493.436859 47.076675 499.882019 C 145.654129 557.480347 418.630646 719.178406 548.934082 794.805664 C 581.707825 810.121948 617.275757 814.818298 641.132568 793.911621 C 670.734558 768.514526 666.82019 747.983215 670.16217 717.14386 C 669.11908 524.984009 669.484497 332.821655 669.845398 140.240601 C 669.84314 129.244751 670.179199 88.369751 641.562195 63.504333 C 621.066284 45.695374 580.352844 43.214478 538.567444 67.778015 C 475.020874 104.852051 174.504974 282.139771 42.017036 361.562927 C 20.241558 375.636261 1.343719 388.61554 1.006269 429.214478 Z"/>            </svg>
-          </div>
-        </glass-box>
-        <glass-box class="glass-final-element interactive cursor-tooltip" corner-radius="100px">
-          <div class="data-tooltip">Next</div>
-          <div class="nav-arrow">
-            <svg viewBox="0 0 852 852" xmlns="http://www.w3.org/2000/svg">
-              <path id="Triangle" fill-rule="evenodd" stroke="none" d="M 1.006269 429.214478 C 0.687578 467.562744 37.722969 493.436859 47.076675 499.882019 C 145.654129 557.480347 418.630646 719.178406 548.934082 794.805664 C 581.707825 810.121948 617.275757 814.818298 641.132568 793.911621 C 670.734558 768.514526 666.82019 747.983215 670.16217 717.14386 C 669.11908 524.984009 669.484497 332.821655 669.845398 140.240601 C 669.84314 129.244751 670.179199 88.369751 641.562195 63.504333 C 621.066284 45.695374 580.352844 43.214478 538.567444 67.778015 C 475.020874 104.852051 174.504974 282.139771 42.017036 361.562927 C 20.241558 375.636261 1.343719 388.61554 1.006269 429.214478 Z"/>            </svg>
-          </div>
-        </glass-box>
-      </div>
-
-      <article class="project-details-group" data-project="bluerov" data-project-id="2">
-        <header class="project-details-title glass-wrapper-fade">
-          <glass-box class="glass-fade-element">
-            <div>BlueROV2</div>
-          </glass-box>
-          <glass-box class="glass-final-element">
-            <div>BlueROV2</div>
-          </glass-box>
-        </header>
-        <div class="project-details-content-wrapper">
-          <img class="project-details-img" src="./assets/img/bluerov2/bluerov2.jpg" />
-          <div class="project-details-description">
-            <glass-box class="date">
-              <div>2022</div>
-            </glass-box>
-            <glass-box class="location">
-              <div>Insset</div>
-            </glass-box>
-            <glass-box class="role">
-              <div>Embedded System</div>
-            </glass-box>
-            <p class="description-text">
-              This project involved creating an adjustable module that can be mounted on the BlueROV2 to collect various water quality data, such as temperature, salinity, and turbidity, using sensors and cameras. The module also includes a robotic arm for sample collection.
-            </p>
-          </div>
-          <div class="project-details-content bluerov2">
-            <section class="web-interfaces">
-              <h2>Web Monitoring Interface</h2>
-              <img src="./assets/img/bluerov2/interface.jpg" alt="BlueROV2 Web Interface" />
-            </section>
-
-            <section class="conceptions">
-              <h2>Conceptions</h2>
-              <div class="images">
-                <img src="./assets/img/bluerov2/support_nv.jpg" alt="BlueROV2 Module Design" />
-                <img src="./assets/img/bluerov2/accroche.jpg" alt="BlueROV2 Module Design" />
-                <img src="./assets/img/bluerov2/accroche.jpg" alt="BlueROV2 Module Design" />
-                <img src="./assets/img/bluerov2/servo.jpg" alt="BlueROV2 Module Design" />
-                <img src="./assets/img/bluerov2/support_cam.jpg" alt="BlueROV2 Module Design" />
-                <img src="./assets/img/bluerov2/cache.jpg" alt="BlueROV2 Module Design" />
-                <img src="./assets/img/bluerov2/assemblage.jpg" alt="BlueROV2 Module Design" />
-                <img src="./assets/img/bluerov2/carte.jpg" alt="BlueROV2 Module Design" />
-              </div>
-
-            </section>
-
-            <section class="skills">
-              <h2>Skills</h2>
-              <glass-box><div>HTML</div></glass-box>
-              <glass-box><div>CSS</div></glass-box>
-              <glass-box><div>JS</div></glass-box>
-              <glass-box><div>PHP</div></glass-box>
-              <glass-box><div>Python</div></glass-box>
-              <glass-box><div>C++</div></glass-box>
-              <glass-box><div>MySQL</div></glass-box>
-              <glass-box><div>Apache</div></glass-box>
-              <glass-box><div>RaspberryPi</div></glass-box>
-              <glass-box><div>Solidworks</div></glass-box>
-              <glass-box><div>Proteus</div></glass-box>
-              <glass-box><div>RJ45</div></glass-box>
-              <glass-box><div>TCP/IP</div></glass-box>
-            </section>
-          </div>
-        </div>
-      </article>
-      <article class="project-details-group" data-project="neobot" data-project-id="1">
-        <header class="project-details-title glass-wrapper-fade">
-          <glass-box class="glass-fade-element">
-            <div>NeoBot</div>
-          </glass-box>
-          <glass-box class="glass-final-element">
-            <div>NeoBot</div>
-          </glass-box>
-        </header>
-        <div class="project-details-content-wrapper">
-          <img class="project-details-img" src="./assets/img/neobot/neobot.jpg" />
-          <div class="project-details-description">
-            <glass-box class="date">
-              <div>2023</div>
-            </glass-box>
-            <glass-box class="location">
-              <div>EPITA</div>
-            </glass-box>
-            <glass-box class="role">
-              <div>Backend Development</div>
-            </glass-box>
-            <p class="description-text">
-              This project involved the development of a web automation tool that allows users to automate tasks for courses. It includes features such as automatic or manual attendance signing, course schedule management, and notifications.
-            </p>
-          </div>
-          <div class="project-details-content neobot">
-            <section class="interface">
-              <h2>App Monitoring Interface</h2>
-              <div class="images">
-                <img src="./assets/img/neobot/screen.jpg" alt="BlueROV2 Web Interface" />
-                <img src="./assets/img/neobot/screen2.jpg" alt="BlueROV2 Web Interface" />
-                <img src="./assets/img/neobot/screen3.jpg" alt="BlueROV2 Web Interface" />
-                <img src="./assets/img/neobot/screen4.jpg" alt="BlueROV2 Web Interface" />
-                <img class="center" src="./assets/img/neobot/screen5.jpg" alt="BlueROV2 Web Interface" />
-              </div>
-            </section>
-
-            <section class="skills">
-              <h2>Skills</h2>
-              <glass-box><div>Node</div></glass-box>
-              <glass-box><div>Typescript</div></glass-box>
-              <glass-box><div>Telegram</div></glass-box>
-              <glass-box><div>MySQL</div></glass-box>
-              <glass-box><div>Cron</div></glass-box>
-              <glass-box><div>Docker</div></glass-box>
-              <glass-box><div>CI/CD</div></glass-box>
-            </section>
-          </div>
-        </div>
-      </article>
-      <article class="project-details-group" data-project="easeidf" data-project-id="4">
-        <header class="project-details-title glass-wrapper-fade">
-          <glass-box class="glass-fade-element">
-            <div>EaseIDF</div>
-          </glass-box>
-          <glass-box class="glass-final-element">
-            <div>EaseIDF</div>
-          </glass-box>
-        </header>
-        <div class="project-details-content-wrapper">
-          <img class="project-details-img" src="./assets/img/easeidf/easeidf.jpg" />
-          <div class="project-details-description">
-            <glass-box class="date">
-              <div>2025</div>
-            </glass-box>
-            <glass-box class="location">
-              <div>IOS</div>
-            </glass-box>
-            <glass-box class="role">
-              <div>Mobile Development</div>
-            </glass-box>
-            <p class="description-text">
-              This project involved the development of a mobile application that allows users to ease tracking of transport in Paris. It includes features such as real-time transport tracking, stop management and configuring, widget integration, and the ability to define conditions to track a specific stop at a specific time and place.
-            </p>
-          </div>
-          <div class="project-details-content easeidf">
-            <section class="interface">
-              <h2>App Monitoring Interface</h2>
-              <h3>Check Transport Tracked</h3>
-              <div class="loading-images">
-                <img src="./assets/img/easeidf/screen1.jpg" alt="EaseIDF Mobile Interface" />
-                <img src="./assets/img/easeidf/screen2.jpg" alt="EaseIDF Mobile Interface" />
-                <img src="./assets/img/easeidf/screen3.jpg" alt="EaseIDF Mobile Interface" />
-              </div>
-              <h3>Add Transport Tracking</h3>
-              <div class="tracking-images">
-                <img src="./assets/img/easeidf/screen4.jpg" alt="EaseIDF Mobile Interface" />
-                <img src="./assets/img/easeidf/screen5.jpg" alt="EaseIDF Mobile Interface" />
-                <img src="./assets/img/easeidf/screen6.jpg" alt="EaseIDF Mobile Interface" />
-                <img src="./assets/img/easeidf/screen7.jpg" alt="EaseIDF Mobile Interface" />
-                <img src="./assets/img/easeidf/screen8.jpg" alt="EaseIDF Mobile Interface" />
-                <img src="./assets/img/easeidf/screen9.jpg" alt="EaseIDF Mobile Interface" />
-              </div>
-              <h3>Widget View</h3>
-              <div class="widget-images">
-                <img src="./assets/img/easeidf/screen10.jpg" alt="EaseIDF Mobile Interface" />
-              </div>
-            </section>
-          </div>
-        </div>
-      </article>
-      <article class="project-details-group" data-project="ejeffrey" data-project-id="5">
-        <header class="project-details-title">
-          <glass-box>
-            <div>
-              <h1>E-Jeffrey</h1>
+            <div class="hero-desc glass-wrapper-fade">
+                <glass-box class="glass-fade-element" corner-radius="0px">
+                    <div class="hero-desc-wrapper">
+                        <div class="desc-line">
+                            <span>Frontend Development &nbsp;●&nbsp; Backend Development &nbsp;●&nbsp; Web Development &nbsp;●&nbsp; Web Design &nbsp;●&nbsp; FullStack Development &nbsp;●&nbsp;</span>
+                        </div>
+                        <div class="desc-line">
+                            <span>Frontend Development &nbsp;●&nbsp; Backend Development &nbsp;●&nbsp; Web Development &nbsp;●&nbsp; Web Design &nbsp;●&nbsp; FullStack Development &nbsp;●&nbsp;</span>
+                        </div>
+                        <div class="desc-line">
+                            <span>Frontend Development &nbsp;●&nbsp; Backend Development &nbsp;●&nbsp; Web Development &nbsp;●&nbsp; Web Design &nbsp;●&nbsp; FullStack Development &nbsp;●&nbsp;</span>
+                        </div>
+                    </div>
+                </glass-box>
+                <glass-box class="glass-final-element" corner-radius="0px">
+                    <div class="hero-desc-wrapper">
+                        <div class="desc-line">
+                            <span>Frontend Development &nbsp;●&nbsp; Backend Development &nbsp;●&nbsp; Web Development &nbsp;●&nbsp; Web Design &nbsp;●&nbsp; FullStack Development &nbsp;●&nbsp;</span>
+                        </div>
+                        <div class="desc-line">
+                            <span>Frontend Development &nbsp;●&nbsp; Backend Development &nbsp;●&nbsp; Web Development &nbsp;●&nbsp; Web Design &nbsp;●&nbsp; FullStack Development &nbsp;●&nbsp;</span>
+                        </div>
+                        <div class="desc-line">
+                            <span>Frontend Development &nbsp;●&nbsp; Backend Development &nbsp;●&nbsp; Web Development &nbsp;●&nbsp; Web Design &nbsp;●&nbsp; FullStack Development &nbsp;●&nbsp;</span>
+                        </div>
+                    </div>
+                </glass-box>
             </div>
-          </glass-box>
-        </header>
-        <div class="project-details-content-wrapper">
-          <div class="project-details-content glass-animation-wrapper">
-          <glass-box hover-effect>
-            <div class="content-glass"></div>
-          </glass-box>
-        </div>
-        </div>
-      </article>
-      <article class="project-details-group" data-project="spider" data-project-id="3">
-        <header class="project-details-title">
-            <glass-box softness="16px" extra-blur="32px">
-              <div>
-                <h1>Spider</h1>
-              </div>
-            </glass-box>
-          </header>
-        <div class="project-details-content-wrapper">
-          <div class="project-details-content glass-animation-wrapper">
-            <p>
-              Lorem ipsum dolor sit amet, consectetur adipiscing elit. Sed do eiusmod tempor incididunt ut labore et dolore magna aliqua. Ut enim ad minim veniam, quis nostrud exercitation ullamco laboris nisi ut aliquip ex ea commodo consequat. Duis aute irure dolor in reprehenderit in voluptate velit esse cillum dolore eu fugiat nulla pariatur. Excepteur sint occaecat cupidatat non proident, sunt in culpa qui officia deserunt mollit anim id est laborum.
-            </p>
-          </div>
-        </div>
-      </article>
-    </section>
-  </div>
-</div>
+        </section>
+
+        <!-- Projects List Section -->
+        <section class="projects-list hidden" id="projects-list">
+            <header class="title glass-wrapper-fade">
+                <glass-box class="glass-fade-element">
+                    <div>Projects List</div>
+                </glass-box>
+                <glass-box class="glass-final-element">
+                    <div>Projects List</div>
+                </glass-box>
+            </header>
+
+            <div class="projects-grid">
+                <article class="project open-project-button bluerov interactive cursor-tooltip" data-project="bluerov" data-project-id="2">
+                    <div class="data-tooltip">
+                        <div class="data-tooltip-wrapper">
+                            <img src="./assets/img/bluerov2/preview.jpg" alt="BlueROV2 project preview" loading="lazy" />
+                            <p>Embedded Module to collect water quality data</p>
+                        </div>
+                    </div>
+                    <div class="project-wrapper">
+                        <div class="left-wrapper">
+                            <glass-box class="interactive" corner-radius="100px">
+                                <div class="nav-button-content nav-arrow">
+                                    <svg viewBox="0 0 852 852" xmlns="http://www.w3.org/2000/svg" aria-hidden="true">
+                                        <path d="M 1.006269 429.214478 C 0.687578 467.562744 37.722969 493.436859 47.076675 499.882019 C 145.654129 557.480347 418.630646 719.178406 548.934082 794.805664 C 581.707825 810.121948 617.275757 814.818298 641.132568 793.911621 C 670.734558 768.514526 666.82019 747.983215 670.16217 717.14386 C 669.11908 524.984009 669.484497 332.821655 669.845398 140.240601 C 669.84314 129.244751 670.179199 88.369751 641.562195 63.504333 C 621.066284 45.695374 580.352844 43.214478 538.567444 67.778015 C 475.020874 104.852051 174.504974 282.139771 42.017036 361.562927 C 20.241558 375.636261 1.343719 388.61554 1.006269 429.214478 Z"/>
+                                    </svg>
+                                </div>
+                            </glass-box>
+                            <h2>BlueRov2</h2>
+                        </div>
+                        <span class="project-category">Embedded System</span>
+                    </div>
+                </article>
+
+                <article class="project open-project-button neobot interactive cursor-tooltip" data-project="neobot" data-project-id="1">
+                    <div class="data-tooltip">
+                        <div class="data-tooltip-wrapper">
+                            <img src="./assets/img/neobot/preview.jpg" alt="NeoBot project preview" loading="lazy" />
+                            <p>Web Automation Tool built with NodeJS</p>
+                        </div>
+                    </div>
+                    <div class="project-wrapper">
+                        <div class="left-wrapper">
+                            <glass-box class="interactive" corner-radius="100px">
+                                <div class="nav-button-content nav-arrow">
+                                    <svg viewBox="0 0 852 852" xmlns="http://www.w3.org/2000/svg" aria-hidden="true">
+                                        <path d="M 1.006269 429.214478 C 0.687578 467.562744 37.722969 493.436859 47.076675 499.882019 C 145.654129 557.480347 418.630646 719.178406 548.934082 794.805664 C 581.707825 810.121948 617.275757 814.818298 641.132568 793.911621 C 670.734558 768.514526 666.82019 747.983215 670.16217 717.14386 C 669.11908 524.984009 669.484497 332.821655 669.845398 140.240601 C 669.84314 129.244751 670.179199 88.369751 641.562195 63.504333 C 621.066284 45.695374 580.352844 43.214478 538.567444 67.778015 C 475.020874 104.852051 174.504974 282.139771 42.017036 361.562927 C 20.241558 375.636261 1.343719 388.61554 1.006269 429.214478 Z"/>
+                                    </svg>
+                                </div>
+                            </glass-box>
+                            <h2>NeoBot</h2>
+                        </div>
+                        <span class="project-category">Backend Development</span>
+                    </div>
+                </article>
+
+                <article class="project open-project-button easeidf interactive cursor-tooltip" data-project="easeidf" data-project-id="4">
+                    <div class="data-tooltip">
+                        <div class="data-tooltip-wrapper">
+                            <img src="./assets/img/easeidf/preview.jpg" alt="EaseIDF project preview" loading="lazy" />
+                            <p>Mobile App to ease tracking of Paris transport</p>
+                        </div>
+                    </div>
+                    <div class="project-wrapper">
+                        <div class="left-wrapper">
+                            <glass-box class="interactive" corner-radius="100px">
+                                <div class="nav-button-content nav-arrow">
+                                    <svg viewBox="0 0 852 852" xmlns="http://www.w3.org/2000/svg" aria-hidden="true">
+                                        <path d="M 1.006269 429.214478 C 0.687578 467.562744 37.722969 493.436859 47.076675 499.882019 C 145.654129 557.480347 418.630646 719.178406 548.934082 794.805664 C 581.707825 810.121948 617.275757 814.818298 641.132568 793.911621 C 670.734558 768.514526 666.82019 747.983215 670.16217 717.14386 C 669.11908 524.984009 669.484497 332.821655 669.845398 140.240601 C 669.84314 129.244751 670.179199 88.369751 641.562195 63.504333 C 621.066284 45.695374 580.352844 43.214478 538.567444 67.778015 C 475.020874 104.852051 174.504974 282.139771 42.017036 361.562927 C 20.241558 375.636261 1.343719 388.61554 1.006269 429.214478 Z"/>
+                                    </svg>
+                                </div>
+                            </glass-box>
+                            <h2>EaseIDF</h2>
+                        </div>
+                        <span class="project-category">Mobile Development</span>
+                    </div>
+                </article>
+
+                <article class="project open-project-button ejeffrey" data-project="ejeffrey" data-project-id="5">
+                    <div class="project-wrapper">
+                        <div class="left-wrapper">
+                            <glass-box class="interactive" corner-radius="100px">
+                                <div class="nav-button-content nav-arrow">
+                                    <svg viewBox="0 0 852 852" xmlns="http://www.w3.org/2000/svg" aria-hidden="true">
+                                        <path d="M 1.006269 429.214478 C 0.687578 467.562744 37.722969 493.436859 47.076675 499.882019 C 145.654129 557.480347 418.630646 719.178406 548.934082 794.805664 C 581.707825 810.121948 617.275757 814.818298 641.132568 793.911621 C 670.734558 768.514526 666.82019 747.983215 670.16217 717.14386 C 669.11908 524.984009 669.484497 332.821655 669.845398 140.240601 C 669.84314 129.244751 670.179199 88.369751 641.562195 63.504333 C 621.066284 45.695374 580.352844 43.214478 538.567444 67.778015 C 475.020874 104.852051 174.504974 282.139771 42.017036 361.562927 C 20.241558 375.636261 1.343719 388.61554 1.006269 429.214478 Z"/>
+                                    </svg>
+                                </div>
+                            </glass-box>
+                            <h2>E-Jeffrey</h2>
+                        </div>
+                        <span class="project-category">Embedded System</span>
+                    </div>
+                </article>
+
+                <article class="project open-project-button spider" data-project="spider" data-project-id="3">
+                    <div class="project-wrapper">
+                        <div class="left-wrapper">
+                            <glass-box class="interactive" corner-radius="100px">
+                                <div class="nav-button-content nav-arrow">
+                                    <svg viewBox="0 0 852 852" xmlns="http://www.w3.org/2000/svg" aria-hidden="true">
+                                        <path d="M 1.006269 429.214478 C 0.687578 467.562744 37.722969 493.436859 47.076675 499.882019 C 145.654129 557.480347 418.630646 719.178406 548.934082 794.805664 C 581.707825 810.121948 617.275757 814.818298 641.132568 793.911621 C 670.734558 768.514526 666.82019 747.983215 670.16217 717.14386 C 669.11908 524.984009 669.484497 332.821655 669.845398 140.240601 C 669.84314 129.244751 670.179199 88.369751 641.562195 63.504333 C 621.066284 45.695374 580.352844 43.214478 538.567444 67.778015 C 475.020874 104.852051 174.504974 282.139771 42.017036 361.562927 C 20.241558 375.636261 1.343719 388.61554 1.006269 429.214478 Z"/>
+                                    </svg>
+                                </div>
+                            </glass-box>
+                            <h2>Spider</h2>
+                        </div>
+                        <span class="project-category">Embedded System</span>
+                    </div>
+                </article>
+            </div>
+        </section>
+
+        <!-- Project Details Section -->
+        <section class="project-details hidden" id="project-details">
+            <!-- Navigation -->
+            <nav class="project-navigation">
+                <button class="nav-button back glass-wrapper-fade" aria-label="Go back to projects list">
+                    <glass-box class="glass-fade-element" corner-radius="100px">
+                        <div class="nav-button-content nav-arrow">
+                            <svg viewBox="0 0 852 852" xmlns="http://www.w3.org/2000/svg" aria-hidden="true">
+                                <path d="M 1.006269 429.214478 C 0.687578 467.562744 37.722969 493.436859 47.076675 499.882019 C 145.654129 557.480347 418.630646 719.178406 548.934082 794.805664 C 581.707825 810.121948 617.275757 814.818298 641.132568 793.911621 C 670.734558 768.514526 666.82019 747.983215 670.16217 717.14386 C 669.11908 524.984009 669.484497 332.821655 669.845398 140.240601 C 669.84314 129.244751 670.179199 88.369751 641.562195 63.504333 C 621.066284 45.695374 580.352844 43.214478 538.567444 67.778015 C 475.020874 104.852051 174.504974 282.139771 42.017036 361.562927 C 20.241558 375.636261 1.343719 388.61554 1.006269 429.214478 Z"/>
+                            </svg>
+                        </div>
+                    </glass-box>
+                    <glass-box class="glass-final-element interactive cursor-tooltip" corner-radius="100px">
+                        <div class="data-tooltip">Back</div>
+                        <div class="nav-button-content nav-arrow">
+                            <svg viewBox="0 0 852 852" xmlns="http://www.w3.org/2000/svg" aria-hidden="true">
+                                <path d="M 1.006269 429.214478 C 0.687578 467.562744 37.722969 493.436859 47.076675 499.882019 C 145.654129 557.480347 418.630646 719.178406 548.934082 794.805664 C 581.707825 810.121948 617.275757 814.818298 641.132568 793.911621 C 670.734558 768.514526 666.82019 747.983215 670.16217 717.14386 C 669.11908 524.984009 669.484497 332.821655 669.845398 140.240601 C 669.84314 129.244751 670.179199 88.369751 641.562195 63.504333 C 621.066284 45.695374 580.352844 43.214478 538.567444 67.778015 C 475.020874 104.852051 174.504974 282.139771 42.017036 361.562927 C 20.241558 375.636261 1.343719 388.61554 1.006269 429.214478 Z"/>
+                            </svg>
+                        </div>
+                    </glass-box>
+                </button>
+
+                <button class="nav-button next glass-wrapper-fade" aria-label="Next project">
+                    <glass-box class="glass-fade-element" corner-radius="100px">
+                        <div class="nav-button-content nav-arrow">
+                            <svg viewBox="0 0 852 852" xmlns="http://www.w3.org/2000/svg" aria-hidden="true">
+                                <path d="M 1.006269 429.214478 C 0.687578 467.562744 37.722969 493.436859 47.076675 499.882019 C 145.654129 557.480347 418.630646 719.178406 548.934082 794.805664 C 581.707825 810.121948 617.275757 814.818298 641.132568 793.911621 C 670.734558 768.514526 666.82019 747.983215 670.16217 717.14386 C 669.11908 524.984009 669.484497 332.821655 669.845398 140.240601 C 669.84314 129.244751 670.179199 88.369751 641.562195 63.504333 C 621.066284 45.695374 580.352844 43.214478 538.567444 67.778015 C 475.020874 104.852051 174.504974 282.139771 42.017036 361.562927 C 20.241558 375.636261 1.343719 388.61554 1.006269 429.214478 Z"/>
+                            </svg>
+                        </div>
+                    </glass-box>
+                    <glass-box class="glass-final-element interactive cursor-tooltip" corner-radius="100px">
+                        <div class="data-tooltip">Next</div>
+                        <div class="nav-button-content nav-arrow">
+                            <svg viewBox="0 0 852 852" xmlns="http://www.w3.org/2000/svg" aria-hidden="true">
+                                <path d="M 1.006269 429.214478 C 0.687578 467.562744 37.722969 493.436859 47.076675 499.882019 C 145.654129 557.480347 418.630646 719.178406 548.934082 794.805664 C 581.707825 810.121948 617.275757 814.818298 641.132568 793.911621 C 670.734558 768.514526 666.82019 747.983215 670.16217 717.14386 C 669.11908 524.984009 669.484497 332.821655 669.845398 140.240601 C 669.84314 129.244751 670.179199 88.369751 641.562195 63.504333 C 621.066284 45.695374 580.352844 43.214478 538.567444 67.778015 C 475.020874 104.852051 174.504974 282.139771 42.017036 361.562927 C 20.241558 375.636261 1.343719 388.61554 1.006269 429.214478 Z"/>
+                            </svg>
+                        </div>
+                    </glass-box>
+                </button>
+            </nav>
+
+            <!-- BlueROV2 Project -->
+            <article class="project-details-group" data-project="bluerov" data-project-id="2">
+                <header class="project-details-title glass-wrapper-fade">
+                    <glass-box class="glass-fade-element">
+                        <h1>BlueROV2</h1>
+                    </glass-box>
+                    <glass-box class="glass-final-element">
+                        <h1>BlueROV2</h1>
+                    </glass-box>
+                </header>
+
+                <div class="project-details-content-wrapper">
+                    <img class="project-details-img" src="./assets/img/bluerov2/bluerov2.jpg" alt="BlueROV2 underwater vehicle" loading="lazy" />
+
+                    <div class="project-details-description">
+                        <glass-box class="date">
+                            <div>2022</div>
+                        </glass-box>
+                        <glass-box class="location">
+                            <div>Insset</div>
+                        </glass-box>
+                        <glass-box class="role">
+                            <div>Embedded System</div>
+                        </glass-box>
+                        <p class="description-text">
+                            This project involved creating an adjustable module that can be mounted on the BlueROV2 to collect various water quality data, such as temperature, salinity, and turbidity, using sensors and cameras. The module also includes a robotic arm for sample collection.
+                        </p>
+                    </div>
+
+                    <div class="project-details-content bluerov2">
+                        <section class="web-interfaces">
+                            <h2>Web Monitoring Interface</h2>
+                            <img src="./assets/img/bluerov2/interface.jpg" alt="BlueROV2 Web Interface" loading="lazy" />
+                        </section>
+
+                        <section class="conceptions">
+                            <h2>Conceptions</h2>
+                            <div class="images">
+                                <img src="./assets/img/bluerov2/support_nv.jpg" alt="BlueROV2 Module Design" loading="lazy" />
+                                <img src="./assets/img/bluerov2/accroche.jpg" alt="BlueROV2 Module Design" loading="lazy" />
+                                <img src="./assets/img/bluerov2/servo.jpg" alt="BlueROV2 Module Design" loading="lazy" />
+                                <img src="./assets/img/bluerov2/support.jpg" alt="BlueROV2 Module Design" loading="lazy" />
+                                <img src="./assets/img/bluerov2/support_cam.jpg" alt="BlueROV2 Module Design" loading="lazy" />
+                                <img src="./assets/img/bluerov2/cache.jpg" alt="BlueROV2 Module Design" loading="lazy" />
+                                <img src="./assets/img/bluerov2/assemblage.jpg" alt="BlueROV2 Module Design" loading="lazy" />
+                                <img src="./assets/img/bluerov2/carte.jpg" alt="BlueROV2 Module Design" loading="lazy" />
+                            </div>
+                        </section>
+
+                        <section class="skills">
+                            <h2>Technologies Used</h2>
+                            <glass-box><div>HTML</div></glass-box>
+                            <glass-box><div>CSS</div></glass-box>
+                            <glass-box><div>JavaScript</div></glass-box>
+                            <glass-box><div>PHP</div></glass-box>
+                            <glass-box><div>Python</div></glass-box>
+                            <glass-box><div>C++</div></glass-box>
+                            <glass-box><div>MySQL</div></glass-box>
+                            <glass-box><div>Apache</div></glass-box>
+                            <glass-box><div>Raspberry Pi</div></glass-box>
+                            <glass-box><div>SolidWorks</div></glass-box>
+                            <glass-box><div>Proteus</div></glass-box>
+                            <glass-box><div>RJ45</div></glass-box>
+                            <glass-box><div>TCP/IP</div></glass-box>
+                        </section>
+                    </div>
+                </div>
+            </article>
+
+            <!-- NeoBot Project -->
+            <article class="project-details-group" data-project="neobot" data-project-id="1">
+                <header class="project-details-title glass-wrapper-fade">
+                    <glass-box class="glass-fade-element">
+                        <h1>NeoBot</h1>
+                    </glass-box>
+                    <glass-box class="glass-final-element">
+                        <h1>NeoBot</h1>
+                    </glass-box>
+                </header>
+
+                <div class="project-details-content-wrapper">
+                    <img class="project-details-img" src="./assets/img/neobot/neobot.jpg" alt="NeoBot automation tool interface" loading="lazy" />
+
+                    <div class="project-details-description">
+                        <glass-box class="date">
+                            <div>2023</div>
+                        </glass-box>
+                        <glass-box class="location">
+                            <div>EPITA</div>
+                        </glass-box>
+                        <glass-box class="role">
+                            <div>Backend Development</div>
+                        </glass-box>
+                        <p class="description-text">
+                            This project involved the development of a web automation tool that allows users to automate tasks for courses. It includes features such as automatic or manual attendance signing, course schedule management, and notifications.
+                        </p>
+                    </div>
+
+                    <div class="project-details-content neobot">
+                        <section class="interface">
+                            <h2>App Monitoring Interface</h2>
+                            <div class="images">
+                                <img src="./assets/img/neobot/screen.jpg" alt="NeoBot interface screenshot" loading="lazy" />
+                                <img src="./assets/img/neobot/screen2.jpg" alt="NeoBot interface screenshot" loading="lazy" />
+                                <img src="./assets/img/neobot/screen3.jpg" alt="NeoBot interface screenshot" loading="lazy" />
+                                <img src="./assets/img/neobot/screen4.jpg" alt="NeoBot interface screenshot" loading="lazy" />
+                                <img class="center" src="./assets/img/neobot/screen5.jpg" alt="NeoBot interface screenshot" loading="lazy" />
+                            </div>
+                        </section>
+
+                        <section class="skills">
+                            <h2>Technologies Used</h2>
+                            <glass-box><div>Node.js</div></glass-box>
+                            <glass-box><div>TypeScript</div></glass-box>
+                            <glass-box><div>Telegram</div></glass-box>
+                            <glass-box><div>MySQL</div></glass-box>
+                            <glass-box><div>Cron</div></glass-box>
+                            <glass-box><div>Docker</div></glass-box>
+                            <glass-box><div>CI/CD</div></glass-box>
+                        </section>
+                    </div>
+                </div>
+            </article>
+
+            <!-- EaseIDF Project -->
+            <article class="project-details-group" data-project="easeidf" data-project-id="4">
+                <header class="project-details-title glass-wrapper-fade">
+                    <glass-box class="glass-fade-element">
+                        <h1>EaseIDF</h1>
+                    </glass-box>
+                    <glass-box class="glass-final-element">
+                        <h1>EaseIDF</h1>
+                    </glass-box>
+                </header>
+
+                <div class="project-details-content-wrapper">
+                    <img class="project-details-img" src="./assets/img/easeidf/easeidf.jpg" alt="EaseIDF mobile app interface" loading="lazy" />
+
+                    <div class="project-details-description">
+                        <glass-box class="date">
+                            <div>2025</div>
+                        </glass-box>
+                        <glass-box class="location">
+                            <div>iOS</div>
+                        </glass-box>
+                        <glass-box class="role">
+                            <div>Mobile Development</div>
+                        </glass-box>
+                        <p class="description-text">
+                            This project involved the development of a mobile application that allows users to ease tracking of transport in Paris. It includes features such as real-time transport tracking, stop management and configuring, widget integration, and the ability to define conditions to track a specific stop at a specific time and place.
+                        </p>
+                    </div>
+
+                    <div class="project-details-content easeidf">
+                        <section class="interface">
+                            <h2>App Interface</h2>
+
+                            <h3>Transport Tracking</h3>
+                            <div class="loading-images">
+                                <img src="./assets/img/easeidf/screen1.jpg" alt="EaseIDF transport tracking interface" loading="lazy" />
+                                <img src="./assets/img/easeidf/screen2.jpg" alt="EaseIDF transport tracking interface" loading="lazy" />
+                                <img src="./assets/img/easeidf/screen3.jpg" alt="EaseIDF transport tracking interface" loading="lazy" />
+                            </div>
+
+                            <h3>Add Transport Tracking</h3>
+                            <div class="tracking-images">
+                                <img src="./assets/img/easeidf/screen4.jpg" alt="EaseIDF add tracking interface" loading="lazy" />
+                                <img src="./assets/img/easeidf/screen5.jpg" alt="EaseIDF add tracking interface" loading="lazy" />
+                                <img src="./assets/img/easeidf/screen6.jpg" alt="EaseIDF add tracking interface" loading="lazy" />
+                                <img src="./assets/img/easeidf/screen7.jpg" alt="EaseIDF add tracking interface" loading="lazy" />
+                                <img src="./assets/img/easeidf/screen8.jpg" alt="EaseIDF add tracking interface" loading="lazy" />
+                                <img src="./assets/img/easeidf/screen9.jpg" alt="EaseIDF add tracking interface" loading="lazy" />
+                            </div>
+
+                            <h3>Widget View</h3>
+                            <div class="widget-images">
+                                <img src="./assets/img/easeidf/screen10.jpg" alt="EaseIDF widget interface" loading="lazy" />
+                            </div>
+                        </section>
+                    </div>
+                </div>
+            </article>
+
+            <!-- E-Jeffrey Project -->
+            <article class="project-details-group" data-project="ejeffrey" data-project-id="5">
+                <header class="project-details-title">
+                    <glass-box>
+                        <h1>E-Jeffrey</h1>
+                    </glass-box>
+                </header>
+                <div class="project-details-content-wrapper">
+                    <div class="project-details-content glass-animation-wrapper">
+                        <glass-box hover-effect>
+                            <div class="content-glass">Coming Soon...</div>
+                        </glass-box>
+                    </div>
+                </div>
+            </article>
+
+            <!-- Spider Project -->
+            <article class="project-details-group" data-project="spider" data-project-id="3">
+                <header class="project-details-title">
+                    <glass-box softness="16px" extra-blur="32px">
+                        <h1>Spider</h1>
+                    </glass-box>
+                </header>
+                <div class="project-details-content-wrapper">
+                    <div class="project-details-content glass-animation-wrapper">
+                        <p>Coming Soon...</p>
+                    </div>
+                </div>
+            </article>
+        </section>
+    </div>
+</main>
 
 <script src="./main.ts" type="module"></script>
 </body>

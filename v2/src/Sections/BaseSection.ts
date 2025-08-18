@@ -5,6 +5,7 @@ import Experience from "../Experience.ts";
 import type World from "../World/World.ts";
 import type {GlobeInterface} from "../World/Globes.ts";
 import Globes from "../World/Globes.ts";
+import Camera from "../Camera.ts";
 
 export type SectionTimeline = gsap.core.Timeline | {[key: string]: gsap.core.Timeline}
 
@@ -13,6 +14,7 @@ export default abstract class BaseSection extends EventEmitter {
 
     protected experience: Experience;
     protected world: World;
+    protected camera: Camera;
     protected globes: Globes;
 
     protected globesList: GlobeInterface[];
@@ -27,6 +29,7 @@ export default abstract class BaseSection extends EventEmitter {
 
         this.experience = new Experience();
         this.world = this.experience.world;
+        this.camera = this.experience.camera;
         this.globes = this.world.globes;
         this.sectionElement = document.querySelector(selector);
 

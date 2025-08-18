@@ -19,6 +19,8 @@ export interface NavigationEvent {
 
 export default class SectionManager {
 
+    private header: HTMLElement | null = document.querySelector(".page-header");
+
     private sections: Map<SectionType, BaseSection> = new Map();
     private currentSection: SectionType;
 
@@ -50,11 +52,7 @@ export default class SectionManager {
             const currentSection = this.sections.get(this.currentSection);
             const targetSection = this.sections.get(section)
 
-            if (targetSection) {
-                if (targetSection?.prepare) {
-                    await targetSection.prepare(data);
-                }
-            }
+            this.hideHeader();
 
             if (currentSection) {
                 await new Promise<void>((resolve) => {
@@ -64,15 +62,36 @@ export default class SectionManager {
             }
 
             if (targetSection) {
+                if (targetSection?.prepare) {
+                    await targetSection.prepare(data);
+                }
+
                 await new Promise<void>((resolve) => {
                     targetSection.once("enterComplete", resolve);
                     targetSection.enter(enterAnimation);
                 })
             }
 
+            if (section !== SectionType.HERO) {
+                this.showHeader();
+            }
+
             this.currentSection = section;
         } finally {
             this.isTransitioning = false;
         }
+    }
+
+    showHeader() {
+        if (!this.header)
+            return
+        this.header.classList.remove("hide");
+        this.header.classList.add("show");
+    }
+    hideHeader() {
+        if (!this.header)
+            return
+        this.header.classList.remove("show");
+        this.header.classList.add("hide");
     }
 }

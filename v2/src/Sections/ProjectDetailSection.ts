@@ -6,14 +6,12 @@ import {SectionType} from "../SectionManager.ts";
 import {globesData, SHADER_DEFAULT_SPEED, SHADER_SLOW_SPEED} from "../World/Globes.ts";
 import type {DetailedGlobeInterface} from "../World/Globes.ts";
 import type {GlobeFactoryInput, GlobeInterface} from "../World/Globes.ts";
-import Camera from "../Camera.ts";
 
 export default class ProjectDetailSection extends BaseSection {
     private nextProjectButton = document.querySelector(".nav-button.next");
     private backProjectButton = document.querySelector(".nav-button.back");
     private projectDetailsGroup: {[key: string]: Element} = {};
 
-    private camera: Camera;
     private detailedGlobes: { [key: number]: DetailedGlobeInterface};
     private enterTimelineComplete = {
         cameraPosition: new THREE.Vector3(0, 0.36, 1),
@@ -35,7 +33,6 @@ export default class ProjectDetailSection extends BaseSection {
     constructor() {
         super('.project-details');
 
-        this.camera = this.experience.camera;
         this.detailedGlobes = this.world.globes.detailedGlobes;
 
         globesData.forEach((globe: GlobeFactoryInput) => {
@@ -287,49 +284,6 @@ export default class ProjectDetailSection extends BaseSection {
                     ease: "power2.in",
                 }, "exitGlobe")
 
-            exitTimeline
-                .to(this.camera.ortographicCamera.position, {
-                    x: 0,
-                    y: 2,
-                    z: 5,
-                    duration: 1,
-                    ease: "power2.in",
-                }, "moveGlobes")
-
-            this.globesList.forEach((globe: GlobeInterface, index: number) => {
-                const behaviourStep = timelineData[index]
-                const increment = (1 / this.globesList.length) / 5;
-
-                [globe.ballMesh, globe.glassMesh].forEach((mesh: THREE.Mesh) => {
-                    exitTimeline
-                        .to(mesh.position, {
-                            x: behaviourStep.position.x,
-                            y: behaviourStep.position.y,
-                            z: behaviourStep.position.z,
-                            ease: "power2.out",
-                            duration: 0.8,
-                            delay: index * increment
-                        }, "moveGlobes")
-                        .to(mesh.scale, {
-                            x: behaviourStep.scale,
-                            y: behaviourStep.scale,
-                            z: behaviourStep.scale,
-                            ease: "power2.out",
-                            duration: 0.8,
-                            delay: index * increment
-                        }, "moveGlobes")
-                        .to(mesh.material, {
-                            opacity: 1,
-                            duration: 0.2,
-                            ease: "power2.out",
-                            onComplete: () => {
-                                mesh.visible = true;
-                            }
-                        }, "moveGlobes");
-                });
-            })
-
-
             this.exitTimeline[projectId] = exitTimeline;
         })
     }
@@ -538,8 +492,7 @@ export default class ProjectDetailSection extends BaseSection {
         });
         this.backProjectButton?.addEventListener("click", () => {
             this.emit('navigate', {
-                to: SectionType.PROJECTS_LIST,
-                enterAnimation: false
+                to: SectionType.PROJECTS_LIST
             })
         })
 

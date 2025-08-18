@@ -74,7 +74,7 @@ export const globesData: GlobeFactoryInput[] = [
         timeline: {
             initial: { position: new THREE.Vector3(0, 0, -3), scale: 0.1 },
             first: { position: new THREE.Vector3(0.0, 1.5, -0.8), scale: 0.25 },
-            second: { position: new THREE.Vector3(-3.2, 2.3, -0.8), scale: 0 },
+            second: { position: new THREE.Vector3(-3.2, 2.18, -0.8), scale: 0 },
             third: {
                 show: { position: new THREE.Vector3(0, 1.5, 0), scale: 0 },
                 hide: {position: new THREE.Vector3(-3.12, 5.86, -2.1), scale: 0.1},
@@ -194,7 +194,7 @@ export const globesData: GlobeFactoryInput[] = [
         timeline: {
             initial: {position: new THREE.Vector3(0, 0, -3), scale: 0.1},
             first: {position: new THREE.Vector3(-3.94, 2.86, 0.73), scale: 0.18},
-            second: {position: new THREE.Vector3(-3.2, 2.3, -0.8), scale: 0},
+            second: {position: new THREE.Vector3(-3.2, 2.18, -0.8), scale: 0},
             third: {
                 show: { position: new THREE.Vector3(-4, 1.5, 0.4), scale: 0 },
                 hide: {position: new THREE.Vector3(-9.2, 5.11, 0.2), scale: 0.15},
@@ -314,7 +314,7 @@ export const globesData: GlobeFactoryInput[] = [
         timeline: {
             initial: {position: new THREE.Vector3(0, 0, -3), scale: 0.1},
             first: {position: new THREE.Vector3(4.8, -3.1, 0.5), scale: 0.14},
-            second: {position: new THREE.Vector3(-3.2, 2.3, -0.8), scale: 0},
+            second: {position: new THREE.Vector3(-3.2, 2.18, -0.8), scale: 0},
             third: {
                 show: { position: new THREE.Vector3(0, -1.9, 0.1), scale: 0 },
                 hide: {position: new THREE.Vector3(1.7, -5.96, 1.04), scale: 0.1},
@@ -347,7 +347,7 @@ export const globesData: GlobeFactoryInput[] = [
         timeline: {
             initial: {position: new THREE.Vector3(0, 0, -3), scale: 0.1},
             first: {position: new THREE.Vector3(4.5, 1.1, -0.2), scale: 0.23},
-            second: {position: new THREE.Vector3(-3.2, 2.3, -0.8), scale: 0},
+            second: {position: new THREE.Vector3(-3.2, 2.18, -0.8), scale: 0},
             third: {
                 show: { position: new THREE.Vector3(4.06, 1.5, -0.1), scale: 0 },
                 hide: {position: new THREE.Vector3(7.64, 3.94, 0.71), scale: 0.2},
@@ -410,7 +410,7 @@ export const globesData: GlobeFactoryInput[] = [
         timeline: {
             initial: {position: new THREE.Vector3(0, 0, -3), scale: 0.1},
             first: {position: new THREE.Vector3(2.8, 0.3, 0.3), scale: 0.08},
-            second: {position: new THREE.Vector3(-3.2, 2.3, -0.8), scale: 0},
+            second: {position: new THREE.Vector3(-3.2, 2.18, -0.8), scale: 0},
             third: {
                 show: { position: new THREE.Vector3(-4.09, -2.02, 0.1), scale: 0},
                 hide: {position: new THREE.Vector3(-7.54, -1.01, 1.02), scale: 0.07},

@@ -48,6 +48,16 @@ export default class ProjectListSection extends BaseSection {
             opacity: globeData.timeline.second.opacity
         }));
 
+        enterTimeline
+            .to(this.camera.ortographicCamera.position, {
+                x: 0,
+                y: 2,
+                z: 5,
+                duration: 1,
+                ease: "power2.in",
+            }, "moveGlobes")
+
+
         const increment = (1 / this.globesList.length) / 5;
         this.globesList.forEach((globe: GlobeInterface, index: number) => {
             [globe.ballMesh, globe.glassMesh].forEach((mesh: THREE.Mesh) => {
@@ -59,7 +69,7 @@ export default class ProjectListSection extends BaseSection {
                         ease: "power2.inOut",
                         delay: index * increment,
                         duration: 1
-                    }, "same")
+                    }, "moveGlobes")
                     .to(mesh.scale, {
                         x: timelineData[index].scale,
                         y: timelineData[index].scale,
@@ -67,7 +77,15 @@ export default class ProjectListSection extends BaseSection {
                         duration: 1,
                         delay: index * increment,
                         ease: "power2.inOut",
-                    }, "same");
+                    }, "moveGlobes")
+                    .to(mesh.material, {
+                        opacity: 1,
+                        duration: 0.6,
+                        ease: "power2.out",
+                        onComplete: () => {
+                            mesh.visible = true;
+                        }
+                    }, "moveGlobes");
             });
 
             if (timelineData[index].small) {
@@ -239,11 +257,8 @@ export default class ProjectListSection extends BaseSection {
         });
     }
 
-    enter(enterAnimation: boolean = true): void {
-        if (enterAnimation)
-            this.enterTimeline.restart();
-        else
-            this.enterComplete();
+    enter(): void {
+        this.initEnterTimeline().restart();
 
         setTimeout(() => {
             this.show();
@@ -256,8 +271,10 @@ export default class ProjectListSection extends BaseSection {
         this.globesList.forEach((globe) => {
             Floating.stop(globe);
         });
-        this.exitTimeline.restart();
-        this.isEnter = false;
+        setTimeout(() => {
+            this.isEnter = false;
+            this.exitTimeline.restart();
+        }, 300);
     }
 
     enterComplete() {
