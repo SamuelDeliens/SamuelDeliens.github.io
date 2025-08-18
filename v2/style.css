@@ -764,38 +764,35 @@ html section.hidden, body section.hidden, .page section.hidden, .page-wrapper se
   border-radius: 0 0 var(--border-radius-md) var(--border-radius-md);
   width: 100%;
 }
-.project-details .nav-button.back {
+.project-details .project-navigation .nav-button {
+  transition: none;
+}
+.project-details .project-navigation .nav-button.back {
   top: 40%;
   left: 10%;
   transform: translateX(-50%);
 }
-.project-details .nav-button.next {
+.project-details .project-navigation .nav-button.next {
   left: auto;
   top: 40%;
   right: 10%;
   transform: translateX(50%);
 }
-.project-details.show .nav-button {
-  transform: translateX(0%);
+.project-details .project-navigation.show .nav-button.back {
+  animation: details-button-translate-right 0.5s ease-out forwards;
+  animation-delay: 1.2s;
 }
-.project-details.show .nav-button.back, .project-details.show .nav-button.next, .project-details.show .nav-button .glass-fade-element, .project-details.show .nav-button .glass-final-element {
-  animation-delay: 1s;
+.project-details .project-navigation.show .nav-button.next {
+  animation: details-button-translate-left 0.5s ease-out forwards;
+  animation-delay: 1.2s;
 }
-.project-details.show .nav-button.back {
-  animation: details-button-translate-right var(--transition-slow) forwards;
-  animation-delay: 1s;
+.project-details .project-navigation.show .nav-button .glass-fade-element {
+  animation: glass-fade-in 0.5s ease-out forwards;
+  animation-delay: 1.2s;
 }
-.project-details.show .nav-button.next {
-  animation: details-button-translate-left var(--transition-slow) forwards;
-  animation-delay: 1s;
-}
-.project-details.show .nav-button .glass-fade-element {
-  animation: glass-fade-in var(--transition-slow) forwards;
-  animation-delay: 1s;
-}
-.project-details.show .nav-button .glass-final-element {
-  animation: glass-fake-fade-in var(--transition-slow) forwards;
-  animation-delay: 1s;
+.project-details .project-navigation.show .nav-button .glass-final-element {
+  animation: glass-fake-fade-in 0.5s ease-out forwards;
+  animation-delay: 1.2s;
 }
 .project-details.show .project-details-group.show {
   display: flex;

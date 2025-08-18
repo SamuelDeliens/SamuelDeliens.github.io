@@ -8,6 +8,8 @@ import type {DetailedGlobeInterface} from "../World/Globes.ts";
 import type {GlobeFactoryInput, GlobeInterface} from "../World/Globes.ts";
 
 export default class ProjectDetailSection extends BaseSection {
+    private header: HTMLElement | null = document.querySelector(".page-header");
+    private navButton = this.sectionElement?.querySelector(".project-navigation");
     private nextProjectButton = document.querySelector(".nav-button.next");
     private backProjectButton = document.querySelector(".nav-button.back");
     private projectDetailsGroup: {[key: string]: Element} = {};
@@ -498,6 +500,8 @@ export default class ProjectDetailSection extends BaseSection {
 
         this.on("enterHalfComplete", () => {
             this.show();
+            this.header?.classList.remove("hide");
+            this.header?.classList.add("show");
         })
         this.on("enterComplete", () => {
             this.world.lerp.active = true;
@@ -512,9 +516,11 @@ export default class ProjectDetailSection extends BaseSection {
     show() {
         super.show();
         this.projectDetailsGroup[this.currentProjectId.toString()]?.classList.add("show");
+        this.navButton?.classList.add("show");
     }
     hide(duration: number = 0) {
         super.hide(duration);
+        this.navButton?.classList.remove("show");
         this.projectDetailsGroup[this.currentProjectId.toString()]?.classList.remove("show");
     }
 
@@ -535,6 +541,8 @@ export default class ProjectDetailSection extends BaseSection {
         this.world.lerp.active = false;
         this.sectionElement?.scrollTo(0, 0);
         this.hide();
+        this.header?.classList.add("hide");
+        this.header?.classList.remove("show");
         this.switchProjectTimeline[this.currentProjectId].restart();
         this.currentProjectId = this.projectDetailsGroup[this.currentProjectId + 1] ? this.currentProjectId + 1 : 1;
     }

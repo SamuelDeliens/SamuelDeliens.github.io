@@ -783,46 +783,48 @@ html, body, .page, .page-wrapper {
         }
     }
 
-    .nav-button {
-        &.back {
-            top: 40%;
-            left: 10%;
-            transform: translateX(-50%);
+    // Navigation par défaut (masquée)
+    .project-navigation {
+        .nav-button {
+            transition: none;
+
+            &.back {
+                top: 40%;
+                left: 10%;
+                transform: translateX(-50%);
+            }
+            &.next {
+                left: auto;
+                top: 40%;
+                right: 10%;
+                transform: translateX(50%);
+            }
         }
-        &.next {
-            left: auto;
-            top: 40%;
-            right: 10%;
-            transform: translateX(50%);
+
+        &.show {
+            .nav-button {
+                &.back {
+                    animation: details-button-translate-right 0.5s ease-out forwards;
+                    animation-delay: 1.2s;
+                }
+                &.next {
+                    animation: details-button-translate-left 0.5s ease-out forwards;
+                    animation-delay: 1.2s;
+                }
+
+                .glass-fade-element {
+                    animation: glass-fade-in 0.5s ease-out forwards;
+                    animation-delay: 1.2s;
+                }
+                .glass-final-element {
+                    animation: glass-fake-fade-in 0.5s ease-out forwards;
+                    animation-delay: 1.2s;
+                }
+            }
         }
     }
 
     &.show {
-        .nav-button {
-            transform: translateX(0%);
-
-            &.back, &.next, .glass-fade-element, .glass-final-element {
-                animation-delay: 1s;
-            }
-
-            &.back {
-                animation: details-button-translate-right var(--transition-slow) forwards;
-                animation-delay: 1s;
-            }
-            &.next {
-                animation: details-button-translate-left var(--transition-slow) forwards;
-                animation-delay: 1s;
-            }
-            .glass-fade-element {
-                animation: glass-fade-in var(--transition-slow) forwards;
-                animation-delay: 1s;
-            }
-            .glass-final-element {
-                animation: glass-fake-fade-in var(--transition-slow) forwards;
-                animation-delay: 1s;
-            }
-        }
-
         .project-details-group.show {
             display: flex;
 
@@ -895,12 +897,20 @@ html, body, .page, .page-wrapper {
 }
 
 @keyframes details-button-translate-right {
-    0% { transform: translateX(-50%); }
-    100% { transform: translateX(0%); }
+    0% {
+        transform: translateX(-50%);
+    }
+    100% {
+        transform: translateX(0%);
+    }
 }
 @keyframes details-button-translate-left {
-    0% { transform: translateX(50%); }
-    100% { transform: translateX(0%); }
+    0% {
+        transform: translateX(50%);
+    }
+    100% {
+        transform: translateX(0%);
+    }
 }
 @keyframes details-title-translate-down {
     0% { transform: translateY(-50%); }
