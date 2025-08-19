@@ -57,6 +57,9 @@ export default class Experience {
         this.time.on('tick', () => {
             this.update();
         });
+        this.sizes.on('resize', () => {
+            this.resize();
+        });
 
         this.camera.on('cameraSwitched', (camera: THREE.OrthographicCamera | THREE.PerspectiveCamera) => {
             this.composer.setCamera(camera);
@@ -65,6 +68,14 @@ export default class Experience {
         setTimeout(() => {
             this.sectionManager.goToSection(SectionType.HERO);
         }, 1100);
+    }
+
+    resize() {
+        this.camera.resize();
+        this.renderer.resize();
+        this.composer.resize();
+        this.debugCamera.resize();
+        this.world.resize();
     }
 
     update() {

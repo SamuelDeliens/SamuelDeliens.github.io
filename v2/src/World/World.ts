@@ -32,6 +32,9 @@ export default class World {
         this.background = new Background();
     }
 
+    resize() {
+    }
+
     update() {
         this.environment.update();
         this.globes.update();
