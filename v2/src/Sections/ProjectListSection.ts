@@ -194,7 +194,8 @@ export default class ProjectListSection extends BaseSection {
     setListeners() {
         this.openProjectButtons.forEach((button) => {
             const projectId = parseInt(button.getAttribute("data-project-id") || "-1");
-            const targetGlobeId = globesData.findIndex(globe => {
+            const projectName = button.getAttribute("data-project") || "Unknown Project";
+/*            const targetGlobeId = globesData.findIndex(globe => {
                 if (globe.small) {
                     if (globe.projectId == projectId) {
                         return true
@@ -202,10 +203,17 @@ export default class ProjectListSection extends BaseSection {
                 }
             })
             const targetGlobe = this.globesList[targetGlobeId];
-            this.targetGlobes.add(targetGlobe);
+            this.targetGlobes.add(targetGlobe);*/
+
+            const titleBackgroundWrapper = document.querySelector(`.projects-list .animated-bg-wrapper.${projectName}`);
+            if (!titleBackgroundWrapper) {
+                console.warn(`No title background wrapper found for project: ${projectName}`);
+                return;
+            }
 
             button.addEventListener("click", () => {
                 if (this.isEnter) {
+                    titleBackgroundWrapper?.classList.remove("hover");
                     this.emit("navigate", {
                         to: SectionType.PROJECT_DETAIL,
                         data: {
@@ -215,14 +223,16 @@ export default class ProjectListSection extends BaseSection {
                 }
             });
             button.addEventListener("mouseenter", () => {
-                this.currentGlobe = targetGlobe;
+/*                this.currentGlobe = targetGlobe;
                 if (this.isEnter) {
                     this.initHoverTimeline(targetGlobe).play();
+                }*/
+                if (this.isEnter) {
+                    titleBackgroundWrapper?.classList.add("hover");
                 }
             })
             button.addEventListener("mouseleave", () => {
-                console.log("mouseleave");
-                if (this.isEnter) {
+/*                if (this.isEnter) {
                     const currentGlobe = this.currentGlobe
 
                     const timeline = gsap.timeline({
@@ -252,6 +262,9 @@ export default class ProjectListSection extends BaseSection {
                         })
                     }
                     timeline.play();
+                }*/
+                if (this.isEnter) {
+                    titleBackgroundWrapper?.classList.remove("hover");
                 }
             })
         });
