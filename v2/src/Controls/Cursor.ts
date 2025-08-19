@@ -32,12 +32,15 @@ export default class Cursor {
 
     private init() {
         gsap.set(".cursor", {xPercent: -50, yPercent: -50});
+        this.initQuickTo();
+        this.setListeners();
+    }
+
+    private initQuickTo() {
         this.xTo = gsap.quickTo(".cursor", "x", {duration: 1, ease: "power3"});
         this.yTo = gsap.quickTo(".cursor", "y", {duration: 1, ease: "power3"});
         this.xScaleDotTo = gsap.quickTo(".cursor-dot", "scaleX", {duration: 0.3, ease: "power3"});
         this.yScaleDotTo = gsap.quickTo(".cursor-dot", "scaleY", {duration: 0.3, ease: "power3"});
-
-        this.setListeners();
     }
 
     private setListeners() {
@@ -72,7 +75,6 @@ export default class Cursor {
                 el.addEventListener('mouseleave', () => this.offTooltip());
             }
         });
-
     }
 
     onMouseMove(e: MouseEvent) {
@@ -120,5 +122,9 @@ export default class Cursor {
     private hide() {
         this.hidden = true;
         this.cursor.classList.add('hidden');
+    }
+
+    public resize() {
+        this.initQuickTo();
     }
 }

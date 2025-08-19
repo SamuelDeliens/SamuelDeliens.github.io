@@ -22,4 +22,10 @@ export default class Controls {
             this.cursor.onMouseMove(e);
         }, {passive:true});
     }
+
+    resize() {
+        if (this.cursor.resize) {
+            this.cursor.resize();
+        }
+    }
 }

@@ -42,10 +42,14 @@ export default class Renderer {
     resize() {
         this.renderer.setSize(this.sizes.width, this.sizes.height);
         this.renderer.setPixelRatio(this.sizes.pixelRatio);
+
+        this.renderer.setViewport(0, 0, this.sizes.width, this.sizes.height);
+
+        this.renderer.clear();
     }
 
     update() {
-        this.renderer.render(this.scene, this.camera.camera);
+        this.renderer.render(this.scene, this.camera.currentCamera);
     }
 
 }

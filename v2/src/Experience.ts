@@ -76,6 +76,7 @@ export default class Experience {
         this.composer.resize();
         this.debugCamera.resize();
         this.world.resize();
+        this.controls.resize();
     }
 
     update() {

@@ -166,11 +166,23 @@ export default class Camera extends EventEmitter {
             bottom: this.sizes.frustrumSize / -7,
         };
 
-        if (this.currentCamera instanceof THREE.OrthographicCamera) {
-            this.restoreOrthoParams();
+        this.ortographicCamera.left = this.originalOrthoParams.left;
+        this.ortographicCamera.right = this.originalOrthoParams.right;
+        this.ortographicCamera.top = this.originalOrthoParams.top;
+        this.ortographicCamera.bottom = this.originalOrthoParams.bottom;
+        this.ortographicCamera.updateProjectionMatrix();
+
+        this.perspectiveCamera.aspect = this.sizes.ratio;
+        this.perspectiveCamera.updateProjectionMatrix();
+
+        if (this.controls) {
+            this.controls.update();
         }
     }
 
     update() {
+        if (this.controls) {
+            this.controls.update();
+        }
     }
 }
