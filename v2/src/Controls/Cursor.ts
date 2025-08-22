@@ -16,6 +16,8 @@ export default class Cursor {
 
     private isTouch: boolean = ('ontouchstart' in window) || navigator.maxTouchPoints > 0;
 
+    private tooltipAddonClassList: Set<string> = new Set<string>();
+
     constructor() {
         if (this.isTouch && this.hideOnMobile) {
             document.getElementById('cursor')!.style.display = 'none';
@@ -70,8 +72,11 @@ export default class Cursor {
         const interactiveTooltipSelector = '.cursor-tooltip';
         document.querySelectorAll(interactiveTooltipSelector).forEach(el => {
             const content = el.querySelector(".data-tooltip")?.innerHTML;
+            const addonClassList = el.querySelector(".data-tooltip")
+                ?.getAttribute('data-addon-class')
+                ?.split(" ") || [];
             if (content) {
-                el.addEventListener('mouseenter', () => this.onTooltip(content));
+                el.addEventListener('mouseenter', () => this.onTooltip(content, addonClassList));
                 el.addEventListener('mouseleave', () => this.offTooltip());
             }
         });
@@ -105,10 +110,21 @@ export default class Cursor {
         this.yScaleDotTo(1);
     }
 
-    private onTooltip(content: string) {
+    private onTooltip(content: string, addonClassList: string[]) {
+        this.tooltipAddonClassList.forEach(className => {
+            if (!addonClassList.includes(className)) {
+                this.tooltip.classList.remove(className);
+                this.tooltipAddonClassList.delete(className);
+            }
+        });
         this.tooltipText.innerHTML = content;
         this.dot.classList.add('hidden');
         this.tooltip.classList.remove('hidden');
+        addonClassList.forEach(className => {
+            if (this.tooltipAddonClassList.has(className)) return;
+            this.tooltipAddonClassList.add(className);
+            this.tooltip.classList.add(className);
+        });
     }
     private offTooltip() {
         this.dot.classList.remove('hidden');

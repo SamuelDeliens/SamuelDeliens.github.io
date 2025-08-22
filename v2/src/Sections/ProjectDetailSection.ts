@@ -10,8 +10,8 @@ import type {GlobeFactoryInput, GlobeInterface} from "../World/Globes.ts";
 export default class ProjectDetailSection extends BaseSection {
     private header: HTMLElement | null = document.querySelector(".page-header");
     private navButton = this.sectionElement?.querySelector(".project-navigation");
-    private nextProjectButton = document.querySelector(".nav-button.next");
-    private backProjectButton = document.querySelector(".nav-button.back");
+    private nextProjectButton = document.querySelector(".next");
+    private backProjectButton = document.querySelector(".back");
     private projectDetailsGroup: {[key: string]: Element} = {};
 
     private detailedGlobes: { [key: number]: DetailedGlobeInterface};
@@ -152,7 +152,7 @@ export default class ProjectDetailSection extends BaseSection {
                         this.globes.speed = SHADER_SLOW_SPEED;
 
                         this.globes.moveObjectPreserveWorldTransform(this.detailedGlobes[projectId].glassMesh, this.globes.currentGroup);
-                        this.globes.moveObjectPreserveWorldTransform(targetGlobe.globe.ballMesh, this.globes.currentGroup);
+                        //this.globes.moveObjectPreserveWorldTransform(targetGlobe.globe.ballMesh, this.globes.currentGroup);
                         this.globes.moveObjectPreserveWorldTransform(targetGlobe.globe.glassMesh, this.globes.currentGroup);
                     }, 300);
                 }, undefined, "enterGlobe")
@@ -168,13 +168,6 @@ export default class ProjectDetailSection extends BaseSection {
                     y: this.enterTimelineComplete.globeMeshScale.y,
                     z: this.enterTimelineComplete.globeMeshScale.z,
                     duration: 1,
-                    ease: "power2.inOut",
-                }, "enterGlobe")
-                .to(targetGlobe.globe.glassMesh.scale, {
-                    x: 0.3,
-                    y: 0.3,
-                    z: 0.3,
-                    duration: 0.8,
                     ease: "power2.inOut",
                 }, "enterGlobe")
                 .to(targetGlobe.globe.glassMesh.position, {
@@ -202,11 +195,6 @@ export default class ProjectDetailSection extends BaseSection {
                     delay: 0.2,
                 }, "enterGlobe")
 
-            enterTimeline
-                .call(() => {
-                    this.emit("enterHalfComplete", projectId);
-                }, undefined, "positionGlass")
-
             this.enterTimeline[projectId] = enterTimeline;
         });
     }
@@ -220,7 +208,6 @@ export default class ProjectDetailSection extends BaseSection {
             });
 
             const currentDetailedGlobe = this.detailedGlobes[projectId];
-            const timelineData = globesData.map((globeData) => globeData.timeline.second);
 
             exitTimeline
                 .call(() => {
@@ -294,7 +281,7 @@ export default class ProjectDetailSection extends BaseSection {
             const switchTimeline = gsap.timeline({
                 paused: true,
                 onComplete: () => {
-                    this.emit("enterComplete", projectId);
+                    this.emit("switchComplete", projectId);
                 }
             });
 
@@ -314,7 +301,7 @@ export default class ProjectDetailSection extends BaseSection {
             switchTimeline
                 .call(() => {
                     this.globes.moveObjectPreserveWorldTransform(currentDetailedGlobe.glassMesh, this.world.scene);
-                    this.globes.moveObjectPreserveWorldTransform(currentDetailedGlobe.globe.ballMesh, this.world.scene);
+                    //this.globes.moveObjectPreserveWorldTransform(currentDetailedGlobe.globe.ballMesh, this.world.scene);
                     this.globes.moveObjectPreserveWorldTransform(currentDetailedGlobe.globe.glassMesh, this.world.scene);
 
                     const newGeo = nextDetailedGlobe.geometry;
@@ -498,12 +485,14 @@ export default class ProjectDetailSection extends BaseSection {
             })
         })
 
-        this.on("enterHalfComplete", () => {
+        this.on("enterComplete", () => {
+            this.show();
+            this.world.lerp.active = true;
+        })
+        this.on("switchComplete", () => {
             this.show();
             this.header?.classList.remove("hide");
             this.header?.classList.add("show");
-        })
-        this.on("enterComplete", () => {
             this.world.lerp.active = true;
         })
     }
@@ -534,7 +523,7 @@ export default class ProjectDetailSection extends BaseSection {
         this.world.lerp.active = false;
         this.sectionElement?.scrollTo(0, 0);
         this.hide();
-        this.exitTimeline[this.currentProjectId].pause(0).play();
+        this.exitTimeline[this.currentProjectId].restart();
         this.currentProjectId = -1;
     }
     switchProject() {

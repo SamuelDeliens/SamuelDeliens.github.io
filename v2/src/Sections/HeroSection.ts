@@ -11,6 +11,7 @@ import {SectionType} from "../SectionManager.ts";
 export default class HeroSection extends BaseSection {
     private homeButton: HTMLElement | null = document.querySelector(".nav-button.home");
     private workButton: HTMLElement | null = document.querySelector(".hero-work");
+    private contactButton: HTMLElement | null = document.querySelector(".hero-contact");
 
     protected enterTimeline: gsap.core.Timeline;
 
@@ -131,6 +132,12 @@ export default class HeroSection extends BaseSection {
             this.emit("navigate", {
                 to: SectionType.PROJECTS_LIST
             } as NavigationEvent)
+        });
+
+        this.contactButton?.addEventListener("click", () => {
+            this.emit("navigate", {
+                to: SectionType.CONTACT
+            } as NavigationEvent);
         });
 
         this.homeButton?.addEventListener("click", () => {

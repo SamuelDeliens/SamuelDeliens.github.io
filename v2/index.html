@@ -28,13 +28,13 @@
 <!-- Main Content -->
 <main class="page">
     <header class="page-header">
-        <button class="nav-button home" aria-label="Go back to home page">
+        <button class="round-button nav-button home" aria-label="Go back to home page">
 <!--
             <div class="animated-bg-wrapper"><div class="animated-bg"></div></div>
 -->
             <glass-box class="glass-final-element interactive cursor-tooltip" corner-radius="100px">
                 <div class="data-tooltip">Home</div>
-                <div class="nav-button-content nav-home">
+                <div class="button-content nav-button-content nav-home">
                     <svg viewBox="0 0 556 556" xmlns="http://www.w3.org/2000/svg">
                         <path id="Path" d="M 269.900024 1.299988 C 267.900024 2.099976 264.700012 3.599976 262.900024 4.799988 C 261 6 204.799988 61.700012 137.899994 128.700012 C 3.899994 262.799988 12.5 253.400024 12.5 266.299988 C 12.5 276.299988 11.399994 276 49.600006 276 L 82 276 L 82.200012 405.200012 C 82.5 525.5 82.600006 534.799988 84.200012 538.299988 C 87 544.5 91.5 549.400024 97.200012 552.599976 L 102.5 555.5 L 151.5 555.799988 C 205.200012 556.099976 206.299988 556 212.799988 550.400024 C 220.700012 543.700012 220.400024 545.900024 221 487.5 L 221.5 435.5 L 223.799988 431 C 227.099976 424.700012 231.400024 420.5 237.400024 417.799988 C 242.400024 415.5 243 415.5 278 415.5 C 312.900024 415.5 313.599976 415.5 318.5 417.799988 C 324.799988 420.700012 328.5 424.200012 331.799988 430.5 L 334.5 435.5 L 335 487.5 C 335.599976 545.900024 335.299988 543.700012 343.200012 550.400024 C 349.700012 556 350.799988 556.099976 404.5 555.799988 C 453.200012 555.5 453.5 555.5 457.700012 553.200012 C 463.400024 550.200012 468.200012 545.200012 471.099976 539.400024 L 473.5 534.5 L 473.799988 405.200012 L 474 276 L 506.400024 276 C 544.700012 276 543.5 276.299988 543.5 266.299988 C 543.400024 253.299988 552.099976 262.900024 417.700012 128.299988 C 329.299988 39.799988 294.299988 5.400024 290.700012 3.400024 C 284.799988 0.200012 275.400024 -0.700012 269.900024 1.299988 Z"/>
                     </svg>
@@ -45,7 +45,7 @@
 
     <div class="page-wrapper">
         <!-- Hero Section -->
-        <section class="hero" id="hero">
+        <section class="hero hidden" id="hero">
             <header class="hero-title">
                 <div class="hero-title-wrapper">
                     <span class="hero-title-first hero-title-1">S</span>
@@ -114,6 +114,76 @@
             </div>
         </section>
 
+        <!-- Contact Section -->
+        <section class="contact hidden" id="contact">
+            <div class="images">
+                <img class="contact-img" src="./assets/img/contact.jpg" alt="Contact Samuel Deliens" loading="lazy" />
+                <div class="contact-link">
+                    <div class="glass-wrapper-translate">
+                        <div class="glass-animation-wrapper">
+                            <glass-box class="linkedin interactive" hover-effect>
+                                <div>LinkedIn</div>
+                            </glass-box>
+                        </div>
+                    </div>
+                    <div class="glass-wrapper-translate">
+                        <div class="glass-animation-wrapper">
+                            <glass-box class="instagram interactive" hover-effect>
+                                <div>Instagram</div>
+                            </glass-box>
+                        </div>
+                    </div>
+                    <div class="glass-wrapper-translate">
+                        <div class="glass-animation-wrapper">
+                            <glass-box class="resume interactive cursor-tooltip" hover-effect>
+                                <div class="data-tooltip" data-addon-class="transparent image">
+                                    <img src="./assets/img/resume-small.jpg" alt="Resume Preview" loading="lazy" />
+                                </div>
+                                <div>Resume</div>
+                            </glass-box>
+                        </div>
+                    </div>
+                </div>
+            </div>
+            <article class="contact-content">
+                <header class="contact-title glass-wrapper-fade">
+                    <glass-box class="glass-fade-element">
+                        <h1>Contact Me</h1>
+                    </glass-box>
+                    <glass-box class="glass-final-element"
+                               extra-blur="32px"
+                               softness="16px" >
+                        <h1>Contact Me</h1>
+                    </glass-box>
+                </header>
+                <main>
+                    <p class="contact-desc">Hey, I'm Samuel ! ✌️</p>
+                    <p class="contact-desc">
+                        I'm a web development engineer based in Paris and a recent graduate from EPITA. Throughout my journey, I’ve built strong skills in computer science 💻, and I love putting them into practice through exciting projects.
+                    </p>
+                    <p class="contact-desc">
+                        Creativity ✏️ is at the heart of who I am️ — I enjoy bringing ideas to life and turning inspiration into concrete achievements.
+                    </p>
+                    <p class="contact-desc">
+                        Beyond my professional path, I’m passionate about challenges and new experiences.🎒 Traveling, going out, discovering new things, or capturing moments through photography 📷 all fuel my creativity and broaden my perspective.
+                    </p>
+                </main>
+                <footer>
+                    <div class="round-button-wrapper">
+                        <button class="round-button mail glass-animation-wrapper" aria-label="Email Me">
+                            <glass-box class="glass-final-element interactive cursor-tooltip" corner-radius="100px">
+                                <div class="data-tooltip">Mail Me</div>
+                                <div class="button-content">
+                                    <svg viewBox="0 0 556 556" xmlns="http://www.w3.org/2000/svg">
+                                        <path id="Envelope" d="M 302.373566 298.397461 C 295.910553 304.864166 287.142578 308.497498 277.999969 308.497498 C 268.857361 308.497498 260.089355 304.864166 253.62648 298.397461 L 28.662018 73.437225 C 39.300941 66.287109 51.832893 62.477234 64.651192 62.496185 L 491.348785 62.496185 C 504.167206 62.47644 516.699402 66.286438 527.33783 73.437225 Z M 6.126845 456.331512 C 2.082071 447.736206 -0.010227 438.352112 3.3e-05 428.852661 L 3.3e-05 127.147278 C -0.010227 117.647827 2.082071 108.263794 6.126845 99.668488 L 184.458359 277.999969 Z M 208.844727 302.382141 L 232.29155 325.826721 C 244.413254 337.951172 260.855408 344.762878 277.999969 344.762878 C 295.144531 344.762878 311.58667 337.951172 323.708252 325.826721 L 347.15509 302.382141 L 527.33783 482.562622 C 516.699402 489.713562 504.167206 493.523407 491.348785 493.503815 L 64.651192 493.503815 C 51.832893 493.522644 39.300941 489.712769 28.662018 482.562622 Z M 549.8797 99.668488 C 553.921204 108.264709 556.01123 117.648346 555.999939 127.147278 L 555.999939 428.852661 C 556.01123 438.351593 553.921204 447.735291 549.8797 456.331512 L 371.550262 277.999969 Z"/>                        </svg>
+                                </div>
+                            </glass-box>
+                        </button>
+                    </div>
+                </footer>
+            </article>
+        </section>
+
         <!-- Projects List Section -->
         <section class="projects-list hidden" id="projects-list">
             <header class="title glass-wrapper-fade">
@@ -141,7 +211,7 @@
                     <div class="project-wrapper">
                         <div class="left-wrapper">
                             <glass-box class="interactive" corner-radius="100px">
-                                <div class="nav-button-content nav-arrow">
+                                <div class="button-content nav-arrow">
                                     <svg viewBox="0 0 852 852" xmlns="http://www.w3.org/2000/svg" aria-hidden="true">
                                         <path d="M 1.006269 429.214478 C 0.687578 467.562744 37.722969 493.436859 47.076675 499.882019 C 145.654129 557.480347 418.630646 719.178406 548.934082 794.805664 C 581.707825 810.121948 617.275757 814.818298 641.132568 793.911621 C 670.734558 768.514526 666.82019 747.983215 670.16217 717.14386 C 669.11908 524.984009 669.484497 332.821655 669.845398 140.240601 C 669.84314 129.244751 670.179199 88.369751 641.562195 63.504333 C 621.066284 45.695374 580.352844 43.214478 538.567444 67.778015 C 475.020874 104.852051 174.504974 282.139771 42.017036 361.562927 C 20.241558 375.636261 1.343719 388.61554 1.006269 429.214478 Z"/>
                                     </svg>
@@ -235,9 +305,9 @@
         <section class="project-details hidden" id="project-details">
             <!-- Navigation -->
             <nav class="project-navigation">
-                <button class="nav-button back glass-wrapper-fade" aria-label="Go back to projects list">
+                <button class="round-button back glass-wrapper-fade" aria-label="Go back to projects list">
                     <glass-box class="glass-fade-element" corner-radius="100px">
-                        <div class="nav-button-content nav-arrow">
+                        <div class="button-content nav-arrow">
                             <svg viewBox="0 0 852 852" xmlns="http://www.w3.org/2000/svg" aria-hidden="true">
                                 <path d="M 1.006269 429.214478 C 0.687578 467.562744 37.722969 493.436859 47.076675 499.882019 C 145.654129 557.480347 418.630646 719.178406 548.934082 794.805664 C 581.707825 810.121948 617.275757 814.818298 641.132568 793.911621 C 670.734558 768.514526 666.82019 747.983215 670.16217 717.14386 C 669.11908 524.984009 669.484497 332.821655 669.845398 140.240601 C 669.84314 129.244751 670.179199 88.369751 641.562195 63.504333 C 621.066284 45.695374 580.352844 43.214478 538.567444 67.778015 C 475.020874 104.852051 174.504974 282.139771 42.017036 361.562927 C 20.241558 375.636261 1.343719 388.61554 1.006269 429.214478 Z"/>
                             </svg>
@@ -245,7 +315,7 @@
                     </glass-box>
                     <glass-box class="glass-final-element interactive cursor-tooltip" corner-radius="100px">
                         <div class="data-tooltip">Back</div>
-                        <div class="nav-button-content nav-arrow">
+                        <div class="button-content nav-arrow">
                             <svg viewBox="0 0 852 852" xmlns="http://www.w3.org/2000/svg" aria-hidden="true">
                                 <path d="M 1.006269 429.214478 C 0.687578 467.562744 37.722969 493.436859 47.076675 499.882019 C 145.654129 557.480347 418.630646 719.178406 548.934082 794.805664 C 581.707825 810.121948 617.275757 814.818298 641.132568 793.911621 C 670.734558 768.514526 666.82019 747.983215 670.16217 717.14386 C 669.11908 524.984009 669.484497 332.821655 669.845398 140.240601 C 669.84314 129.244751 670.179199 88.369751 641.562195 63.504333 C 621.066284 45.695374 580.352844 43.214478 538.567444 67.778015 C 475.020874 104.852051 174.504974 282.139771 42.017036 361.562927 C 20.241558 375.636261 1.343719 388.61554 1.006269 429.214478 Z"/>
                             </svg>
@@ -253,9 +323,9 @@
                     </glass-box>
                 </button>
 
-                <button class="nav-button next glass-wrapper-fade" aria-label="Next project">
+                <button class="round-button next glass-wrapper-fade" aria-label="Next project">
                     <glass-box class="glass-fade-element" corner-radius="100px">
-                        <div class="nav-button-content nav-arrow">
+                        <div class="button-content nav-arrow">
                             <svg viewBox="0 0 852 852" xmlns="http://www.w3.org/2000/svg" aria-hidden="true">
                                 <path d="M 1.006269 429.214478 C 0.687578 467.562744 37.722969 493.436859 47.076675 499.882019 C 145.654129 557.480347 418.630646 719.178406 548.934082 794.805664 C 581.707825 810.121948 617.275757 814.818298 641.132568 793.911621 C 670.734558 768.514526 666.82019 747.983215 670.16217 717.14386 C 669.11908 524.984009 669.484497 332.821655 669.845398 140.240601 C 669.84314 129.244751 670.179199 88.369751 641.562195 63.504333 C 621.066284 45.695374 580.352844 43.214478 538.567444 67.778015 C 475.020874 104.852051 174.504974 282.139771 42.017036 361.562927 C 20.241558 375.636261 1.343719 388.61554 1.006269 429.214478 Z"/>
                             </svg>
@@ -263,7 +333,7 @@
                     </glass-box>
                     <glass-box class="glass-final-element interactive cursor-tooltip" corner-radius="100px">
                         <div class="data-tooltip">Next</div>
-                        <div class="nav-button-content nav-arrow">
+                        <div class="button-content nav-arrow">
                             <svg viewBox="0 0 852 852" xmlns="http://www.w3.org/2000/svg" aria-hidden="true">
                                 <path d="M 1.006269 429.214478 C 0.687578 467.562744 37.722969 493.436859 47.076675 499.882019 C 145.654129 557.480347 418.630646 719.178406 548.934082 794.805664 C 581.707825 810.121948 617.275757 814.818298 641.132568 793.911621 C 670.734558 768.514526 666.82019 747.983215 670.16217 717.14386 C 669.11908 524.984009 669.484497 332.821655 669.845398 140.240601 C 669.84314 129.244751 670.179199 88.369751 641.562195 63.504333 C 621.066284 45.695374 580.352844 43.214478 538.567444 67.778015 C 475.020874 104.852051 174.504974 282.139771 42.017036 361.562927 C 20.241558 375.636261 1.343719 388.61554 1.006269 429.214478 Z"/>
                             </svg>

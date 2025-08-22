@@ -76,7 +76,7 @@ const DotScreenShader = {
 			
 			vec2 uvrandom = vUv;
 			uvrandom.y *= rand(vec2(uvrandom.y, 0.4));
-			color.rgb += rand(uvrandom) * 0.15;
+			color.rgb += rand(uvrandom) * 0.11;
 
             gl_FragColor = color;
 		}`

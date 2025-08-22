@@ -20,7 +20,7 @@ export default class World {
         targetX: 0,
         currentY: 0,
         targetY: 0,
-        ease: 0.1
+        ease: 0.04
     }
 
     constructor() {
@@ -52,8 +52,8 @@ export default class World {
                 this.lerp.ease
             );
 
-            this.globes.currentGroup.rotation.y = this.lerp.currentX*0.1;
-            this.globes.currentGroup.rotation.x = this.lerp.currentY*0.1;
+            this.globes.currentGroup.position.y = this.lerp.currentX*0.1;
+            this.globes.currentGroup.position.x = this.lerp.currentY*0.1;
         }
         this.globes.currentGroup.visible = true;
     }

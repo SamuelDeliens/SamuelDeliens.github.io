@@ -26,30 +26,14 @@
   color: var(--text-color);
 }
 
-@property --x1 {
-  syntax: "<percentage>";
-  inherits: false;
-  initial-value: 38%;
-}
-@property --y1 {
-  syntax: "<percentage>";
-  inherits: false;
-  initial-value: 52%;
-}
-@property --x2 {
-  syntax: "<percentage>";
-  inherits: false;
-  initial-value: 62%;
-}
-@property --y2 {
-  syntax: "<percentage>";
-  inherits: false;
-  initial-value: 48%;
-}
 * {
   margin: 0;
   padding: 0;
   box-sizing: border-box;
+}
+
+html {
+  background-color: #1a1e21;
 }
 
 html, body, .page, .page-wrapper {
@@ -96,7 +80,7 @@ html section.hidden, body section.hidden, .page section.hidden, .page-wrapper se
   transition: visibility 0.8s ease;
 }
 
-.nav-button {
+.round-button {
   position: absolute;
   overflow: hidden;
   top: 0;
@@ -106,34 +90,17 @@ html section.hidden, body section.hidden, .page section.hidden, .page-wrapper se
   border: none;
   background: none;
 }
-.nav-button .nav-button-content {
+.round-button .button-content {
   display: flex;
   align-items: center;
   justify-content: center;
 }
-.nav-button .nav-button-content svg {
+.round-button .button-content svg {
   fill: var(--primary-color);
   width: 4rem;
 }
-.nav-button .nav-arrow {
-  width: 7rem;
-  height: 7rem;
-}
-.nav-button .nav-arrow svg {
-  transform: rotate(30deg);
-  transition: transform 0.4s cubic-bezier(0.175, 0.885, 0.32, 1.275);
-}
-.nav-button.next svg {
-  transform: rotate(90deg);
-}
-.nav-button:hover {
+.round-button:hover {
   transform: scale(1.05);
-}
-.nav-button:hover svg {
-  transform: rotate(0deg);
-}
-.nav-button.next:hover svg {
-  transform: rotate(60deg);
 }
 
 .interactive {
@@ -166,7 +133,7 @@ html section.hidden, body section.hidden, .page section.hidden, .page-wrapper se
   font-weight: bold;
 }
 
-.page-header .nav-button.home {
+.page-header .round-button.home {
   width: 10rem;
   height: 10rem;
   top: -3rem;
@@ -200,26 +167,26 @@ html section.hidden, body section.hidden, .page section.hidden, .page-wrapper se
               }
           }*/
 }
-.page-header .nav-button.home .nav-home {
+.page-header .round-button.home .nav-home {
   width: 10rem;
   height: 10rem;
 }
-.page-header .nav-button.home svg {
+.page-header .round-button.home svg {
   width: 2rem;
   transform: translate(0.5rem, 0.5rem);
   transition: transform 0.4s cubic-bezier(0.175, 0.885, 0.32, 1.275);
 }
-.page-header .nav-button.home:hover {
+.page-header .round-button.home:hover {
   transform: scale(1.06);
 }
-.page-header .nav-button.home:hover svg {
+.page-header .round-button.home:hover svg {
   transform: translate(1.2rem, 1.2rem);
 }
 .page-header.show .home {
   transition: transform 0.6s cubic-bezier(0.175, 0.885, 0.32, 1.275);
   transform: translate(0, 0);
 }
-.page-header.hide .nav-button.home {
+.page-header.hide .round-button.home {
   transition: transform 1s ease;
   transform: translate(-10rem, -10rem);
 }
@@ -340,6 +307,193 @@ html section.hidden, body section.hidden, .page section.hidden, .page-wrapper se
 .hero.hide .glass-final-element {
   animation: glass-fake-fade-out 0s ease forwards;
   animation-delay: 0.1s;
+}
+
+.contact {
+  width: 100%;
+  height: 100%;
+  padding: 10% 10% 10% 8%;
+  display: flex;
+  flex-direction: row;
+  background-color: rgba(0, 0, 0, 0.1);
+}
+.contact .images {
+  height: 100%;
+  width: 50%;
+  display: flex;
+  flex-direction: column;
+  padding: 0 5rem;
+  gap: 1rem;
+}
+.contact .images img {
+  width: 100%;
+  height: calc(100% - 1rem - 3rem);
+  object-fit: cover;
+  opacity: 0;
+  transform: translateY(-25%);
+  transition: all 0.5s ease-out;
+}
+.contact .images .contact-link {
+  display: flex;
+  justify-content: space-evenly;
+}
+.contact .images .contact-link .glass-wrapper {
+  overflow: hidden;
+}
+.contact .images .contact-link .glass-animation-wrapper {
+  transform: translateY(-100%);
+  transition: all 0.5s ease-out;
+  transition-delay: 0.5s;
+}
+.contact .images .contact-link .glass-wrapper-translate:nth-child(2) .glass-animation-wrapper {
+  transition-delay: 0.4s;
+}
+.contact .images .contact-link .resume .data-tooltip {
+  display: none;
+}
+.contact .images .contact-link glass-box {
+  width: 100%;
+}
+.contact .images .contact-link glass-box div {
+  width: 100%;
+  display: flex;
+  justify-content: center;
+  padding: 0.7rem var(--spacing-sm);
+}
+.contact .contact-content {
+  width: 50%;
+  display: flex;
+  flex-direction: column;
+  gap: 2rem;
+  position: relative;
+  transform: translateY(10%);
+  transition: transform 0.5s ease-out;
+}
+.contact .contact-content .contact-title {
+  width: 100%;
+}
+.contact .contact-content .contact-title glass-box {
+  width: 100%;
+}
+.contact .contact-content .contact-title glass-box h1 {
+  width: 100%;
+  display: flex;
+  justify-content: center;
+  padding: 0.7rem var(--spacing-sm);
+}
+.contact .contact-content main {
+  padding: 0 1rem;
+}
+.contact .contact-content main .contact-desc:first-child {
+  text-align: center;
+  margin-bottom: 1rem;
+}
+.contact .contact-content main .contact-desc {
+  text-align: justify;
+  color: var(--text-color);
+  line-height: 1.3rem;
+  font-size: 1.1rem;
+  margin-bottom: 0.7rem;
+}
+.contact .contact-content footer {
+  height: 9rem;
+  width: 100%;
+  display: flex;
+  justify-content: center;
+  align-items: center;
+  overflow: hidden;
+  box-sizing: border-box;
+}
+.contact .contact-content footer .round-button-wrapper {
+  transform: translateY(100%);
+  transition: transform 0.5s ease-out;
+  transition-delay: 0.5s;
+}
+.contact .contact-content footer .round-button-wrapper:hover {
+  transform: translateY(0);
+}
+.contact .contact-content footer .round-button {
+  transition: transform 0.2s ease-out;
+}
+.contact .contact-content footer .round-button.mail {
+  width: 7rem;
+  height: 7rem;
+  position: relative;
+}
+.contact .contact-content footer .round-button.mail .button-content {
+  width: 7rem;
+  height: 7rem;
+}
+.contact .contact-content footer .round-button.mail svg {
+  width: 2.5rem;
+  height: 2.5rem;
+}
+.contact .contact-content footer .round-button:hover {
+  transform: scale(1.1);
+}
+.contact .contact-content footer .round-button.next svg {
+  transform: rotate(90deg);
+}
+.contact .contact-content footer .round-button.next:hover svg {
+  transform: rotate(60deg);
+}
+.contact .contact-content footer button {
+  position: absolute;
+  overflow: hidden;
+  top: 0;
+  left: 0;
+  z-index: 10;
+  transition: all var(--transition-normal);
+  border: none;
+  background: none;
+}
+.contact .contact-content .glass-fade-element,
+.contact .contact-content .glass-final-element {
+  animation-delay: 0.2s;
+}
+.contact.show .images .contact-img {
+  opacity: 1;
+  transform: translateY(0);
+}
+.contact.show .images .contact-link .glass-wrapper-translate .glass-animation-wrapper {
+  transform: translateY(0);
+}
+.contact.show .contact-content {
+  transform: translateY(0%);
+}
+.contact.show .contact-content .glass-fade-element {
+  animation: glass-fade-in var(--transition-slow) forwards;
+}
+.contact.show .contact-content .glass-final-element {
+  animation: glass-fake-fade-in var(--transition-slow) forwards;
+}
+.contact.show .contact-content .round-button-wrapper {
+  transform: translateY(0);
+}
+.contact .hide .images img {
+  animation-delay: 0.3s;
+}
+.contact .hide .images .contact-link .glass-animation-wrapper {
+  transition-delay: 0s;
+}
+.contact .hide .images .contact-link .glass-wrapper-translate:nth-child(2) .glass-animation-wrapper {
+  transition-delay: 0.2s;
+}
+.contact .hide .contact-content {
+  transition-delay: 0.3s;
+}
+.contact .hide .contact-content .glass-fade-element,
+.contact .hide .contact-content .glass-final-element {
+  animation-delay: 0s;
+}
+.contact .hide .contact-content .glass-fade-element {
+  animation: glass-fade-out var(--transition-normal) forwards;
+}
+.contact .hide .contact-content .glass-final-element {
+  animation: glass-fake-fade-out var(--transition-normal) forwards;
+}
+.contact .hide .contact-content footer .round-button-wrapper {
+  transition-delay: 0s;
 }
 
 .projects-list {
@@ -524,7 +678,7 @@ html section.hidden, body section.hidden, .page section.hidden, .page-wrapper se
 .projects-list .project-wrapper::after {
   content: "";
   position: absolute;
-  bottom: 0px;
+  bottom: 0;
   left: 0;
   width: 0;
   height: 1px;
@@ -872,36 +1026,53 @@ html section.hidden, body section.hidden, .page section.hidden, .page-wrapper se
   border-radius: 0 0 var(--border-radius-md) var(--border-radius-md);
   width: 100%;
 }
-.project-details .nav-button.back {
+.project-details .round-button.back .button-content, .project-details .round-button.next .button-content {
+  width: 7rem;
+  height: 7rem;
+}
+.project-details .round-button.back svg, .project-details .round-button.next svg {
+  transform: rotate(30deg);
+  transition: transform 0.4s cubic-bezier(0.175, 0.885, 0.32, 1.275);
+}
+.project-details .round-button.back {
   top: 40%;
   left: 10%;
   transform: translateX(-50%);
 }
-.project-details .nav-button.next {
+.project-details .round-button.next {
   left: auto;
   top: 40%;
   right: 10%;
   transform: translateX(50%);
 }
-.project-details.show .nav-button {
+.project-details .round-button:hover svg {
+  transform: rotate(0deg);
+}
+.project-details .round-button.next svg {
+  transform: rotate(90deg);
+}
+.project-details .round-button.next:hover svg {
+  transform: rotate(60deg);
+}
+.project-details.show .round-button {
   transform: translateX(0%);
 }
-.project-details.show .nav-button.back, .project-details.show .nav-button.next, .project-details.show .nav-button .glass-fade-element, .project-details.show .nav-button .glass-final-element {
+.project-details.show .round-button.back, .project-details.show .round-button.next, .project-details.show .round-button .glass-fade-element, .project-details.show .round-button .glass-final-element {
   animation-delay: 1s;
 }
-.project-details.show .nav-button.back {
+.project-details.show .round-button.back {
   animation: details-button-translate-right var(--transition-slow) forwards;
   animation-delay: 1s;
 }
-.project-details.show .nav-button.next {
+.project-details.show .round-button.next {
   animation: details-button-translate-left var(--transition-slow) forwards;
   animation-delay: 1s;
 }
-.project-details.show .nav-button .glass-fade-element {
+.project-details.show .round-button .glass-fade-element {
   animation: glass-fade-in var(--transition-slow) forwards;
   animation-delay: 1s;
 }
-.project-details.show .nav-button .glass-final-element {
+.project-details.show .round-button .glass-final-element {
   animation: glass-fake-fade-in var(--transition-slow) forwards;
   animation-delay: 1s;
 }

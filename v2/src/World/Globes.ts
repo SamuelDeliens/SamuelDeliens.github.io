@@ -9,6 +9,7 @@ import glassV from "../Shaders/glassV.glsl?raw";
 
 export const SHADER_DEFAULT_SPEED = 0.0005;
 export const SHADER_SLOW_SPEED = 0.0001;
+export const SHADER_MEDIUM_SPEED = 0.0001;
 
 export interface GlobeInterface {
     ballMesh: THREE.Mesh;

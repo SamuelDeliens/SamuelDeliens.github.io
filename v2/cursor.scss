@@ -45,6 +45,23 @@
     transition: opacity 120ms ease-out;
     opacity: 1;
 
+    &.transparent {
+        background-color: transparent;
+        color: #fff;
+        box-shadow: none;
+    }
+    &.image {
+      img {
+        width: 5rem;
+        aspect-ratio: 21/29.7;
+        border-radius: 0.2rem;
+        margin-right: 0.5rem;
+        box-shadow: 0 2px 10px rgba(0, 0, 0, 0.1);
+        padding: 0.2rem;
+        background-color: #fff;
+      }
+    }
+
     &.hidden {
       opacity: 0;
     }

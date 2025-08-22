@@ -2,12 +2,14 @@ import type BaseSection from "./Sections/BaseSection.ts";
 import HeroSection from "./Sections/HeroSection.ts";
 import ProjectListSection from "./Sections/ProjectListSection.ts";
 import ProjectDetailSection from "./Sections/ProjectDetailSection.ts";
+import ContactSection from "./Sections/ContactSection.ts";
 
 export const SectionType = {
     VOID: -1,
     HERO: 0,
-    PROJECTS_LIST: 1,
-    PROJECT_DETAIL: 2
+    CONTACT: 1,
+    PROJECTS_LIST: 2,
+    PROJECT_DETAIL: 3,
 }
 export type SectionType = typeof SectionType[keyof typeof SectionType];
 
@@ -33,6 +35,7 @@ export default class SectionManager {
 
     init() {
         this.sections.set(SectionType.HERO, new HeroSection());
+        this.sections.set(SectionType.CONTACT, new ContactSection());
         this.sections.set(SectionType.PROJECTS_LIST, new ProjectListSection());
         this.sections.set(SectionType.PROJECT_DETAIL, new ProjectDetailSection());
 
