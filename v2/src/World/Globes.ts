@@ -495,6 +495,7 @@ export default class Globes {
     private createBall(globeData: GlobeFactoryInput, radius = 1.5, segments = 8): [THREE.Mesh, THREE.ShaderMaterial] {
         const ballMat = new THREE.ShaderMaterial({
             extensions: {
+                // @ts-ignore
                 derivatives: `#extension 
                 GL_OES_standard_derivatives: enable`,
             },
@@ -525,6 +526,7 @@ export default class Globes {
     private createGlass(globeData: GlobeFactoryInput, radius = 2, segments = 64): [THREE.Mesh, THREE.ShaderMaterial] {
         const glassMat = new THREE.ShaderMaterial({
             extensions: {
+                // @ts-ignore
                 derivatives: `#extension 
                 GL_OES_standard_derivatives: enable`,
             },

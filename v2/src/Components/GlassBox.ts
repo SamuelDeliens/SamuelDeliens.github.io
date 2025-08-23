@@ -205,6 +205,7 @@ export default class GlassBox extends HTMLElement {
         this.updateAllAttributes();
     }
 
+    // @ts-ignore
     attributeChangedCallback(name: string, oldValue: string, newValue: string) {
         this.updateStyleVariable(name, newValue);
     }
