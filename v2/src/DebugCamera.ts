@@ -45,7 +45,7 @@ export default class DebugCamera {
             1000
         );
 
-        this.debugCamera.position.set(15, 10, 15);
+        this.debugCamera.position.set(0, 5, -5);
         this.debugCamera.lookAt(0, 0, 0);
 
         this.scene.add(this.debugCamera);

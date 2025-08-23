@@ -25,7 +25,7 @@ export default class Experience {
 
     controls!: Controls;
     sectionManager!: SectionManager;
-    debugCamera!: DebugCamera;
+    //debugCamera!: DebugCamera;
 
     constructor(canvas?: HTMLCanvasElement) {
         if (Experience._instance) {
@@ -52,7 +52,7 @@ export default class Experience {
         this.controls = new Controls();
         this.sectionManager = new SectionManager();
 
-        this.debugCamera = new DebugCamera();
+        //this.debugCamera = new DebugCamera();
 
         this.time.on('tick', () => {
             this.update();
@@ -74,7 +74,7 @@ export default class Experience {
         this.camera.resize();
         this.renderer.resize();
         this.composer.resize();
-        this.debugCamera.resize();
+        //this.debugCamera.resize();
         this.world.resize();
         this.controls.resize();
     }
@@ -83,9 +83,9 @@ export default class Experience {
         this.camera.update();
         this.world.update();
 
-        this.debugCamera.update();
+        //this.debugCamera.update();
         this.composer.update();
-        this.debugCamera.render();
+        //this.debugCamera.render();
     }
 
 }
