@@ -66,8 +66,8 @@ export default class Experience {
         });
 
         setTimeout(() => {
-            this.sectionManager.goToSection(SectionType.HERO);
-        }, 1100);
+            this.sectionManager.goToSection(SectionType.SPLASH);
+        }, 500);
     }
 
     resize() {

@@ -3,6 +3,7 @@ import HeroSection from "./Sections/HeroSection.ts";
 import ProjectListSection from "./Sections/ProjectListSection.ts";
 import ProjectDetailSection from "./Sections/ProjectDetailSection.ts";
 import ContactSection from "./Sections/ContactSection.ts";
+import SplashSection from "./Sections/SplashSection.ts";
 
 export const SectionType = {
     VOID: -2,
@@ -35,6 +36,7 @@ export default class SectionManager {
     }
 
     init() {
+        this.sections.set(SectionType.SPLASH, new SplashSection());
         this.sections.set(SectionType.HERO, new HeroSection());
         this.sections.set(SectionType.CONTACT, new ContactSection());
         this.sections.set(SectionType.PROJECTS_LIST, new ProjectListSection());

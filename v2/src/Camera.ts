@@ -43,6 +43,7 @@ export default class Camera extends EventEmitter {
         };
 
         this.currentCamera = this.ortographicCamera;
+        this.switchPerspectiveCamera(); // Start with perspective camera but need to copy fov
         //this.setOrbitControls();
     }
 
@@ -73,7 +74,8 @@ export default class Camera extends EventEmitter {
             100
         );
 
-        this.perspectiveCamera.position.set(0, 0, 3);
+        this.perspectiveCamera.position.set(0, 2, 5);
+        this.perspectiveCamera.lookAt(0, 0, 0);
     }
 
     setOrbitControls() {

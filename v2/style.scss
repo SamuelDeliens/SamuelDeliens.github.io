@@ -235,6 +235,52 @@ html, body, .page, .page-wrapper {
 }
 
 // ===== SECTIONS =====
+.splash {
+    width: 100%;
+    height: 100%;
+    display: flex;
+    flex-direction: row;
+    align-items: center;
+    justify-content: center;
+    font-size: 3rem;
+    font-weight: 1000;
+    font-family: var(--font-family-bold);
+
+    span {
+        opacity: 0;
+        transform: translateY(-100%);
+        transition: transform 0.5s cubic-bezier(.47,1.44,.41,.8), opacity 0.5s cubic-bezier(.47,1.64,.41,.8);
+    }
+
+    &.show {
+
+        span {
+            transform: translateY(0);
+            opacity: 1;
+        }
+
+        @for $i from 1 through 7 {
+            span:nth-child(#{$i}) {
+                transition-delay: #{$i * 0.1}s;
+            }
+        }
+    }
+
+    &.hide {
+        span {
+            transform: translateY(100%);
+            opacity: 0;
+            transition: transform 0.5s ease, opacity 0.5s ease;
+        }
+
+        @for $i from 1 through 7 {
+            span:nth-child(#{$i}) {
+                transition-delay: #{$i * 0.1}s;
+            }
+        }
+    }
+}
+
 .hero {
     overflow: hidden;
     width: 100%;

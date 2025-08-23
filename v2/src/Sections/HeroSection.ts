@@ -7,29 +7,21 @@ import {globesData} from "../World/Globes.ts";
 import Floating from "../World/Floating.ts";
 import type {NavigationEvent} from "../SectionManager.ts";
 import {SectionType} from "../SectionManager.ts";
+import Composer from "../Composer.ts";
 
 export default class HeroSection extends BaseSection {
     private homeButton: HTMLElement | null = document.querySelector(".nav-button.home");
     private workButton: HTMLElement | null = document.querySelector(".hero-work");
     private contactButton: HTMLElement | null = document.querySelector(".hero-contact");
 
-    protected enterTimeline: gsap.core.Timeline;
+    private composer: Composer;
 
     public showHeader: boolean = false;
 
     constructor() {
         super('.hero');
 
-        this.enterTimeline = gsap.timeline({
-            paused: true,
-            onComplete: () => {
-                this.globesList.forEach(globe => {
-                    Floating.start(globe);
-                });
-
-                this.emit("enterComplete");
-            }
-        });
+        this.composer = this.experience.composer;
 
         this.init();
         this.setListeners();
@@ -44,7 +36,20 @@ export default class HeroSection extends BaseSection {
         }
     }
 
-    init() {
+    init() {}
+
+    initTimeline() {
+        const enterTimeline = gsap.timeline({
+            paused: true,
+            onComplete: () => {
+                this.globesList.forEach(globe => {
+                    Floating.start(globe);
+                });
+
+                this.emit("enterComplete");
+            }
+        });
+
         const timelineData = globesData.map((globeData) => ({
             position: globeData.timeline.first.position,
             scale: globeData.timeline.first.scale
@@ -53,7 +58,7 @@ export default class HeroSection extends BaseSection {
         const increment = (1 / this.globesList.length) / 5;
         this.globesList.forEach((globe: GlobeInterface, index: number) => {
             [globe.ballMesh, globe.glassMesh].forEach((mesh: THREE.Mesh) => {
-                this.enterTimeline
+                enterTimeline
                     .to(mesh.position, {
                         x: timelineData[index].position.x,
                         y: timelineData[index].position.y,
@@ -69,9 +74,11 @@ export default class HeroSection extends BaseSection {
                         duration: 0.5,
                         delay: index * increment,
                         ease: "power3.out",
-                    }, "same");
+                    }, "same")
             });
         });
+
+        return enterTimeline;
     }
     resetTimeline() {
         const resetTimeline = gsap.timeline({
@@ -154,7 +161,7 @@ export default class HeroSection extends BaseSection {
         this.show();
 
         setTimeout(() => {
-            this.enterTimeline.restart();
+            this.initTimeline().restart();
         }, 650)
     }
 

@@ -7,6 +7,7 @@ import {RenderPass} from "three/examples/jsm/postprocessing/RenderPass";
 // @ts-ignore
 import {ShaderPass} from "three/examples/jsm/postprocessing/ShaderPass";
 import {DotScreenShader} from "./Shaders/DotScreenShader.ts";
+import {VignetteShader} from "./Shaders/VignetteShader.ts";
 
 export default class Composer {
     experience: Experience
@@ -15,9 +16,16 @@ export default class Composer {
     composer!: EffectComposer;
     renderPass!: RenderPass;
 
+    dotScreenEffect!: ShaderPass;
+    vignetteEffect!: ShaderPass;
+
+    aspectRatio: number;
+
     constructor() {
         this.experience = new Experience();
         this.scene = this.experience.scene;
+
+        this.aspectRatio = this.experience.sizes.ratio;
 
         this.setComposer();
     }
@@ -31,10 +39,22 @@ export default class Composer {
         );
         this.composer.addPass(this.renderPass);
 
-        const effect = new ShaderPass( DotScreenShader );
-        effect.uniforms[ 'scale' ].value = 4;
+        this.dotScreenEffect = new ShaderPass( DotScreenShader );
+        this.dotScreenEffect.uniforms[ 'scale' ].value = 4;
 
-        this.composer.addPass( effect );
+        const vignetteEffect = new ShaderPass( VignetteShader )
+        vignetteEffect.uniforms['intensity'].value = 1.0;
+        vignetteEffect.uniforms['radius'].value = -0.5;
+        vignetteEffect.uniforms['softness'].value = 0.25;
+        vignetteEffect.uniforms['darkness'].value = 0.0;
+        vignetteEffect.uniforms['sharpness'].value = 1;
+        vignetteEffect.uniforms['aspectRatio'].value = this.aspectRatio;
+        vignetteEffect.renderToScreen = true;
+
+        this.vignetteEffect = vignetteEffect;
+
+        this.composer.addPass( this.vignetteEffect );
+        this.composer.addPass( this.dotScreenEffect );
     }
 
     setCamera(camera: THREE.Camera) {
@@ -42,6 +62,8 @@ export default class Composer {
     }
 
     resize() {
+        this.aspectRatio = this.experience.sizes.ratio;
+        this.vignetteEffect.uniforms['aspectRatio'].value = this.aspectRatio;
         this.composer.setSize(this.experience.sizes.width, this.experience.sizes.height);
     }
 

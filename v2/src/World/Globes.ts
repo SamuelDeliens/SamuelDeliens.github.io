@@ -39,6 +39,7 @@ export interface GlobeFactoryInput {
     main?: boolean,
     small?: boolean
     timeline: {
+        splash?: GlobeStep;
         initial: GlobeStep;
         first: GlobeStep;
         second: GlobeStep;
@@ -57,6 +58,7 @@ export const globesData: GlobeFactoryInput[] = [
         projectId: 1,
         main: true,
         timeline: {
+            splash: {position: new THREE.Vector3(0, 0, 0), scale: 20},
             initial: {position: new THREE.Vector3(0, 0, 0), scale: 1},
             first: {position: new THREE.Vector3(0, 0, 0), scale: 0.6},
             second: {position: new THREE.Vector3(2.5, 2.3, 0), scale: 0.4},
@@ -453,6 +455,12 @@ export default class Globes {
         const globe = this.createGlobe(globeData);
 
         this.globes.push(globe);
+
+        if (!globeData.timeline.splash) {
+            globe.ballMesh.visible = false;
+            globe.glassMesh.visible = false;
+        }
+
         this.scene.add(globe.ballMesh);
         this.scene.add(globe.glassMesh);
 
@@ -507,9 +515,10 @@ export default class Globes {
         const ballGeo = new THREE.SphereGeometry(radius, segments, segments);
         const ballMesh = new THREE.Mesh(ballGeo, ballMat);
 
-        ballMesh.position.copy(globeData.timeline.initial.position);
-        ballMesh.scale.set(globeData.timeline.initial.scale ?? 1, globeData.timeline.initial.scale ?? 1, globeData.timeline.initial.scale ?? 1)
-        ballMesh.rotation.copy(globeData.timeline.initial.rotation || new THREE.Euler(0, 0, 0));
+        const behavior = globeData.timeline.splash ?? globeData.timeline.initial;
+        ballMesh.position.copy(behavior.position);
+        ballMesh.scale.set(behavior.scale ?? 1, behavior.scale ?? 1, behavior.scale ?? 1)
+        ballMesh.rotation.copy(behavior.rotation || new THREE.Euler(0, 0, 0));
 
         return [ballMesh, ballMat];
     }
@@ -534,8 +543,9 @@ export default class Globes {
         const glassGeo = new THREE.SphereGeometry(radius, segments, segments);
         const glassMesh = new THREE.Mesh(glassGeo, glassMat);
 
-        glassMesh.position.copy(globeData.timeline.initial.position);
-        glassMesh.scale.set(globeData.timeline.initial.scale ?? 1, globeData.timeline.initial.scale ?? 1, globeData.timeline.initial.scale ?? 1)
+        const behavior = globeData.timeline.splash ?? globeData.timeline.initial;
+        glassMesh.position.copy(behavior.position);
+        glassMesh.scale.set(behavior.scale ?? 1, behavior.scale ?? 1, behavior.scale ?? 1)
 
         return [glassMesh, glassMat]
     }
@@ -572,7 +582,17 @@ export default class Globes {
     }
 
     update() {
-        this.globes.forEach(globe => globe.glassMesh.visible = false);
+        const visibilityState = new Map<number, {
+            glass: boolean;
+            ball: boolean;
+        }>();
+        this.globes.forEach((globe) => {
+            visibilityState.set(globe.ballMesh.id, {
+                glass: globe.glassMesh.visible,
+                ball: globe.ballMesh.visible
+            });
+            globe.glassMesh.visible = false;
+        });
 
         const detailedGlassVisibilityState = new Map<number, boolean>();
         Object.entries(this.detailedGlobes).forEach(([projectId, dg]) => {
@@ -592,8 +612,8 @@ export default class Globes {
         });
 
         this.globes.forEach((globe) => {
-            if (!globe.ballMesh.visible) return;
-            globe.glassMesh.visible = true;
+            globe.ballMesh.visible = visibilityState.get(globe.ballMesh.id)!.ball
+            globe.glassMesh.visible = visibilityState.get(globe.ballMesh.id)!.glass
             globe.ballMat.uniforms.time.value = this.experience.time.elapsed * this.speed;
             globe.glassMat.uniforms.tCube.value = globe.cubeRenderTarget.texture;
         });
