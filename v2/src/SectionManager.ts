@@ -5,7 +5,8 @@ import ProjectDetailSection from "./Sections/ProjectDetailSection.ts";
 import ContactSection from "./Sections/ContactSection.ts";
 
 export const SectionType = {
-    VOID: -1,
+    VOID: -2,
+    SPLASH: -1,
     HERO: 0,
     CONTACT: 1,
     PROJECTS_LIST: 2,
@@ -73,10 +74,10 @@ export default class SectionManager {
                     targetSection.once("enterComplete", resolve);
                     targetSection.enter(enterAnimation);
                 })
-            }
 
-            if (section !== SectionType.HERO) {
-                this.showHeader();
+                if (targetSection.showHeader) {
+                    this.showHeader();
+                }
             }
 
             this.currentSection = section;

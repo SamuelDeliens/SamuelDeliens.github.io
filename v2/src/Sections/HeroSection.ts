@@ -15,6 +15,8 @@ export default class HeroSection extends BaseSection {
 
     protected enterTimeline: gsap.core.Timeline;
 
+    public showHeader: boolean = false;
+
     constructor() {
         super('.hero');
 

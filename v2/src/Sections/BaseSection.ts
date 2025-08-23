@@ -24,6 +24,8 @@ export default abstract class BaseSection extends EventEmitter {
 
     protected currentData?: any;
 
+    public showHeader: boolean = true;
+
     protected constructor(selector: string) {
         super();
 
